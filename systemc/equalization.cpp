@@ -1,17 +1,21 @@
 //-----------------------------------------------------
 #include <systemc.h>
 
-
-#define ROWS 323
-#define COLS 434
 #define H_LENGTH 256
 
 SC_MODULE (hist_equalizer) {
 
   //-----------Internal variables-------------------
+  uint16_t img_rows, img_cols;
+  uint8_t** original_img;
+  uint8_t** filtered_img;
+
+  sc_event start_t;
 
   // Constructor
-  SC_CTOR(hist_equalizer) {};
+  SC_CTOR(hist_equalizer) {
+    SC_THREAD(compute);
+  };
 
   //------------Code Starts Here-------------------------
 
@@ -25,15 +29,17 @@ SC_MODULE (hist_equalizer) {
    * @return void
    */
   void _calculate_histogram(
-    uint8_t image[ROWS][COLS],
+    uint8_t** image,
     uint32_t histogram[H_LENGTH])
   {
     uint8_t value = 0;
 
-    for (int i = 0; i < ROWS; i++) {
-      for (int j = 0; j < COLS; j++) {
+    for (int i = 0; i < img_rows; i++) {
+      for (int j = 0; j < img_cols; j++) {
         value = image[i][j];
         histogram[value]++;
+
+        wait(1, SC_NS);
       }
     }
   }
@@ -55,7 +61,9 @@ SC_MODULE (hist_equalizer) {
 
     for (int i = 0; i < H_LENGTH; i++) {
       addition += histogram[i];
-      distribution[i] = addition / (ROWS * COLS);
+      distribution[i] = addition / (img_rows * img_cols);
+
+      wait(1, SC_NS);
     }
   }
 
@@ -73,19 +81,21 @@ SC_MODULE (hist_equalizer) {
    */
   void _equalization(
     float distribution[H_LENGTH],
-    uint8_t original_image[ROWS][COLS],
-    uint8_t filtered_image[ROWS][COLS])
+    uint8_t** original_image,
+    uint8_t** filtered_image)
   {
     uint8_t pixel = 0;
     uint8_t new_pixel = 0;
 
-    for (int i = 0; i < ROWS; i++) {
-      for (int j = 0; j < COLS; j++) {
+    for (int i = 0; i < img_rows; i++) {
+      for (int j = 0; j < img_cols; j++) {
         pixel = original_image[i][j];
 
         new_pixel = distribution[pixel] * 255;
 
         filtered_image[i][j] = (uint8_t)floor(new_pixel);
+
+        wait(1, SC_NS);
       }
     }
   }
@@ -100,22 +110,41 @@ SC_MODULE (hist_equalizer) {
    * @return void
    */
   void equalize(
-    uint8_t original_image[ROWS][COLS],
-    uint8_t filtered_image[ROWS][COLS])
+    uint16_t rows,
+    uint16_t cols,
+    uint8_t** original_image,
+    uint8_t** filtered_image)
   {
-    uint32_t histogram[H_LENGTH] = { 0 };
-    float distribution[H_LENGTH] = { 0 };
+    original_img = original_image;
+    filtered_img = filtered_image;
+    img_rows = rows;
+    img_cols = cols;
 
-    _calculate_histogram(original_image,
-                         histogram);
-
-    _cumulative_distribution(histogram,
-                             distribution);
-
-    _equalization(distribution,
-                  original_image,
-                  filtered_image);
+    start_t.notify(0, SC_NS);
   }
-  
-  
+
+  /**
+   * Thread function that waits for the start_t event to start
+   * the computation of the histogram equalization algorithm
+   * 
+   * @return void
+   */
+  void compute() {
+    while(true) {
+      wait(start_t);
+
+      uint32_t histogram[H_LENGTH] = { 0 };
+      float distribution[H_LENGTH] = { 0 };
+
+      _calculate_histogram(original_img,
+                            histogram);
+
+      _cumulative_distribution(histogram,
+                                distribution);
+
+      _equalization(distribution,
+                    original_img,
+                    filtered_img);
+    }
+  }
 }; // End of Module memory
