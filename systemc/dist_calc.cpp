@@ -14,6 +14,14 @@ SC_MODULE (dist_calc) {
   sc_out<const char*> sens_range;
   sc_out<bool > trigger;
   sc_in<bool > echo;
+  sc_out<sc_int <32> > count_near;
+  sc_out<sc_int <32> > count_half;
+  sc_out<sc_int <32> > count_far;
+  
+  //sc_out<double > count_near = 0.0;
+  //sc_out<double > count_half = 0.0;
+  //sc_out<double > count_far = 0.0;
+  
   //sc_inout<bool > trigger;
  
  //sc_out<sc_uint<32> > control_register; 
@@ -27,8 +35,11 @@ SC_MODULE (dist_calc) {
   sc_int <32> range3 = 200;  // debe ser mayor 5883 us
   sc_int <32> range4 = 400;  // debe ser mayor 11765 us
   //sc_bv<32> control_register = 0;
-  
+  sc_int <32> cuenta_near = 0;
+  sc_int <32> cuenta_half = 0;
+  sc_int <32> cuenta_far = 0;
 
+	
   // Constructor 
   SC_CTOR(dist_calc) {
    //SC_THREAD(obj_m);
@@ -108,12 +119,12 @@ SC_MODULE (dist_calc) {
   
   void sensor_range(){
     	wait(30, SC_US);
-      	//cout <<" Rango de sensor y actividad \n" << endl;
     	if ((dist_cm)>=range1 && (dist_cm)<=range2){
-            wait(30, SC_US);
-    		sens_active = 1;
+            //wait(30, SC_US);
             sens_range = "cercano";
-          	
+    		sens_active = 1;
+          	cuenta_near = cuenta_near+1;
+          	count_near = cuenta_near;
             control_register[12] = "1";
             control_register.range(15,14) = "00";
     	}
@@ -121,7 +132,8 @@ SC_MODULE (dist_calc) {
             //wait(30, SC_US);
     		sens_range = "medio";
           	sens_active = 1;
-            
+            cuenta_half = cuenta_half+1;
+            count_half = cuenta_half;
             control_register[12] = "1";
             control_register.range(15,14) = "01";
     	}
@@ -129,6 +141,8 @@ SC_MODULE (dist_calc) {
           	//wait(30, SC_US);
     		sens_range = "lejano";
           	sens_active = 1;
+          	cuenta_far = cuenta_far+1;
+            count_far = cuenta_far;     
             control_register[12] = "1";
             control_register.range(15,14) = "10";
     	}
@@ -141,29 +155,5 @@ SC_MODULE (dist_calc) {
         }
   }
 
+
 }; 
-
-
-
-
-  /*void sensor_active(){
-    	wait(20, SC_NS);
-      	cout << "@" << dist_cm <<" dist_cm \n" << endl;
-    	if ((dist_cm)>range1 && (dist_cm)<range4){
-    		sens_active = 1;
-            control_register[12] = "1";
-    	}
-    	else {
-    		sens_active = 0;
-            control_register[12] = "0";
-    	}
-  }*/
-
-
-        /*wait(d_capture);
-      	t2=sc_time_stamp().to_seconds()*1000000;
-      	wait(10, SC_NS);
-        cout << "@" << t2 <<" t2 tiempo \n" << endl;*/
-        //resultado=t2-t1;
-        //wait(20, SC_NS);
-      	//cout << resultado <<" resultado \n" << endl;
