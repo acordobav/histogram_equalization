@@ -38,8 +38,8 @@ SC_MODULE (dist_calc) {
   sc_int <32> cuenta_near = 0;
   sc_int <32> cuenta_half = 0;
   sc_int <32> cuenta_far = 0;
+  
 
-	
   // Constructor 
   SC_CTOR(dist_calc) {
    //SC_THREAD(obj_m);
@@ -59,9 +59,9 @@ SC_MODULE (dist_calc) {
   	d_start.notify(2, SC_US);
   }
 
-   void e_wait(){
-  	end_wait.notify(0, SC_US);
-  }
+ //  void e_wait(){
+ // 	end_wait.notify(0, SC_US);
+ // }
   
   
   void pulse_trigger(){ 
@@ -72,7 +72,7 @@ SC_MODULE (dist_calc) {
         wait(10, SC_US);
         trigger=0;
         //printf("- - -trigger! - - - \n");
-        wait(50, SC_MS);
+        wait(1000, SC_MS);  // each 1s trigger signal will be raised
       
       }  
 	}
@@ -80,7 +80,7 @@ SC_MODULE (dist_calc) {
   void end_wait_th(){ 
     wait(d_start);
 	while(true) {
-      if (echo.read() == 0){
+      if (echo.read() == 0){  //when echo is down, it enables next event to measure t2
       	end_wait.notify(0, SC_US);
       }
       wait(1, SC_US);
@@ -91,26 +91,13 @@ SC_MODULE (dist_calc) {
     wait(d_start);
 	while(true) {
       if (echo.read() == 1){
-      	//wait(10, SC_US);
-      	//wait(20000, SC_US);
-        //printf("- - -PROBANDO DISTANCIA 3 - - - \n");
-      	//echo=1;
       	t1=sc_time_stamp().to_seconds()*1000000;
-        wait(end_wait);
-        //if (echo.read() == 0){
-      	//wait(10, SC_US);
-      	//cout << "@" << t1 <<" t1 tiempo \n" << endl;
-        	//wait(20, SC_US);
-        	//echo=0;
+        wait(end_wait);  // waitinh end_wait_th to enable end_wait event
       	t2=sc_time_stamp().to_seconds()*1000000;
-      	//wait(10, SC_US);
-      	//cout << "@" << t2 <<" t2 tiempo \n" << endl;
-      	//wait(10, SC_US);
         dist_cm = (t2-t1)*0.034;
-        //wait(10, SC_US);
       	sensor_range();
       };
-      wait(5, SC_US);
+      wait(50, SC_US);
     }  
   }
  
@@ -123,7 +110,7 @@ SC_MODULE (dist_calc) {
             //wait(30, SC_US);
             sens_range = "cercano";
     		sens_active = 1;
-          	cuenta_near = cuenta_near+1;
+			cuenta_near = cuenta_near+1;
           	count_near = cuenta_near;
             control_register[12] = "1";
             control_register.range(15,14) = "00";
@@ -132,8 +119,9 @@ SC_MODULE (dist_calc) {
             //wait(30, SC_US);
     		sens_range = "medio";
           	sens_active = 1;
-            cuenta_half = cuenta_half+1;
-            count_half = cuenta_half;
+
+			cuenta_half = cuenta_half+1;
+			count_half = cuenta_half;
             control_register[12] = "1";
             control_register.range(15,14) = "01";
     	}
@@ -141,7 +129,7 @@ SC_MODULE (dist_calc) {
           	//wait(30, SC_US);
     		sens_range = "lejano";
           	sens_active = 1;
-          	cuenta_far = cuenta_far+1;
+            cuenta_far = cuenta_far+1;
             count_far = cuenta_far;     
             control_register[12] = "1";
             control_register.range(15,14) = "10";
@@ -154,6 +142,5 @@ SC_MODULE (dist_calc) {
       		control_register.range(15,14) = "11";
         }
   }
-
 
 }; 
