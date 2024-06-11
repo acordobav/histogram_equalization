@@ -1,5 +1,5 @@
 #include <systemc.h>
-#include "compression.cpp"
+#include "interpolation.cpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -11,7 +11,6 @@ int sc_main(int argc, char* argv[]) {
   // Variables para la imagen original y redimensionada
   int original_width, original_height, channels;
   const char* input_filename = "filtered.jpg";
-  //const char* input_filename = "jaguar.jpg";
   const char* output_filename = "compressed_image.jpg";
 
   // Cargar la imagen JPEG
@@ -25,7 +24,7 @@ int sc_main(int argc, char* argv[]) {
     printf("Original Width: %d\n", original_width);
     printf("Original Height: %d\n", original_height);
     printf("Channels: %d\n", channels);
-}
+  }
 
   // Definir el nuevo tamaño de la imagen
   int new_width = original_width / 2;
@@ -34,17 +33,17 @@ int sc_main(int argc, char* argv[]) {
   // Crear un nuevo buffer para la imagen redimensionada
   unsigned char* compress_image = (unsigned char*)malloc(new_width * new_height * channels);
 
-  // Crear una instancia del módulo de compresión
-  compression comp("COMP");
+  // Crear una instancia del módulo de interpolación
+  interpolation interp("INTERP");
 
   // Iniciar la simulación
   sc_start(0, SC_NS);
-  cout << "@" << sc_time_stamp() << " Starting compression\n";
+  cout << "@" << sc_time_stamp() << " Starting interpolation\n";
 
-  // Llamar a la función de compresión
-  comp.compress_image(original_image, original_width, original_height, compress_image, new_width, new_height, channels);
+  // Llamar a la función de interpolación
+  interp.interpolate_image(original_image, original_width, original_height, compress_image, new_width, new_height, channels);
 
-  // Esperar a que termine la compresión
+  // Esperar a que termine la interpolación
   sc_start();
 
   // Guardar la imagen redimensionada como JPEG
