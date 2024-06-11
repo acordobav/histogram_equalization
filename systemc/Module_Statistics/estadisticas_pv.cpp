@@ -76,7 +76,7 @@ SC_MODULE(estadist_unit){
                 internal_total_animals += 1;
                 internal_range += values[i];
             
-                if (values[i] > 2 && values[i] <= 50){
+                if (values[i] >= 2 && values[i] <= 50){
                     internal_1m += 1;
                 }
                 else if (values[i] > 50 && values[i] <= 200){
