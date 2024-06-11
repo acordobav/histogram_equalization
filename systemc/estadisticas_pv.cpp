@@ -136,14 +136,16 @@ SC_MODULE(estadist_unit){
         }
     }
   
-	void reset_Statistics(){
-        internal_range = 0;
-    	internal_1m = 0;
-    	internal_2m = 0;
-    	internal_3m = 0;
-    	internal_total_animals = 0;
-    	internal_range_out = 0;
-      
+	void reset_Statistics(bool reset_data){
+        if (reset_data){
+            internal_range = 0;
+            internal_1m = 0;
+            internal_2m = 0;
+            internal_3m = 0;
+            internal_total_animals = 0;
+            internal_range_out = 0;
+        }
+        
 		//Output results ----------------------------------
         range = internal_range;
         results_1m = internal_1m;

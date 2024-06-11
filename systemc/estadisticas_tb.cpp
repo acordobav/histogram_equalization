@@ -126,7 +126,9 @@ int sc_main (int argc, char* argv[]) {
 
     printf("Writing next iteration\n");
 
-    estadist.reset_Statistics();
+    bool reset_data = false; //register in charge to enable the reset of the data
+
+    estadist.reset_Statistics(reset_data);
   
     sc_start(20,SC_NS);
     cout << "@" << sc_time_stamp() << " Range: " << estadist.range << endl;
@@ -135,7 +137,23 @@ int sc_main (int argc, char* argv[]) {
     cout << "@" << sc_time_stamp() << " Results 3rd zone: " << estadist.results_3m << endl;
     cout << "@" << sc_time_stamp() << " Results total animal: " << estadist.total_animals << endl;
     cout << "@" << sc_time_stamp() << " Results average distance: " << estadist.average_out << endl;
+
+
+    //TEST 6 ----------------------------------------------
+
+    printf("Writing next iteration\n");
+
+    reset_data = true; //register in charge to enable the reset of the data
+
+    estadist.reset_Statistics(reset_data);
   
+    sc_start(20,SC_NS);
+    cout << "@" << sc_time_stamp() << " Range: " << estadist.range << endl;
+    cout << "@" << sc_time_stamp() << " Results 1st zone: " << estadist.results_1m << endl;
+    cout << "@" << sc_time_stamp() << " Results 2nd zone: " << estadist.results_2m << endl;
+    cout << "@" << sc_time_stamp() << " Results 3rd zone: " << estadist.results_3m << endl;
+    cout << "@" << sc_time_stamp() << " Results total animal: " << estadist.total_animals << endl;
+    cout << "@" << sc_time_stamp() << " Results average distance: " << estadist.average_out << endl;
   
     cout << "@" << sc_time_stamp() <<" Terminating simulation\n" << endl;
     sc_close_vcd_trace_file(wf);
