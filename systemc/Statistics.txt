@@ -1,0 +1,9 @@
+Corresponding day Data: 1
+Number of hours: 24
+Total of animals detected: 120
+Total distance: 4176
+Number of animals on 1st zone:96
+Number of animals on 2nd zone:8
+Number of animals on 3rd zone:8
+Average distance: 34.8
+ 
