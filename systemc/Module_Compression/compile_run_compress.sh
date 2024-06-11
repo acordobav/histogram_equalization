@@ -8,7 +8,7 @@ rm -rf compression.o | tee -a "$LOG_FILE"
 export SYSTEMC_HOME=/usr/local/systemc-2.3.2/
 export LD_LIBRARY_PATH="$SYSTEMC_HOME/lib-linux64"
 
-g++ -I"$SYSTEMC_HOME/include" -L"$SYSTEMC_HOME/lib-linux64" testbench.cpp interpolation.cpp -lsystemc -ljpeg -o interpolation.o 2>&1 | tee -a "$LOG_FILE"
+g++ -I"$SYSTEMC_HOME/include" -L"$SYSTEMC_HOME/lib-linux64" interpolation_tb.cpp interpolation.cpp -lsystemc -ljpeg -o interpolation.o 2>&1 | tee -a "$LOG_FILE"
 
 echo 'Simulation Started' | tee -a "$LOG_FILE"
 ./interpolation.o 2>&1 | tee -a "$LOG_FILE"

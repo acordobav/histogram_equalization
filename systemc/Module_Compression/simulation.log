@@ -1,0 +1,16 @@
+Compiling *.c *.cpp files
+Simulation Started
+
+        SystemC 2.3.2-Accellera --- May 20 2024 15:39:05
+        Copyright (c) 1996-2017 by all Contributors,
+        ALL RIGHTS RESERVED
+Imagen cargada exitosamente:
+Input Filename: filtered.jpg
+Original Width: 434
+Original Height: 323
+Channels: 3
+@0 s Starting interpolation
+@139909 ns Terminating simulation
+Simulation Ended
+24K	compressed_image.jpg
+56K	filtered.jpg
