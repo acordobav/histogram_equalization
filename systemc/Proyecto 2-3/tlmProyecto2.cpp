@@ -2,9 +2,16 @@
 #define SC_INCLUDE_DYNAMIC_PROCESSES
 
 #include <systemc.h>
+#include <systemc-ams>
+
+// Required because of functionalities of the modules
 #include <iostream>
 #include <string>
+#include <cmath>
+
+// Required because of implemented modules
 #include "memory_map.h"
+#include "ultrasonicSensor.hpp"
 
 using namespace sc_core;   
 using namespace sc_dt;   
@@ -139,8 +146,15 @@ SC_MODULE(Top)
   RouterT2<2>          *routerT2;
 
   Memory               *memory; 
+
+  //For the AMS module
+  //Ultrasonic sensor
+  sca_tdf::sca_signal<double> tx_signal, echo_signal, time_output;
+  int num_samples;
+
+  ultrasonic_sensor    *sensor;
    
-  SC_CTOR(Top)   
+  SC_CTOR(Top) : num_samples(100) //The quantity of samples to be simulated   
   {   
     // Instantiate components 
 
@@ -208,6 +222,15 @@ SC_MODULE(Top)
 
     // MEMORIA
     memory = new Memory   ("memory");
+
+    // AMS MODULES
+    // ULTRASONIC SENSOR
+    ultrasonicSensor = new ultrasonic_sensor("ultrasonicSensor", 40.0, 10, 100, 25000);
+    ultrasonicSensor->tx_signal(tx_signal);
+    ultrasonicSensor->echo_signal(echo_signal);
+    ultrasonicSensor->time_output(time_output);
+
+    SC_THREAD(stimulus);
    
    /*------------------------------------------------------------------*/
     // Bind initiator socket to target socket
@@ -241,7 +264,23 @@ SC_MODULE(Top)
 
     //Conexion 8
     routerMemory->initiator_socket.bind( memory->target_socket );
-  }   
+  }
+
+  void stimulus()
+  {
+    for (int i = 0; i < num_samples; ++i) 
+    {
+      // Simulate a pulse transmission
+      double pulse = 1.0;
+      tx_signal.write(pulse);
+      wait(10, SC_MS);
+
+      pulse = 0.0;
+      tx_signal.write(pulse);
+      wait(50, SC_MS); //To match suggested wait time of the actual sensor
+    }
+  }
+
 };
 
 /*---------------------------------------------------------------------*/
