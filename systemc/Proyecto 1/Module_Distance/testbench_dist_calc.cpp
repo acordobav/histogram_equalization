@@ -17,9 +17,8 @@ bool trigger_check(bool act){
   }
 
 int sc_main(int argc, char* argv[]) {
-              
-  sc_signal<double> senal_s;
   sc_signal<sc_int <32> > dist_cm; 
+  sc_signal<double > calc_voltage;
   sc_signal<bool> sens_active;
   sc_signal<const char*> sens_range;
   sc_signal<bool > trigger;
@@ -33,14 +32,14 @@ int sc_main(int argc, char* argv[]) {
   int time;
    
   dist_calc dist ("DIST");
-  	dist.senal_s(senal_s);
     dist.dist_cm(dist_cm);
+    dist.calc_voltage(calc_voltage);
     dist.sens_active(sens_active);
-  	dist.sens_range(sens_range);
-  	dist.trigger(trigger);
-  	dist.echo(echo);
-  	dist.count_near(count_near);
-  	dist.count_half(count_half);
+    dist.sens_range(sens_range);
+    dist.trigger(trigger);
+    dist.echo(echo);
+    dist.count_near(count_near);
+    dist.count_half(count_half);
     dist.count_far(count_far);
   
   // Open VCD file
@@ -49,6 +48,7 @@ int sc_main(int argc, char* argv[]) {
   
   // Dump the desired signals
   sc_trace(wf, dist_cm, "dist_cm");
+  sc_trace(wf, calc_voltage, "calc_voltage");
   sc_trace(wf, sens_active, "sens_active");
   sc_trace(wf, trigger, "trigger");
   sc_trace(wf, echo, "echo");
@@ -73,6 +73,7 @@ int sc_main(int argc, char* argv[]) {
 
       time = 30 + (rand() % (15000 - 30 +1) );  //randomize (30 - 15000) time elapsed according to distance
       sc_start(time,SC_US); // wait that time to represent distance t2 - t1
+      dist.e_wait();
     }
     if(sc_time_stamp().to_seconds() >= 10) {
       break;
