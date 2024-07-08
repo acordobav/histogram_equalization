@@ -9,8 +9,9 @@
 #include <string>
 #include <cmath>
 
-// Required because of implemented modules
+// Required because of implemented modules/registers
 #include "memory_map.h"
+#include "RegisterBank.hpp"
 #include "ultrasonicSensor.hpp"
 
 using namespace sc_core;   
@@ -58,14 +59,6 @@ Router2 ------------------------------------> Router3
 Conexion 8:
 Router3 ------------------------------------> Memoria
 --------------------------------------------------------------------------------------------*/
-
-/*--------------------------------------------------------------------*/
-// VARIABLES GLOBALES
-// - Se puede considerar constituir el banco de registros, basandose en 
-// el memory map del Proyecto 1
-const int Size = 0;
-int Bank_Reg[Size];
-
 
 /*--------------------------------------------------------------------*/
 // FUNCIONES GENERALES
@@ -288,6 +281,10 @@ SC_MODULE(Top)
 
 int sc_main(int argc, char* argv[])
 {
+  //Create the Registers Bank according to the Memory Bank
+  RegisterBank reg_bank(0x10000, 0x10072);
+
+  //To initiate the different modules
   Top top("top");
   sc_start();
   return 0;
