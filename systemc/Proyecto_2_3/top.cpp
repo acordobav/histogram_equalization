@@ -1,4 +1,5 @@
 #include "equalizerTLM.cpp"
+#include "InterpolationTLM.cpp"
 
 struct DefaultInitiator: sc_module
 {
@@ -140,23 +141,17 @@ struct DefaultTarget: sc_module
 
     cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
     
-    unsigned char* ptr = trans_pending->get_data_ptr();
-    uint8_t** filtered_image = (uint8_t**)ptr;
+    unsigned char* filtered_image = trans_pending->get_data_ptr();
 
     // Call on backward path to complete the transaction
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
     target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
 
     // Save output image
-    uint8_t save_image[ROWS][COLS] = { 0 };
-    for (int i = 0; i < ROWS; i++) {
-      for (int j = 0; j < COLS; j++) {
-        save_image[i][j] = filtered_image[i][j];
-      }
-    }
-    stbi_write_jpg("filtered.jpg", COLS, ROWS, 1, save_image, ROWS*COLS);
+    
+    stbi_write_jpg("filtered.jpg", COLS/2, ROWS/2, 1, filtered_image, (ROWS/2)*(COLS/2));
 
-    freeMatrix(filtered_image, ROWS);
+    free(filtered_image);
   }
 }
 
@@ -196,17 +191,20 @@ SC_MODULE(Top)
   DefaultInitiator*  initiator;
   EqualizerTLM* compressor;
   DefaultTarget* defaultTarget;
+  InterpolationTLM* interpolation;
 
   SC_CTOR(Top)
   {
     // Instantiate components
     initiator     = new DefaultInitiator("initiator");
     compressor    = new EqualizerTLM("equalizerTLM");
+    interpolation = new InterpolationTLM("InterpolationTlM");
     defaultTarget = new DefaultTarget("defaultTarget");
 
     // Bind sockets
     initiator->initiator_socket.bind(compressor->target_socket);
-    compressor->initiator_socket.bind(defaultTarget->target_socket);
+    compressor->initiator_socket.bind(interpolation->target_socket);
+    interpolation->initiator_socket.bind(defaultTarget->target_socket);
   }
 };
 
