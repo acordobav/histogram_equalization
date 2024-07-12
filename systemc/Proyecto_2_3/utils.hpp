@@ -12,6 +12,7 @@
 
 #include "./../Proyecto_1/Module_Equalization/equalization.cpp"
 
+#include "./../Proyecto_1/Module_Compression/interpolation.cpp"
 
 
 #define STB_IMAGE_IMPLEMENTATION
