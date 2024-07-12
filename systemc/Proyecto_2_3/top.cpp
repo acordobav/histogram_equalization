@@ -143,15 +143,14 @@ struct DefaultTarget: sc_module
     
     unsigned char* filtered_image = trans_pending->get_data_ptr();
 
-    // Call on backward path to complete the transaction
-    tlm::tlm_phase phase = tlm::BEGIN_RESP;
-    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
-
     // Save output image
-    
     stbi_write_jpg("filtered.jpg", COLS/2, ROWS/2, 1, filtered_image, (ROWS/2)*(COLS/2));
 
     free(filtered_image);
+
+    // Call on backward path to complete the transaction
+    tlm::tlm_phase phase = tlm::BEGIN_RESP;
+    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
   }
 }
 

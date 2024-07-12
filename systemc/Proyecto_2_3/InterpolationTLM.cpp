@@ -57,21 +57,20 @@ struct InterpolationTLM: sc_module
       cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     }
 
-    // Save output image
-    uint8_t equalized_image[ROWS][COLS] = { 0 };
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-        equalized_image[i][j] = image[i][j];
-        }
-    }
     //
     //
     //
     // Process image here
-    int width = 434; // Example width, adjust according to your image
-    int height = 323; // Example height, adjust according to your image
+    int width = ROWS; // Example width, adjust according to your image
+    int height = COLS; // Example height, adjust according to your image
     int channels = 1; // RGBA format assumed
 
+    unsigned char* equalized_image = (unsigned char*)malloc(width * height * channels);
+    for (int i = 0; i < ROWS; i++) {
+      memcpy(equalized_image + (i * COLS), image[i], sizeof(uint8_t)*COLS);
+    }
+
+    stbi_write_jpg("equalized.jpg", COLS, ROWS, channels, equalized_image, ROWS*COLS);
 
     // Instantiate interpolation module
     
@@ -79,9 +78,14 @@ struct InterpolationTLM: sc_module
 
     inter->interpolate_image((unsigned char*)equalized_image, width, height, filtered_image, width/2, height/2, channels);
 
+    stbi_write_jpg("interpolated.jpg", COLS/2, ROWS/2, channels, filtered_image, (ROWS/2)*(COLS/2));
+
+
 
     freeMatrix(image, ROWS);
-
+    // free(equalized_image);
+    
+    
     //
     //
     //
@@ -96,8 +100,8 @@ struct InterpolationTLM: sc_module
     sc_time delay = sc_time(10, SC_NS);   
 
     tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
-    trans.set_data_ptr( reinterpret_cast<unsigned char*>(filtered_image) );   
-    trans.set_data_length( sizeof(image) );   
+    trans.set_data_ptr( filtered_image );   
+    trans.set_data_length( sizeof(filtered_image) );   
 
     cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     status = initiator_socket->nb_transport_fw(trans, phase, delay);  // Non-blocking transport call   
