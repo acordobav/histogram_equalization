@@ -1,0 +1,22 @@
+$date
+    Thu Jul 11 19:17:51 2024
+$end
+
+$version
+    2.4
+$end
+
+$timescale
+      1 ps
+$end
+
+$scope module SystemC_AMS $end
+
+$var wire 1 !  cable $end
+$var wire 1 "  digital_image_ready $end
+
+$upscope $end
+
+$enddefinitions $end
+
+
