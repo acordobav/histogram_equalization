@@ -14,7 +14,7 @@ unsigned int prueba[420546];
 unsigned int analog_prueba[420546];
 unsigned int digital_prueba[420546]; 
 uint8_t save_image[ROWS][COLS][3] = {0};
-camara_sensor::camara_sensor(sc_core::sc_module_name nm, double const_digitalization_)
+camara_sensor::camara_sensor(sc_core::sc_module_name cam_nm, double const_digitalization_)
 :
 signal_in("signal_in"),
 //sens_active
@@ -26,8 +26,9 @@ void camara_sensor::processing()
 {
 	int original_width, original_height, channels;
   	int index = 0;
-  	const char* input_filename = "_filtered.jpg";
-  	const char* output_filename = "imagen_generada.jpg";
+  	const char* input_filename = "reference_image.jpg";
+  	const char* output_analog_filename = "analog_image.jpg";
+  	const char* output_filename = "digital_image.jpg";
   	unsigned char* original_image;
 	digital_image_ready.write(false);
 	//printf("HOla");
@@ -43,6 +44,9 @@ void camara_sensor::processing()
          analog_prueba[y] = (static_cast<unsigned int>(original_image[y])*190); // representacion de 0 a 256, que representa 0.019, pero 19 para no trabajar con floats
          //cout << "Listen!!" << y << "\n";  
     }
+    
+    	stbi_write_jpg(output_analog_filename, original_width, original_height, channels, analog_prueba, 100); 
+    	
 	for (int y = 0; y < (original_width*original_height*channels); y++) {
          digital_prueba[y] = (static_cast<unsigned int>(analog_prueba[y])/190); 
          //cout << "Listen!!" << y << "\n";  
@@ -69,7 +73,6 @@ void camara_sensor::processing()
 
 
 }
-
 
 
 
