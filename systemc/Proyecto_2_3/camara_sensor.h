@@ -13,7 +13,7 @@ class camara_sensor : public sca_tdf::sca_module
 		sca_tdf:: sca_in<bool> signal_in; 
 		sca_tdf:: sca_out<bool> digital_image_ready;
 
-		camara_sensor(sc_core::sc_module_name nm, double const_digitalization);
+		camara_sensor(sc_core::sc_module_name cam_nm, double const_digitalization);
 		
 	void processing();
 	
