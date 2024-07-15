@@ -1,9 +1,9 @@
 #include <systemc-ams.h>
 #include "camara_sensor.h"
 #include "camara_sensor.cpp"
-#include "camara_source.h"
-#include "camara_source.cpp"
-//#include "dist_calc.cpp"
+//#include "camara_source.h"
+//#include "camara_source.cpp"
+#include "dist_calc.cpp"
 #include <systemc.h>
 
 //#include "dist_calc.cpp"
@@ -65,8 +65,8 @@ dist_calc dist ("DIST");
 //cam_source.sens_active(cable);
 
 
-/*dist_calc distance("sens_active");
-distance.sens_active(sens_active_cable);*/
+//dist_calc distance("sens_active");
+//distance.sens_active(sens_active_cable);
 
 
 camara_sensor cam_sensor("cam_sensor", const_digitalization, tiempo);
@@ -89,9 +89,12 @@ cam_sensor.digital_image_ready(image_ready_cable);
 //	sca_trace(sensor_vcd, cable, cable.name());
 //	sca_trace(sensor_vcd, image_ready_cable, image_ready_cable.name());
 //sca_trace(tfp, signal, signal.name());
+	
         cout<< "Simulation started ... " <<endl;
 	//sens_active.write(false);
 	//Simulation
+	 sc_start(20,SC_US);
+	dist.delay_start();  
 	while(true) {
 	
     	tmp = trigger.read();
