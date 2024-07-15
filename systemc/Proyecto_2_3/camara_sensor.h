@@ -5,12 +5,13 @@
 
 #define ROWS 323
 #define COLS 434
-#include <systemc-ams>
+#include <systemc-ams.h>
 
 class camara_sensor : public sca_tdf::sca_module
 {
 	public: //signals
-		sca_tdf:: sc_in<bool> signal_in; 
+		sca_tdf::sca_de::sca_in<bool> signal_in;  //modified
+		
 		sca_tdf:: sca_out<bool> digital_image_ready;
 
 		camara_sensor(sc_core::sc_module_name nm, double const_digitalization, double tiempo);
@@ -18,7 +19,9 @@ class camara_sensor : public sca_tdf::sca_module
 	void processing();
 	
 	void set_attributes();
-
+	
+	void change_attributes();
+	
 	private: 
 		double const_digitalization;
 		double tiempo; 
