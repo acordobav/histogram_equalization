@@ -1,17 +1,21 @@
 #ifndef ULTRASONIC_SENSOR_HPP
 #define ULTRASONIC_SENSOR_HPP
 
-#include <systemc-ams>
-#include <systemc.h>
+#include "systemc.h"
+#include "systemc-ams.h"
+#include <random>
+#include <cmath>
+#include <algorithm>
+#include <cstdlib> //for random values purposes
 
 // Following the basic structure got from "SystemC Analog/Mixed-Signal User's Guide"
 // Section 2.2.1 TDF Modules, from Accellera
 
-SCA_TDF_MODULE( ultrasonic_sensor ) {
+SCA_TDF_MODULE(ultrasonic_sensor) {
     //Port Declarations (AMS Signals only)
     sca_tdf::sca_in<double> tx_signal;  // Señal que sera transmitida (input)
-    sca_tdf::sca_out<double> echo_signal; //Señal eco
-    sca_tdf::sca_out<double> time_output;   // Señal de tiempo (output)
+    sca_tdf::sca_out<double> echo_out; //Señal eco
+    sca_tdf::sca_out<double> time_delay;   // Señal de tiempo (output)
 
     //Constant
     const double speed_of_sound = 343.0;  // Speed of sound in meters per second
@@ -21,6 +25,10 @@ SCA_TDF_MODULE( ultrasonic_sensor ) {
     double timeTrigger;
     double minEchoTime_us;
     double maxEchoTime_us;
+    double elapsed_time;
+    double last_echo;
+    bool detected;
+    double detection_delay;
 
     //Constructor
     ultrasonic_sensor(sc_core::sc_module_name nm, 
@@ -32,6 +40,13 @@ SCA_TDF_MODULE( ultrasonic_sensor ) {
 
     void processing();
 
+    double detect(double input_signal);
+
+    void read_outputs();
+
+    double read_last_echo();
+
+    double read_detection_elapsed_time();
 };
 
 #endif

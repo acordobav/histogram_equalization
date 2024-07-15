@@ -1,7 +1,9 @@
-#include "ultrasonic_sensor.hpp"
+#include "ultrasonicSensor.hpp"
 #include <cmath>
+#include <algorithm>
 
-#include <systemc-ams>
+#include "systemc.h"
+#include "systemc-ams.h"
 #include <cstdlib> //for random values purposes
 
 /*
@@ -20,48 +22,89 @@ Tiempo mínimo de espera entre una medida y el inicio de otra 20ms (recomendable
 //Constructor
 ultrasonic_sensor::ultrasonic_sensor(sc_core::sc_module_name nm, 
                                     double ult_frequency, double time_trigger,
-                                    double min_echo_time_us, max_echo_time_us) :
-    sc_module(nm),
+                                    double min_echo_time_us, double max_echo_time_us) :
     tx_signal("tx_signal"),
-    echo_signal("echo_signal"), 
-    time_output("time_output"),
+    echo_out("echo_out"), 
+    time_delay("time_delay"),
     ultrasonic_frequency(ult_frequency),
     timeTrigger(time_trigger),
+    elapsed_time(0.0),
+    detection_delay(0.0),
+    last_echo(0.0),
+    detected(false),
     minEchoTime_us(min_echo_time_us),
     maxEchoTime_us(max_echo_time_us) {}
 
 //Attributes
 void ultrasonic_sensor::set_attributes()
 {
-    set_timestep(50.0, SC_MS); //recommended by device specifications
+    set_timestep(1.0, SC_MS); //recommended by device specifications
 }
 
 void ultrasonic_sensor::processing()
 {
     //time-domain signal processing behavior or algorithm
     double input_signal = tx_signal.read();
-    double time_now = sc_time_stamp().to_seconds();  // Get the current simulation time in seconds
+    double echo_value = detect(input_signal);
 
-    //Since distance equation (used in calc distance module) requires times in seconds
-    double min_echo_time_s = minEchoTime_us * 1e-6;
-    double max_echo_time_s = maxEchoTime_us * 1e-6;
+    if (echo_value != 0.0) {
+        double time_now = elapsed_time; // Get the elapsed simulation time in seconds
 
-    // Transmit pulse simulates the ultrasonic pulse transmitted by the sensor
-    double transmit_pulse = (input_signal > 0.5) ? sin(2 * M_PI * ultrasonic_frequency * time_now) : 0.0;
+        //Since distance equation (used in calc distance module) requires times in seconds
+        double min_echo_time_s = minEchoTime_us * 1e-6;
+        double max_echo_time_s = maxEchoTime_us * 1e-6;
 
-    // Simulate a fixed time delay for echo signal
-    // Clamp the current time to be within the specified range (we don't want distances out of the 0.2-4.5m range)
-    double clamped_time = std::max(min_echo_time_s, std::min(time_now, max_echo_time_s));
+        // Simulate a fixed time delay for echo signal
+        // Clamp the current time to be within the specified range (we don't want distances out of the 0.2-4.5m range)
+        double clamped_time = std::max(min_echo_time_s, std::min(time_now, max_echo_time_s));
 
-    // Calculate actual time delay based on the clamped time
-    // Now we are sure that the distance to be calculate later on is not going to be out of range
-    // This because the sensor IS NOT able to calculate those distances
-    double actual_echo_time_delay = clamped_time;
+        // Output the simulated echo signal and the current time
+        echo_out.write(echo_value);
+        time_delay.write(clamped_time);
 
-    // Simulate the echo signal with the calculated delay
-    double echo_signal_value = (time_now >= actual_echo_time_delay) ? transmit_pulse : 0.0;
+        last_echo = echo_value;
+    }
+}
 
-    // Output the simulated echo signal and the current time
-    echo_signal.write(echo_signal_value);
-    time_output.write(time_now);
+double ultrasonic_sensor::detect(double input_signal) 
+{
+    double echo_value = 0.0;
+
+    //std::cout << "Detection delay: " << detection_delay << " Input Signal: " << input_signal << std::endl;
+    if (detection_delay <= 0.0 && input_signal == 1 && !detected) {
+        detected = true;
+        double time_now = sc_time_stamp().to_seconds();
+        echo_value = std::sin(2 * M_PI * ultrasonic_frequency * time_now);
+    }
+    else if (detection_delay <= 0.0) {
+        detected = false;
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<> pulse_width(1.16, 23.33);
+
+        double pulse_width_dist = pulse_width(gen);
+
+        elapsed_time = pulse_width_dist * 0.001;
+        detection_delay = elapsed_time;
+    }
+    else if (detection_delay > 0.0 && input_signal == 1) {
+        detection_delay -= 0.001;
+    }
+
+    return echo_value;
+}
+
+void ultrasonic_sensor::read_outputs() 
+{
+    std::cout << "Echo Signal: " << last_echo << " Time Diff Output: " << elapsed_time << std::endl;
+}
+
+double ultrasonic_sensor::read_last_echo() 
+{
+    return last_echo;
+}
+
+double ultrasonic_sensor::read_detection_elapsed_time() 
+{
+    return elapsed_time;
 }
