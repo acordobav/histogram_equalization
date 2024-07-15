@@ -1,5 +1,7 @@
 #include <systemc.h>
 #include "camara_sensor.h"
+#include <systemc-ams.h>
+//#include "camara_source.cpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -10,6 +12,7 @@
 #define ROWS 323
 #define COLS 434
 
+int count=0; 
 unsigned int prueba[420546];
 unsigned int analog_prueba[420546];
 unsigned int digital_prueba[420546]; 
@@ -23,9 +26,19 @@ signal_in("signal_in"),
 const_digitalization(const_digitalization_)
 {}
 
+
 void camara_sensor::set_attributes()
 {
-	tiempo.set_timestep(1000000.0, sc_core::SC_MS);
+	accept_attribute_changes();
+	
+	does_attribute_changes();
+	
+	
+	set_timestep(1.0, sc_core::SC_MS);
+}
+
+void camara_sensor::change_attributes(){
+	request_next_activation(signal_in.default_event());
 }
 
 void camara_sensor::processing()
@@ -36,18 +49,24 @@ void camara_sensor::processing()
   	const char* output_analog_filename = "analog_image.jpg";
   	const char* output_filename = "digital_image.jpg";
   	unsigned char* original_image;
-	digital_image_ready.write(false);
+  	
+  	
+  	printf("Signal In"); 
+  	//bool verificacion = signal_in.read();
+  	
+	//digital_image_ready.write(false);
 	//printf("Generando imagen :D"); 
 	//printf("HOla");
-	cout << "Signal In " << signal_in<< "\n";  
-	printf("Signal In"); 
+	//cout << "COUNT " << count << "\n";  
+	
+	//count++;
+	printf("Signal In in camara sensor"); 
+	
 	if(signal_in.read()){
+	//}*/
 		printf("Generando imagen :D"); 
 	 	original_image = stbi_load(input_filename, &original_width, &original_height, &channels, 0);
-	//printf("HOla2");
-		
-	//cout << "original_width!!" << original_width << "\n";  
-	//cout << "original_height!!" << original_height << "\n"; 
+
 	//cout << "channels!!" << channels << "\n"; 
 		for (int y = 0; y < (original_width*original_height*channels); y++) {
 	//cout << "HOla3!!" << y << "\n";  
@@ -76,9 +95,13 @@ void camara_sensor::processing()
 	
 	}
 	stbi_image_free(original_image);
+	//free (original_image);
+	//free(save_image);
   	//stbi_image_free(analog_prueba);
 	//stbi_image_free(digital_prueba);
+	printf("Final :D");
 	digital_image_ready.write(true);
+
 }
 
 
