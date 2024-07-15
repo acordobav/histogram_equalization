@@ -1,27 +1,50 @@
 // Needed for the simple_target_socket
 #define SC_INCLUDE_DYNAMIC_PROCESSES
 
+// SYSTEMC related
+#include "utils.hpp"
 #include <systemc.h>
 #include <systemc-ams>
+
+#include "tlm.h"
+#include "tlm_utils/simple_initiator_socket.h"
+#include "tlm_utils/simple_target_socket.h"
+#include "tlm_utils/peq_with_cb_and_phase.h"
+
+// TLM MODULES
+// Ultrasonic Sensor
+#include "ultrasonicSensorTLM.cpp"
+#include "ultrasonicSensor.cpp"
+// CALC_DIST
+
+// EQUALIZER
+#include "equalizerTLM.cpp"
+#include "InterpolationTLM.cpp"
+// INTERPOLATION
+
+// ROUTER
+
+// MEMORY
+
+// Required because of implemented registers
+#include "memory_map.h"
+#include "RegisterBank.hpp"
 
 // Required because of functionalities of the modules
 #include <iostream>
 #include <string>
 #include <cmath>
 
-// Required because of implemented modules/registers
-#include "memory_map.h"
-#include "RegisterBank.hpp"
-#include "ultrasonicSensor.hpp"
-
 using namespace sc_core;   
 using namespace sc_dt;   
 using namespace std;   
    
-#include "tlm.h"
-#include "tlm_utils/simple_initiator_socket.h"
-#include "tlm_utils/simple_target_socket.h"
-#include "tlm_utils/peq_with_cb_and_phase.h"
+
+
+/*------------------------------------------------------------------------------------------*/
+//Global BANK OF REGISTERS
+//Need to remove it in the future
+RegisterBank global_register_bank(0x10000, 0x10072);
 
 /*------------------------------------------------------------------------------------------*/
 /*
@@ -59,29 +82,6 @@ Router2 ------------------------------------> Router3
 Conexion 8:
 Router3 ------------------------------------> Memoria
 --------------------------------------------------------------------------------------------*/
-
-/*--------------------------------------------------------------------*/
-// FUNCIONES GENERALES
-/*
-La siguiente funcion sirve para mantener un "track" del numero de
-transaccion en la que se encuentra el proceso, entre otros
-
-- Podria no ser necesario (temp*)
-*/
-struct ID_extension: tlm::tlm_extension<ID_extension> {
-  ID_extension() : transaction_id(0) {}
-  virtual tlm_extension_base* clone() const { // Must override pure virtual clone method
-    ID_extension* t = new ID_extension;
-    t->transaction_id = this->transaction_id;
-    return t;
-  }
-
-  // Must override pure virtual copy_from method
-  virtual void copy_from(tlm_extension_base const &ext) {
-    transaction_id = static_cast<ID_extension const &>(ext).transaction_id;
-  }
-  unsigned int transaction_id;
-};
 
 /*---------------------------------------------------------------------*/
 // BLOQUE: SENSOR PROXIMIDAD
@@ -123,29 +123,24 @@ struct ID_extension: tlm::tlm_extension<ID_extension> {
 
 SC_MODULE(Top)   
 {   
-  InitiatorSensProx    *initiatorSensProx; 
-  InitiatorDetector    *initiatorDetector;
-  InitiatorCamara      *initiatorCamara;
-  InitiatorEcualizador *initiatorEcualizador;
-  InitiatorCompresor   *initiatorCompresor;
+  //InitiatorSensProx       *initiatorSensProx;
+  UltrasonicSensorTLM*      uSensor;
+  //InitiatorDetector       *initiatorDetector;
+  CalcDistInitiatorTLM*     calcDistTarget
+  InitiatorCamara           *initiatorCamara;
+  InitiatorEcualizador      *initiatorEcualizador;
+  InitiatorCompresor        *initiatorCompresor;
 
-  TargetSensProx       *targetSensProx; 
-  TargetDetector       *targetDetector;
-  TargetCamara         *targetCamara;
-  TargetEcualizador    *targetEcualizador;
-  TargetCompresor      *targetCompresor;
+  //TargetDetector          *targetDetector;
+  CalcDistTargetTLM*        calcDistTarget;
+  TargetCamara              *targetCamara;
+  TargetEcualizador         *targetEcualizador;
+  TargetCompresor           *targetCompresor;
 
-  RouterT1<8>          *routerT1;
-  RouterT2<2>          *routerT2;
+  RouterT1<8>               *routerT1;
+  RouterT2<2>               *routerT2;
 
-  Memory               *memory; 
-
-  //For the AMS module
-  //Ultrasonic sensor
-  sca_tdf::sca_signal<double> tx_signal, echo_signal, time_output;
-  int num_samples;
-
-  ultrasonic_sensor    *sensor;
+  Memory                    *memory; 
    
   SC_CTOR(Top) : num_samples(100) //The quantity of samples to be simulated   
   {   
@@ -157,13 +152,6 @@ SC_MODULE(Top)
     {
       sprintf("InitiatorSensProx_%d", i);
       initSensProx[i] = new InitiatorSensProx(strSensProx+to_string(i));
-    }
-
-    string strTargetSensProx = "target_SensProx";
-    for (int i = 0; i < 8; i++)
-    {
-      sprintf("TargetSensProx_%d", i);
-      targetSensProx[i] = new TargetSensProx(strTargetSensProx+to_string(i));
     }
 
     // DETECTOR
@@ -215,15 +203,6 @@ SC_MODULE(Top)
 
     // MEMORIA
     memory = new Memory   ("memory");
-
-    // AMS MODULES
-    // ULTRASONIC SENSOR
-    ultrasonicSensor = new ultrasonic_sensor("ultrasonicSensor", 40.0, 10, 100, 25000);
-    ultrasonicSensor->tx_signal(tx_signal);
-    ultrasonicSensor->echo_signal(echo_signal);
-    ultrasonicSensor->time_output(time_output);
-
-    SC_THREAD(stimulus);
    
    /*------------------------------------------------------------------*/
     // Bind initiator socket to target socket
@@ -257,21 +236,6 @@ SC_MODULE(Top)
 
     //Conexion 8
     routerMemory->initiator_socket.bind( memory->target_socket );
-  }
-
-  void stimulus()
-  {
-    for (int i = 0; i < num_samples; ++i) 
-    {
-      // Simulate a pulse transmission
-      double pulse = 1.0;
-      tx_signal.write(pulse);
-      wait(10, SC_MS);
-
-      pulse = 0.0;
-      tx_signal.write(pulse);
-      wait(50, SC_MS); //To match suggested wait time of the actual sensor
-    }
   }
 
 };

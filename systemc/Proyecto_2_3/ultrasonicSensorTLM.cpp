@@ -7,7 +7,9 @@
 #include "systemc.h"
 #include "systemc-ams.h"
 
+#include "memory_map.h"
 #include "ultrasonicSensor.hpp"
+#include "global_register_bank.hpp"
 
 class signal_driver : public sca_tdf::sca_module {
   public:
@@ -84,7 +86,7 @@ struct UltrasonicSensorTLM: sc_module
      
     // Generate a random sequence of reads and writes
 
-    num_samples = 10;
+    num_samples = 15;
     for (int i = 0; i < num_samples; ++i) 
     {
         // Simulate a pulse transmission
@@ -105,6 +107,12 @@ struct UltrasonicSensorTLM: sc_module
         cout << "Delay time being sent: " << time_output_val << endl;
         cout << "Echo signal being sent: " << echo_signal_val << endl;
         
+        //Prepare to write register
+        if (echo_signal_val != 0.0){
+            cout << "Writting REGISTER" << endl;
+            global_register_bank.write_bits(REG_BASE_1+0x2,0x1,0x1);
+        }
+
         //Generating unique id and fields required for the communication
         id_extension->transaction_id = generateUniqueID();
         tlm::tlm_phase phase = tlm::BEGIN_REQ;   

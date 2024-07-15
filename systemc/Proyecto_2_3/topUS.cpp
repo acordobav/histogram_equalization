@@ -1,6 +1,15 @@
 #include "ultrasonicSensorTLM.cpp"
 #include "ultrasonicSensor.cpp"
 
+//To include operations related to the Bank of Registers
+#include "memory_map.h"
+#include "RegisterBank.hpp"
+#include "RegisterBank.cpp"
+#include "global_register_bank.hpp"
+
+//Need to remove it in the future
+RegisterBank global_register_bank(0x10000, 0x10072);
+
 struct DefaultTarget: sc_module
 {
   // TLM-2 socket, defaults to 32-bits wide, base protocol
@@ -48,6 +57,8 @@ struct DefaultTarget: sc_module
     cout << "From TARGET" << endl;
     cout << "Delay time coming from sensor : " << time_output << endl;
     cout << "Echo signal coming from sensor: " << echo_signal << endl;
+
+    cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_1+0x2,0x1) << endl;
 
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
     target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
