@@ -51,7 +51,7 @@ void camara_sensor::processing()
   	unsigned char* original_image;
   	
   	
-  	printf("Signal In"); 
+  	//printf("Signal In"); 
   	//bool verificacion = signal_in.read();
   	
 	//digital_image_ready.write(false);
