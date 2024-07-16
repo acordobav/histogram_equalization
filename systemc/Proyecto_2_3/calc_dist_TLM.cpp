@@ -1,9 +1,9 @@
 #include "utils.hpp"
 
 #include "memory_map.h"
-#include "RegisterBank.hpp"
-#include "RegisterBank.cpp"
-#include "global_register_bank.hpp"
+//#include "RegisterBank.hpp"
+//#include "RegisterBank.cpp"
+//#include "global_register_bank.hpp"
 
 struct CalcDistTLM: sc_module
 {
@@ -13,7 +13,13 @@ struct CalcDistTLM: sc_module
   // TLM2 socket, defaults to 32-bits wide, generic payload, generic DMI mode   
   tlm_utils::simple_initiator_socket<CalcDistTLM> initiator_socket;
 
-  // Internal data buffer used by initiator with generic payload   
+  // Internal data buffer used by initiator with generic payload
+  sc_event  e1;
+  tlm::tlm_generic_payload* trans_pending;   
+  tlm::tlm_phase phase_pending; 
+  sc_time delay_pending;  
+  dist_calc* calcDistMod;
+
   int data;
   sc_signal<sc_int <32> > dist_cm;
   sc_signal<bool> sens_active;
@@ -33,8 +39,8 @@ struct CalcDistTLM: sc_module
     target_socket.register_nb_transport_fw(this, &CalcDistTLM::target_nb_transport_fw);
     initiator_socket.register_nb_transport_bw(this, &CalcDistTLM::initiator_nb_transport_bw);
     
-    calcDistMod = new dist_calc("cdM")
-    calcDistMod->delta_time()
+    calcDistMod = new dist_calc("cdM");
+    calcDistMod->delta_time();
     calcDistMod->dist_cm(dist_cm);
     calcDistMod->sens_active(sens_active);
     calcDistMod->trigger(trigger);
@@ -75,11 +81,13 @@ struct CalcDistTLM: sc_module
             cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_1+0x2,0x1) << endl;
 
             //Since reading was detected, now disabling it for next iteration
-            global_register_bank.write_bits(REG_BASE_1+0x2,0x1,0x0)
+            global_register_bank.write_bits(REG_BASE_1+0x2,0x1,0x0);
         }
         
-        sens_active = false;
+        //sens_active = false;
+        sens_active = true; //needs to be removed later
         echo_temp = false;
+        int sens_active_transmit = 0;
         if (echo_signal != 0.0){
             echo_temp = true;
         }
@@ -89,6 +97,7 @@ struct CalcDistTLM: sc_module
             //Register bit to indicate that an animal is in front of the camara
             //Capture bit being set to TRUE
             global_register_bank.write_bits(REG_BASE_2+0x2,0x1,0x1);
+            sens_active_transmit = 1;
         }
 
         tlm::tlm_phase phase = tlm::BEGIN_RESP;
@@ -104,18 +113,20 @@ struct CalcDistTLM: sc_module
 
         // TLM2 generic payload transaction
         tlm::tlm_generic_payload trans;
-        ID_extension* id_extension = new ID_extension;
+        id_extension = new ID_extension;
         trans.set_extension( id_extension ); // Add the extension to the transaction
 
         id_extension->transaction_id = generateUniqueID();
 
-        tlm::tlm_phase phase = tlm::BEGIN_REQ;   
+        phase = tlm::BEGIN_REQ;   
         sc_time delay = sc_time(10, SC_NS);   
 
         //Data to be sent        
-        // These lines should be modified to include the important data coming out of the calc dist module 
-        trans.set_data_ptr( sens_active );   
-        trans.set_data_length( sizeof(sens_active) );
+        // These lines should be modified to include the important data coming out of the calc dist module   
+        trans.set_data_length( sizeof(sens_active_transmit) );
+        unsigned char data[sizeof(int)]; //Here it is going to be concatenated the data to be sent
+        memcpy(data, &sens_active_transmit, sizeof(int));
+        trans.set_data_ptr( data ); 
 
         cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
         status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
