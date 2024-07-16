@@ -60,11 +60,11 @@ void camara_sensor::processing()
 	//cout << "COUNT " << count << "\n";  
 	
 	//count++;
-	printf("Signal In in camara sensor"); 
+	//printf("Signal In in camara sensor"); 
 	
 	if(signal_in.read()){
 	//}*/
-		printf("Generando imagen :D"); 
+		//printf("Generando imagen :D"); 
 	 	original_image = stbi_load(input_filename, &original_width, &original_height, &channels, 0);
 
 	//cout << "channels!!" << channels << "\n"; 
@@ -99,7 +99,7 @@ void camara_sensor::processing()
 	//free(save_image);
   	//stbi_image_free(analog_prueba);
 	//stbi_image_free(digital_prueba);
-	printf("Final :D");
+	//printf("Final :D");
 	digital_image_ready.write(true);
 
 }
