@@ -10,8 +10,8 @@
 SC_MODULE (dist_calc) {
   sc_out<sc_int <32> > dist_cm;
   sc_out<double > calc_voltage;
-//  sca_tdf::sca_signal<bool> sens_active_cable("sens_active_cable");
-//  sc_out<bool > sens_active;
+  //  sca_tdf::sca_signal<bool> sens_active_cable("sens_active_cable");
+  //  sc_out<bool > sens_active;
   sc_out<bool > sens_active;
   sc_out<const char*> sens_range;
   sc_out<bool > trigger;
@@ -36,12 +36,14 @@ SC_MODULE (dist_calc) {
   sc_int <32> cuenta_far = 0;
   sc_int <32> zero_value = 0;
   sc_int<64> time_signal_value =0;
-  //sc_int <32>  calc_voltage =0; 
-  
+  //sc_int <32>  calc_voltage =0;
+
+  double distance_out_module;
+  bool sens_active_out_module;  
 
   // Constructor 
   SC_CTOR(dist_calc) {
-   SC_THREAD(pulse_trigger);
+   //SC_THREAD(pulse_trigger);
    SC_THREAD(pulse_echo);
    //SC_THREAD(end_wait_th);
   } 
@@ -73,15 +75,18 @@ SC_MODULE (dist_calc) {
     wait(d_start);
 	while(true) {
       if (echo_signal.read() != zero_value){
+        //distance_out_module = 0;
         calc_voltage = 0;
         //cout<< "Inside the if... " <<endl;
       	time_signal_value = time_signal.read();
       	wait(1, SC_US);	
-        dist_cm = time_signal_value*0.034;
+        dist_cm.write(time_signal_value*0.034);
         wait(3, SC_US);
-        distance_cm = dist_cm;
+        distance_cm = time_signal.read()*0.034;
 
-        
+        if (time_signal.read()*0.034 != zero_value){
+            distance_out_module = time_signal.read()*0.034;
+        }
         wait(10, SC_US);
         calc_voltage = distance_cm*0.0016; //here!!!! 
         //printf("- - -PROBANDO voltaje - - - \n");
@@ -95,45 +100,57 @@ SC_MODULE (dist_calc) {
   
   void sensor_range(){
     	wait(30, SC_US);
-    	printf("DIST CALC "); 
+    	//printf("DIST CALC "); 
     	if ((dist_cm)>=range1 && (dist_cm)<=range2){
-            sens_range = "cercano";
+        sens_range = "cercano";
             	
     		sens_active = 1;
     		wait(1, SC_US);
     		//cout << "SENS ACTIVE 1 " << sens_active << endl;
-          	wait(3, SC_MS);
-            sens_active = 0;
-			cuenta_near = cuenta_near+1;
-          	count_near = cuenta_near;
+        wait(3, SC_MS);
+        sens_active = 0;
+			  cuenta_near = cuenta_near+1;
+        count_near = cuenta_near;
     	}
     	else if ((dist_cm)>range2 && (dist_cm)<=range3){
     		sens_range = "medio";
     		
-          	sens_active = 1;
-          	wait(1, SC_US);
-          	//cout << "SENS ACTIVE 2 " << sens_active << endl;
-		wait(3, SC_MS);
-            sens_active = 0;
-			cuenta_half = cuenta_half+1;
-			count_half = cuenta_half;
+        sens_active = 1;
+        wait(1, SC_US);
+        //cout << "SENS ACTIVE 2 " << sens_active << endl;
+		    wait(3, SC_MS);
+        sens_active = 0;
+        cuenta_half = cuenta_half+1;
+        count_half = cuenta_half;
     	}
     	else if ((dist_cm)>range3 && (dist_cm)<=range4){
     		sens_range = "lejano";
     		
-          	sens_active = 1;
-          	wait(1, SC_US);
-          	//cout << "SENS ACTIVE 3 " << sens_active << endl;
-          	wait(3, SC_MS);
-            sens_active = 0;
-            cuenta_far = cuenta_far+1;
-            count_far = cuenta_far;     
+        sens_active = 1;
+        wait(1, SC_US);
+        //cout << "SENS ACTIVE 3 " << sens_active << endl;
+        wait(3, SC_MS);
+        sens_active = 0;
+        cuenta_far = cuenta_far+1;
+        count_far = cuenta_far;     
     	}
     	else{	
-          	sens_range = "fuera_de_rango";
+        sens_range = "fuera_de_rango";
     		sens_active = 0;
-        }
-        //printf("Generando imagen jill:D"); 
+      } 
+      sens_active_out_module = sens_active;
+
+      //cout << "Inside" << endl;
+      //cout << "Distance: " << dist_cm << endl;
+      //cout << "Sensr Active: " << sens_active_out_module << endl;
+  }
+
+  double read_distance(){
+    return distance_out_module;
+  }
+
+  bool read_sens_active(){
+    return sens_active_out_module; 
   }
 
 }; 

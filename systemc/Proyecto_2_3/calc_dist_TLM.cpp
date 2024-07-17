@@ -20,15 +20,28 @@ struct CalcDistTLM: sc_module
   sc_time delay_pending;  
   dist_calc* calcDistMod;
 
+  //Internal variables
   int data;
-  sc_signal<sc_int <32> > dist_cm;
-  sc_signal<bool> sens_active;
+
+  //To fully connect the Dist Calc module
+  //sca_tdf::sca_signal<bool> sens_active;
+  sc_signal<bool> sens_active_cable;
+  sc_signal<sc_int <32> > dist_cm; 
+  sc_signal<double > calc_voltage;
+  sc_signal<double> echo_signal;
+  sc_signal<double> time_signal;
+  sc_signal<const char*> sens_range;
   sc_signal<bool > trigger;
-  sc_signal<bool > echo;
-    
-  bool tmp;
-  bool echo_temp;
-  int time;
+  sc_signal<sc_int <32> > count_near;
+  sc_signal<sc_int <32> > count_half;
+  sc_signal<sc_int <32> > count_far;
+
+  //To be able to process data with the Dist Calc module
+  double time_output;
+  double echo_signal_result;
+  double dist_result;
+  bool sens_active_result;
+  int sens_active_transmit;
 
   SC_CTOR(CalcDistTLM)   
   : target_socket("CalcDistTLM:target"),
@@ -40,11 +53,16 @@ struct CalcDistTLM: sc_module
     initiator_socket.register_nb_transport_bw(this, &CalcDistTLM::initiator_nb_transport_bw);
     
     calcDistMod = new dist_calc("cdM");
-    calcDistMod->delta_time();
     calcDistMod->dist_cm(dist_cm);
-    calcDistMod->sens_active(sens_active);
+    calcDistMod->calc_voltage(calc_voltage);
+    calcDistMod->sens_range(sens_range);
     calcDistMod->trigger(trigger);
-    calcDistMod->echo(echo);
+    calcDistMod->echo_signal(echo_signal);
+    calcDistMod->time_signal(time_signal);
+    calcDistMod->count_near(count_near);
+    calcDistMod->count_half(count_half);
+    calcDistMod->count_far(count_far);
+    calcDistMod->sens_active(sens_active_cable);
 
     SC_THREAD(thread_process);   
   }   
@@ -66,39 +84,50 @@ struct CalcDistTLM: sc_module
         cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
         
         //Variables to store the incoming data
-        double time_output = 0.0;
-        double echo_signal = 0.0;
 
         if (global_register_bank.read_bits(REG_BASE_1+0x2,0x1)){
             unsigned char* data_ptr = trans_pending->get_data_ptr();
             memcpy(&time_output, data_ptr, sizeof(double));
-            memcpy(&echo_signal, data_ptr + sizeof(double), sizeof(double));
+            memcpy(&echo_signal_result, data_ptr + sizeof(double), sizeof(double));
 
-            cout << "From TARGET" << endl;
+            cout << endl;
+            cout << "From CALC DIST TARGET" << endl;
             cout << "Delay time coming from sensor : " << time_output << endl;
-            cout << "Echo signal coming from sensor: " << echo_signal << endl;
+            cout << "Echo signal coming from sensor: " << echo_signal_result << endl;
 
-            cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_1+0x2,0x1) << endl;
+            //cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_1+0x2,0x1) << endl;
 
             //Since reading was detected, now disabling it for next iteration
             global_register_bank.write_bits(REG_BASE_1+0x2,0x1,0x0);
         }
-        
-        //sens_active = false;
-        sens_active = true; //needs to be removed later
-        echo_temp = false;
-        int sens_active_transmit = 0;
-        if (echo_signal != 0.0){
-            echo_temp = true;
-        }
-        echo.write(echo_temp); // echo enabled
+        sens_active_result = false;
+        sens_active_transmit = 0;
 
-        if (sens_active){
+        // CALC DIST Module is going to provide the required data
+        //cout << "Simulation of the Calc Dist module" << endl;
+
+        calcDistMod->delay_start(); 
+        echo_signal.write(echo_signal_result); // echo enabled
+        time_signal.write(time_output);
+        //cout << "Distance: " << dist_cm.read() << endl;
+        dist_result = calcDistMod->read_sens_active();
+        sens_active_result = calcDistMod->read_sens_active();
+        calcDistMod->e_wait();
+        //cout << "Distance: " << dist_cm.read() << endl;
+
+        //dist_result = calcDistMod->read_sens_active();
+
+        cout << "From Dist Calc Module/Init" << endl;
+        cout << "Distance: " << dist_result << endl;
+        cout << "Sens Active value: " << sens_active_result << endl;
+
+        if (sens_active_result){
             //Register bit to indicate that an animal is in front of the camara
             //Capture bit being set to TRUE
             global_register_bank.write_bits(REG_BASE_2+0x2,0x1,0x1);
             sens_active_transmit = 1;
         }
+        sens_active_transmit = 1; //Just for debugging
 
         tlm::tlm_phase phase = tlm::BEGIN_RESP;
         status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);

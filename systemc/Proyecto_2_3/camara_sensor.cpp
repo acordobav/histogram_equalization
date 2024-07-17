@@ -1,13 +1,14 @@
 #include <systemc.h>
 #include "camara_sensor.h"
 #include <systemc-ams.h>
+#include "utils.hpp"
 //#include "camara_source.cpp"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
 
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
+//#define STB_IMAGE_WRITE_IMPLEMENTATION
+//#include "stb_image_write.h"
 
 #define ROWS 323
 #define COLS 434
@@ -38,7 +39,7 @@ void camara_sensor::set_attributes()
 }
 
 void camara_sensor::change_attributes(){
-	request_next_activation(signal_in.default_event());
+	//request_next_activation(signal_in.default_event());
 }
 
 void camara_sensor::processing()

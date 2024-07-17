@@ -1,9 +1,34 @@
-#include "utils.hpp"
-
+//#include "utils.hpp"
 #include "memory_map.h"
-#include "RegisterBank.hpp"
-#include "RegisterBank.cpp"
-#include "global_register_bank.hpp"
+#include "camara_sensor.cpp"
+
+class signal_driver2 : public sca_tdf::sca_module {
+  public:
+      sca_tdf::sca_out<bool> out;
+
+    signal_driver2(sc_core::sc_module_name nm) : out("out"), signal_value(0.0) {}
+
+    void set_attributes() {
+        set_timestep(1.0, SC_MS); // Set the time step to 1 ms
+    }
+
+    void processing() {
+        out.write(signal_value);
+    }
+
+    void set_signal_value(double value) {
+        signal_value = value;
+    }
+
+  private:
+      double signal_value;
+};
+
+/*
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+*/
 
 struct CamaraSensTLM: sc_module
 {
@@ -13,22 +38,45 @@ struct CamaraSensTLM: sc_module
   // TLM2 socket, defaults to 32-bits wide, generic payload, generic DMI mode   
   tlm_utils::simple_initiator_socket<CamaraSensTLM> initiator_socket;
 
-  // Internal data buffer used by initiator with generic payload   
+  // Internal data buffer used by initiator with generic payload
+  sc_event  e1;
+  tlm::tlm_generic_payload* trans_pending;   
+  tlm::tlm_phase phase_pending; 
+  sc_time delay_pending;
+
+  // Internal data buffer used by initiator with generic payload  
+  camara_sensor* cs1;
+  signal_driver2* sig_drv;
+  //using namespace sc_core;
+	double const_digitalization = 190;
+	double tiempo;
+  sca_tdf::sca_signal<bool> sens_active_cable;
+  sca_tdf::sca_signal<double> echo_signal_cable;
+	sca_tdf::sca_signal<double> time_signal_cable;
+	sca_tdf::sca_signal<bool> image_ready_cable;
   int data;
 
   SC_CTOR(CamaraSensTLM)   
   : target_socket("CamaraSensTLM:target"),
-  initiator_socket("CamaraSensTLM:initiator")  // Construct and name socket   
-  
-  {   
+  initiator_socket("CamaraSensTLM:initiator")  // Construct and name socket
+  {
     // Register callbacks for incoming interface method calls
     target_socket.register_nb_transport_fw(this, &CamaraSensTLM::target_nb_transport_fw);
     initiator_socket.register_nb_transport_bw(this, &CamaraSensTLM::initiator_nb_transport_bw);
-    
+
+    /* 
     //Inst new CAMARA SENSOR
+    cs1 = new camara_sensor("cs1", const_digitalization, tiempo);
+    sig_drv = new signal_driver2("sig_drv");
+
+    cs1->signal_in(sens_active_cable);
+    sig_drv->out(sens_active_cable); //Signals are going to be 'connected', to produce the required behavior
+
+    cs1->digital_image_ready(image_ready_cable);
+    */
 
     SC_THREAD(thread_process);   
-  }   
+  }
 
   void thread_process()   
   {
@@ -56,10 +104,10 @@ struct CamaraSensTLM: sc_module
             cout << "From TARGET CAM SENSOR" << endl;
             cout << "Sens active bool coming from sensor : " << sens_active << endl;
 
-            cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_2+0x2,0x1) << endl;
+            //cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_2+0x2,0x1) << endl;
 
             //Since camara sensor was actived, now disabling it for next iteration
-            global_register_bank.write_bits(REG_BASE_2+0x2,0x1,0x0)
+            global_register_bank.write_bits(REG_BASE_2+0x2,0x1,0x0);
         }
 
         tlm::tlm_phase phase = tlm::BEGIN_RESP;
@@ -70,10 +118,11 @@ struct CamaraSensTLM: sc_module
         cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
         }
 
+        /*
+        uint8_t** image = createMatrix(ROWS, COLS);
+
         // Process DATA coming from Sensor
         if (sens_active){
-            uint8_t** image = createMatrix(ROWS, COLS);
-
             // Load image
             int width, height, channels;
             uint8_t* img = stbi_load("../Proyecto_1/Module_Equalization/sydney.jpg", &width, &height, &channels, 0);
@@ -89,20 +138,38 @@ struct CamaraSensTLM: sc_module
             // Free the image memory
             stbi_image_free(img);
         }
+        */
+
+        uint8_t** image = createMatrix(ROWS, COLS);
+
+        // Load image
+        int width, height, channels;
+        uint8_t* img = stbi_load("../Proyecto_1/Module_Equalization/sydney.jpg", &width, &height, &channels, 0);
+
+        // Extract the red channel
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int index = (y * width + x) * channels;
+                image[y][x] = img[index]; // Red channel is the first byte in each pixel
+            }
+        }
+
+        // Free the image memory
+        stbi_image_free(img);
 
         // TLM2 generic payload transaction
         tlm::tlm_generic_payload trans;
-        ID_extension* id_extension = new ID_extension;
+        id_extension = new ID_extension;
         trans.set_extension( id_extension ); // Add the extension to the transaction
 
         id_extension->transaction_id = generateUniqueID();
 
-        tlm::tlm_phase phase = tlm::BEGIN_REQ;   
+        phase = tlm::BEGIN_REQ;   
         sc_time delay = sc_time(10, SC_NS);   
 
         //Data to be sent        
-        tlm::tlm_phase phase = tlm::BEGIN_REQ;   
-        sc_time delay = sc_time(10, SC_NS);   
+        phase = tlm::BEGIN_REQ;   
+        delay = sc_time(10, SC_NS);   
                 
         tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
         trans.set_data_ptr( reinterpret_cast<unsigned char*>(image) );   

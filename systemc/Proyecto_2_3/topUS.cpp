@@ -1,5 +1,11 @@
 #include "ultrasonicSensorTLM.cpp"
 #include "ultrasonicSensor.cpp"
+#include "calc_dist_TLM.cpp"
+#include "camara_sensor_TLM.cpp"
+#include "equalizerTLM.cpp"
+#include "InterpolationTLM.cpp"
+
+#include "utils.hpp"
 
 //To include operations related to the Bank of Registers
 #include "memory_map.h"
@@ -44,22 +50,17 @@ struct DefaultTarget: sc_module
     // Obliged to set response status to indicate successful completion   
     trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
 
+    cout << "LAST TARGET MODULE" << endl << endl;
     cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
     
-    //Variables to store the incoming data
-    double time_output = 0.0;
-    double echo_signal = 0.0;
+    unsigned char* filtered_image = trans_pending->get_data_ptr();
 
-    unsigned char* data_ptr = trans_pending->get_data_ptr();
-    memcpy(&time_output, data_ptr, sizeof(double));
-    memcpy(&echo_signal, data_ptr + sizeof(double), sizeof(double));
+    // Save output image
+    stbi_write_jpg("filtered.jpg", COLS/2, ROWS/2, 1, filtered_image, (ROWS/2)*(COLS/2));
 
-    cout << "From TARGET" << endl;
-    cout << "Delay time coming from sensor : " << time_output << endl;
-    cout << "Echo signal coming from sensor: " << echo_signal << endl;
+    free(filtered_image);
 
-    cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_1+0x2,0x1) << endl;
-
+    // Call on backward path to complete the transaction
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
     target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
   }
@@ -98,17 +99,30 @@ struct DefaultTarget: sc_module
 
 SC_MODULE(Top)
 {
-  UltrasonicSensorTLM* uSensor;
-  DefaultTarget* defaultTarget;
+  UltrasonicSensorTLM*  uSensor;
+  CalcDistTLM*          calcDist;
+  CamaraSensTLM*        cSens;
+  EqualizerTLM*         compressor;
+  //InterpolationTLM*     interpolation;
+  DefaultTarget*        defaultTarget;
 
   SC_CTOR(Top)
   {
     // Instantiate components
-    uSensor    = new UltrasonicSensorTLM("UltrasonicSensorTLM");
+    uSensor       = new UltrasonicSensorTLM("UltrasonicSensorTLM");
+    calcDist      = new CalcDistTLM("CalcDistTLM");
+    cSens         = new CamaraSensTLM("CamaraSensTLM");
+    compressor    = new EqualizerTLM("equalizerTLM");
+    //interpolation = new InterpolationTLM("InterpolationTlM");
     defaultTarget = new DefaultTarget("defaultTarget");
 
     // Bind sockets
-    uSensor->initiator_socket.bind(defaultTarget->target_socket);
+    uSensor->initiator_socket.bind(calcDist->target_socket);
+    calcDist->initiator_socket.bind(cSens->target_socket);
+    cSens->initiator_socket.bind(compressor->target_socket);
+    //compressor->initiator_socket.bind(interpolation->target_socket);
+    compressor->initiator_socket.bind(defaultTarget->target_socket);
+    //interpolation->initiator_socket.bind(defaultTarget->target_socket);
   }
 };
 

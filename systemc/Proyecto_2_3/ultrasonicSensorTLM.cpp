@@ -104,12 +104,15 @@ struct UltrasonicSensorTLM: sc_module
         double echo_signal_val = us1->read_last_echo(); //eco signal time
         
         //Just to verify the communication is okay
+        cout << endl;
+        cout << "FROM ULTRASONIC SENSOR" << endl;
         cout << "Delay time being sent: " << time_output_val << endl;
         cout << "Echo signal being sent: " << echo_signal_val << endl;
+        cout << endl;
         
         //Prepare to write register
         if (echo_signal_val != 0.0){
-            cout << "Writting REGISTER" << endl;
+            //cout << "Writting REGISTER" << endl;
             global_register_bank.write_bits(REG_BASE_1+0x2,0x1,0x1);
         }
 
@@ -137,7 +140,7 @@ struct UltrasonicSensorTLM: sc_module
           cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
         }
     }
-
+    return;
 }
 
   // ************************************************

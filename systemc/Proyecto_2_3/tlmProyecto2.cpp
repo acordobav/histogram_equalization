@@ -16,12 +16,13 @@
 #include "ultrasonicSensorTLM.cpp"
 #include "ultrasonicSensor.cpp"
 // CALC_DIST
-
+#include "calc_dist_TLM.cpp"
+//CAMARA SENSOR
+#include "camara_sensor_TLM.cpp"
 // EQUALIZER
 #include "equalizerTLM.cpp"
-#include "InterpolationTLM.cpp"
 // INTERPOLATION
-
+#include "InterpolationTLM.cpp"
 // ROUTER
 
 // MEMORY
@@ -29,6 +30,9 @@
 // Required because of implemented registers
 #include "memory_map.h"
 #include "RegisterBank.hpp"
+#include "RegisterBank.cpp"
+#include "global_register_bank.hpp"
+#include "utils.hpp"
 
 // Required because of functionalities of the modules
 #include <iostream>
@@ -115,8 +119,85 @@ Router3 ------------------------------------> Memoria
 
 /*---------------------------------------------------------------------*/
 // BLOQUE: MEMORIA
- 
+struct DefaultTarget: sc_module
+{
+  // TLM-2 socket, defaults to 32-bits wide, base protocol
+  tlm_utils::simple_target_socket<DefaultTarget> target_socket;
 
+  sc_event  e1;
+  tlm::tlm_generic_payload* trans_pending;   
+  tlm::tlm_phase phase_pending; 
+  sc_time delay_pending;
+
+
+  // Construct and name socket   
+  SC_CTOR(DefaultTarget)
+  : target_socket("DefaultTarget:target")
+  {
+    // Register callbacks for incoming interface method calls
+    target_socket.register_nb_transport_fw(this, &DefaultTarget::nb_transport_fw);
+
+    SC_THREAD(thread_process);
+  }
+
+  void thread_process()  
+{
+  while(true) {
+
+    // Wait for an event to pop out of the back end of the queue   
+    wait(e1);
+
+    ID_extension* id_extension = new ID_extension;
+    trans_pending->get_extension(id_extension); 
+
+    // Obliged to set response status to indicate successful completion   
+    trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
+
+    cout << "LAST TARGET MODULE" << endl << endl;
+    cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+    
+    unsigned char* filtered_image = trans_pending->get_data_ptr();
+
+    // Save output image
+    stbi_write_jpg("filtered.jpg", COLS/2, ROWS/2, 1, filtered_image, (ROWS/2)*(COLS/2));
+
+    free(filtered_image);
+
+    // Call on backward path to complete the transaction
+    tlm::tlm_phase phase = tlm::BEGIN_RESP;
+    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
+  }
+}
+
+  // TLM-2 non-blocking transport method
+  virtual tlm::tlm_sync_enum nb_transport_fw(
+    tlm::tlm_generic_payload& trans,
+    tlm::tlm_phase& phase,
+    sc_time& delay)
+  {
+    ID_extension* id_extension = new ID_extension;
+    trans.get_extension(id_extension);
+
+    if (phase != tlm::BEGIN_REQ) {
+      cout << name() << " unknown phase " << phase << endl;
+      return tlm::TLM_ACCEPTED;
+    }
+
+    cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
+
+    // Now queue the transaction until the annotated time has elapsed
+    trans_pending=&trans;
+    phase_pending=phase;
+    delay_pending=delay;
+
+    e1.notify();
+
+    //Delay
+    wait(delay);
+
+    return tlm::TLM_ACCEPTED;
+  }
+};
 
 /*---------------------------------------------------------------------*/
 // BLOQUE: TOP
@@ -124,7 +205,14 @@ Router3 ------------------------------------> Memoria
 SC_MODULE(Top)   
 {   
   //InitiatorSensProx       *initiatorSensProx;
-  UltrasonicSensorTLM*      uSensor;
+  UltrasonicSensorTLM*      uSensor[8];
+  CalcDistTLM*              calcDist[8];
+  CamaraSensTLM*            cSens[8];
+  EqualizerTLM*             compressor[8];
+  //InterpolationTLM*         interpolation[8];
+  DefaultTarget*            defaultTarget[8];
+
+  /*
   //InitiatorDetector       *initiatorDetector;
   CalcDistInitiatorTLM*     calcDistTarget
   InitiatorCamara           *initiatorCamara;
@@ -141,103 +229,92 @@ SC_MODULE(Top)
   RouterT2<2>               *routerT2;
 
   Memory                    *memory; 
+  */
    
-  SC_CTOR(Top) : num_samples(100) //The quantity of samples to be simulated   
+  SC_CTOR(Top) //The quantity of samples to be simulated   
   {   
     // Instantiate components 
 
     // SENSOR PROXIMIDAD
-    string strSensProx = "init_SensProx";
+    char strDefault[40];
     for (int i = 0; i < 8; i++)
     {
-      sprintf("InitiatorSensProx_%d", i);
-      initSensProx[i] = new InitiatorSensProx(strSensProx+to_string(i));
+      sprintf(strDefault,"UltrasonicSensor_%d", i);
+      uSensor[i] = new UltrasonicSensorTLM(strDefault);
     }
 
     // DETECTOR
-    string strDetector = "init_Detector";
     for (int i = 0; i < 8; i++)
     {
-      sprintf("InitiatorDetector_%d", i);
-      initDetector[i] = new InitiatorDetector(strDetector+to_string(i));
-    }
-
-    string strTargetDetector = "target_Detector";
-    for (int i = 0; i < 8; i++)
-    {
-      sprintf("TargetDetector_%d", i);
-      targetDetector[i] = new TargetDetector(strTargetDetector+to_string(i));
+      sprintf(strDefault,"CalcDistModule_%d", i);
+      calcDist[i] = new CalcDistTLM(strDefault);
     }
 
     // CAMARA
-    string strCamara = "init_Camara";
     for (int i = 0; i < 8; i++)
     {
-      sprintf("InitiatorCamara_%d", i);
-      initCamara[i] = new InitiatorCamara(strCamara+to_string(i));
-    }
-
-    string strTargetCamara = "target_Camara";
-    for (int i = 0; i < 8; i++)
-    {
-      sprintf("TargetCamara_%d", i);
-      targetCamara[i] = new TargetCamara(strTargetCamara+to_string(i));
-    }
+      sprintf(strDefault,"CamaraSensor_%d", i);
+      cSens[i] = new CamaraSensTLM(strDefault);
+    }    
 
     // ECUALIZADOR
-    initEcualizador = new InitiatorEcualizador("init_Ecualizador");
-
-    targetEcualizador = new TargetEcualizador("target_Ecualizador");
+    for (int i = 0; i < 8; i++)
+    {
+      sprintf(strDefault,"equalizerTLM_%d", i);
+      compressor[i] = new EqualizerTLM(strDefault);
+    }
 
     // COMPRESOR
-    initCompresor = new InitiatorCompresor("init_Compresor");
+    /*
+    for (int i = 0; i < 8; i++)
+    {
+      sprintf(strDefault, "InterpolationTlM%d", i);
+      interpolation[i] = new InterpolationTLM(strDefault);
+    }
+    */
 
-    targetCompresor = new TargetCompresor("target_Compresor");
-
+    /*
     // ROUTER
-    routerT1_Camara = new RouterT1<8>("routerT1_Camara");
-
-    routerT1_Est = new RouterT1<8>("routerT1_Est");
-
-    routerMemory = new RouterT2<2>("routerMemory");
+    routerT1_Memory = new RouterT1<8>("routerT1_Camara");
 
     // MEMORIA
     memory = new Memory   ("memory");
+    */
+
+    //Temp Solution
+    for (int i = 0; i < 8; i++)
+    {
+      sprintf(strDefault,"defaultTarget_%d", i);
+      defaultTarget[i] = new DefaultTarget(strDefault);
+    }
    
    /*------------------------------------------------------------------*/
     // Bind initiator socket to target socket
     // See references to each "Conexion" at the beginning of the script
     //Conexion 1
     for (int i = 0; i < 8; i++)
-      initSensProx[i]->initiator_socket.bind( targetDetector[i]->target_socket );
+      uSensor[i]->initiator_socket.bind( calcDist[i]->target_socket );
 
     //Conexion 2
     for (int i = 0; i < 8; i++)
-      initDetector[i]->initiator_socket[0].bind( targetCamara[i]->target_socket );
+      calcDist[i]->initiator_socket.bind( cSens[i]->target_socket );
 
     //Conexion 3
     for (int i = 0; i < 8; i++)
-      initCamara[i]->initiator_socket.bind( routerT1_Camara->target_socket[i] );
+      cSens[i]->initiator_socket.bind( compressor[i]->target_socket );
 
     //Conexion 4
+    /*
     for (int i = 0; i < 8; i++)
-      initDetector[i]->initiator_socket[1].bind( routerT1_Est->target_socket[i] );
+      compressor[i]->initiator_socket.bind( interpolation[i]->target_socket );
     
     //Conexion 5
-    for (int i = 0; i < 4; i++)
-      routerT1_Camara->initiator_socket->bind( targetEcualizador->target_socket );
-
-    //Conexion 6
-    initEcualizador->initiator_socket.bind( targetCompresor->target_socket );
-
-    //Conexion 7
-    initCompresor->initiator_socket.bind( routerMemory->target_socket[0] );
-    routerT1_Est->initiator_socket->bind( routerMemory->target_socket[1] );
-
-    //Conexion 8
-    routerMemory->initiator_socket.bind( memory->target_socket );
+    for (int i = 0; i < 8; i++)
+      interpolation[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
+    */
+    for (int i = 0; i < 8; i++)
+      compressor[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
   }
-
 };
 
 /*---------------------------------------------------------------------*/
@@ -246,7 +323,7 @@ SC_MODULE(Top)
 int sc_main(int argc, char* argv[])
 {
   //Create the Registers Bank according to the Memory Bank
-  RegisterBank reg_bank(0x10000, 0x10072);
+  //RegisterBank reg_bank(0x10000, 0x10072);
 
   //To initiate the different modules
   Top top("top");
