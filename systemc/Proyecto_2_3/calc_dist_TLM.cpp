@@ -25,8 +25,8 @@ struct CalcDistTLM: sc_module
 
   //To fully connect the Dist Calc module
   //sca_tdf::sca_signal<bool> sens_active;
-  sc_signal<bool> sens_active_cable;
-  sc_signal<sc_int <32> > dist_cm; 
+  sc_signal<bool> sens_active;
+  sc_signal<double> dist_cm; 
   sc_signal<double > calc_voltage;
   sc_signal<double> echo_signal;
   sc_signal<double> time_signal;
@@ -62,7 +62,7 @@ struct CalcDistTLM: sc_module
     calcDistMod->count_near(count_near);
     calcDistMod->count_half(count_half);
     calcDistMod->count_far(count_far);
-    calcDistMod->sens_active(sens_active_cable);
+    calcDistMod->sens_active(sens_active);
 
     SC_THREAD(thread_process);   
   }   
@@ -110,7 +110,7 @@ struct CalcDistTLM: sc_module
         echo_signal.write(echo_signal_result); // echo enabled
         time_signal.write(time_output);
         //cout << "Distance: " << dist_cm.read() << endl;
-        dist_result = calcDistMod->read_sens_active();
+        dist_result = calcDistMod->read_distance();
         sens_active_result = calcDistMod->read_sens_active();
         calcDistMod->e_wait();
         //cout << "Distance: " << dist_cm.read() << endl;
