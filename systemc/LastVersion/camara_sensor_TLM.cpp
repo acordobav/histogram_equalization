@@ -172,12 +172,12 @@ struct CamaraSensTLM: sc_module
             	
           //cout << "DATA output file digital: " << digital_image_result << endl;
 	  
- 		//cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+ 		cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
 		status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
 	    
 		// Check value returned from nb_transport   
 		if (status != tlm::TLM_ACCEPTED) {
-		  //  cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+		    cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
 		    }
 		}
         

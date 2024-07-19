@@ -56,12 +56,12 @@ struct EqualizerTLM: sc_module
     // Call on backward path to complete the transaction
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
     
-    /*status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
+    status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
 
     // Check value returned from nb_transport   
     if (status != tlm::TLM_ACCEPTED) {
       cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-    }*/
+    }
 
     //
     //
