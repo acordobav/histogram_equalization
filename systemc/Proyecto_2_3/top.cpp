@@ -1,5 +1,6 @@
 #include "equalizerTLM.cpp"
 #include "InterpolationTLM.cpp"
+#include "routerTLM.cpp"
 
 struct DefaultInitiator: sc_module
 {
@@ -69,9 +70,9 @@ struct DefaultInitiator: sc_module
     stbi_image_free(img);
 
     // TLM2 generic payload transaction
-    tlm::tlm_generic_payload trans;
+    tlm::tlm_generic_payload* trans = new tlm::tlm_generic_payload;
     ID_extension* id_extension = new ID_extension;
-    trans.set_extension( id_extension ); // Add the extension to the transaction
+    trans->set_extension( id_extension ); // Add the extension to the transaction
 
     // Generate a random sequence of reads and writes   
     for (int i = 15; i < 16; i++)   
@@ -83,8 +84,8 @@ struct DefaultInitiator: sc_module
       sc_time delay = sc_time(10, SC_NS);   
             
       tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
-      trans.set_data_ptr( reinterpret_cast<unsigned char*>(image) );   
-      trans.set_data_length( sizeof(image) );   
+      trans->set_data_ptr( reinterpret_cast<unsigned char*>(image) );   
+      trans->set_data_length( sizeof(image) );   
 
       // Other fields default: byte enable = 0, streaming width = 0, DMI_hint = false, no extensions   
 
@@ -93,13 +94,14 @@ struct DefaultInitiator: sc_module
       tlm::tlm_sync_enum status;   
       
       cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-      status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
+      status = initiator_socket->nb_transport_fw( *trans, phase, delay );  // Non-blocking transport call   
    
       // Check value returned from nb_transport   
       if (status != tlm::TLM_ACCEPTED) {
         cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
       }
       
+      delete trans;
     }   
   }   
 
@@ -184,6 +186,71 @@ struct DefaultTarget: sc_module
   }
 };
 
+struct BlockingTarget: sc_module
+{
+  // TLM-2 socket, defaults to 32-bits wide, base protocol
+  tlm_utils::simple_target_socket<BlockingTarget> target_socket;
+
+  // Construct and name socket   
+  SC_CTOR(BlockingTarget)
+  : target_socket("BlockingTarget:target")
+  {
+    // Register callbacks for incoming interface method calls
+    target_socket.register_b_transport(this, &BlockingTarget::b_transport);
+  }
+
+  // TLM-2 non-blocking transport method
+  virtual void b_transport( tlm::tlm_generic_payload& trans, sc_time& delay )
+  {
+    ID_extension* id_extension = new ID_extension;
+    trans.get_extension(id_extension);
+
+    cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
+
+    //Delay
+    wait(delay);
+
+    cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+    
+    // Obliged to set response status to indicate successful completion
+    trans.set_response_status( tlm::TLM_OK_RESPONSE );
+  }
+};
+
+/*
+SC_MODULE(Top)
+{
+  #define ROUTER_INIT 1
+  DefaultInitiator*       initiator[ROUTER_INIT];
+  RouterTLM<ROUTER_INIT>* router;
+  BlockingTarget*         blockingTarget;
+
+  SC_CTOR(Top)
+  {
+    // Instantiate components
+    for (int i = 0; i < ROUTER_INIT; i++) {
+      char str[30] = "";
+      sprintf(str, "\033[31m" "initiator%u" "\033[0m", i);
+      initiator[i] = new DefaultInitiator(str);
+    }
+    router         = new RouterTLM<ROUTER_INIT>("\033[34m" "routerTLM" "\033[0m");
+    blockingTarget = new BlockingTarget("blockingTarget");
+
+    // Bind sockets
+    for (int i = 0; i < ROUTER_INIT; i++) {
+      initiator[i]->initiator_socket.bind(*router->target_socket[i]);
+    }
+    router->initiator_socket.bind(blockingTarget->target_socket);
+  }
+};
+
+int sc_main(int argc, char* argv[])
+{
+  Top top("top");
+  sc_start();
+  return 0;
+}
+*/
 
 SC_MODULE(Top)
 {
