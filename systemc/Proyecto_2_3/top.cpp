@@ -29,7 +29,7 @@ struct DefaultInitiator: sc_module
   {   
     tlm::tlm_command cmd = trans.get_command();   
     sc_dt::uint64    adr = trans.get_address();   
-    
+
     ID_extension* id_extension = new ID_extension;
     trans.get_extension( id_extension ); 
     
@@ -254,8 +254,8 @@ int sc_main(int argc, char* argv[])
 
 SC_MODULE(Top)
 {
-  DefaultInitiator*  initiator;
-  EqualizerTLM* compressor;
+  DefaultInitiator* initiator;
+  EqualizerTLM* equalizer;
   DefaultTarget* defaultTarget;
   InterpolationTLM* interpolation;
 
@@ -263,13 +263,13 @@ SC_MODULE(Top)
   {
     // Instantiate components
     initiator     = new DefaultInitiator("initiator");
-    compressor    = new EqualizerTLM("equalizerTLM");
+    equalizer    = new EqualizerTLM("equalizerTLM");
     interpolation = new InterpolationTLM("InterpolationTlM");
     defaultTarget = new DefaultTarget("defaultTarget");
 
     // Bind sockets
-    initiator->initiator_socket.bind(compressor->target_socket);
-    compressor->initiator_socket.bind(interpolation->target_socket);
+    initiator->initiator_socket.bind(equalizer->target_socket);
+    equalizer->initiator_socket.bind(interpolation->target_socket);
     interpolation->initiator_socket.bind(defaultTarget->target_socket);
   }
 };
