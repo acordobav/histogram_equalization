@@ -6,13 +6,14 @@
 #define ROWS 323
 #define COLS 434
 #include <systemc-ams.h>
+#include "systemc.h"
 
 class camara_sensor : public sca_tdf::sca_module
 {
 	public: //signals
-		sca_tdf::sca_in<bool> signal_in;  //modified
-		
-		sca_tdf::sca_out<bool> digital_image_ready;
+		sca_tdf::sc_in<bool> sens_active_in;  //modificado para que el puerto lo aceptara
+
+		sca_tdf::sc_out<bool> digital_image_ready;
 
 		camara_sensor(sc_core::sc_module_name nm, double const_digitalization, double tiempo);
 		
