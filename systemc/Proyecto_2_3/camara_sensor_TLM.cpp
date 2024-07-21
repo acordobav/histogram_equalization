@@ -112,7 +112,7 @@ struct CamaraSensTLM: sc_module
         // Obliged to set response status to indicate successful completion   
         trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
 
-        cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+        cout << name() << " BEGIN_RESP SENT 1" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
         
         //Variables to store the incoming data
         	//sens_active_result = false;
@@ -135,22 +135,28 @@ struct CamaraSensTLM: sc_module
                     //cout << "Será que no lo escribe....     " << digital_image_result << endl;
             	}
             	//global_register_bank.write_bits(REG_BASE_2+0x2,0x1,0x0);
+			if (global_register_bank.read_bits(REG_BASE_3+0x2,0x1)){ 
 			
+			    //cout << "Será que no lo escribe....     " << digital_image_result << endl;
+			  }        
+            
             
             //}
             //break;
           
             tlm::tlm_phase phase = tlm::BEGIN_RESP;
-            
-        	  //status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
+           // cout << name() << "Será que no lo escribe4....     " << digital_image_result << endl;
+        	  /*status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);*/
+        	 // cout << name() << "Será que no lo escribe2....     " << digital_image_result << endl;
            
-           // if (status != tlm::TLM_ACCEPTED) {
-		  //  cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-            //  }
+            /*if (status != tlm::TLM_ACCEPTED) {
+		    cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+              }*/
           // TLM2 generic payload transaction
         	tlm::tlm_generic_payload trans;
         	id_extension = new ID_extension;
         	trans.set_extension( id_extension ); // Add the extension to the transaction
+        	//cout << "Será que no lo escribe3....     " << digital_image_result << endl;
 
         	id_extension->transaction_id = generateUniqueID();
         	
@@ -164,7 +170,7 @@ struct CamaraSensTLM: sc_module
           memcpy(data2, &digital_image_result, sizeof(int));
           trans.set_data_ptr( data2 ); 
             	
-         // cout << "DATA output file digital: " << digital_image_result << endl;
+          //cout << "DATA output file digital: " << digital_image_result << endl;
 	  
  		cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
 		status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
@@ -186,6 +192,7 @@ struct CamaraSensTLM: sc_module
     tlm::tlm_phase& phase,
     sc_time& delay)
     {
+    //cout << "Será que no lo escribe5....     " << digital_image_result << endl;
         ID_extension* id_extension = new ID_extension;
         trans.get_extension(id_extension);
 
@@ -194,7 +201,7 @@ struct CamaraSensTLM: sc_module
         return tlm::TLM_ACCEPTED;
         }
 
-        cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
+        cout << name() << " BEGIN_REQ RECEIVED CAMARA NOTIFY" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
 
         // Now queue the transaction until the annotated time has elapsed
         trans_pending=&trans;
@@ -218,6 +225,7 @@ struct CamaraSensTLM: sc_module
     tlm::tlm_phase&           phase,
     sc_time&                  delay)
   {   
+  //cout << "Será que no lo escribe6....     " << digital_image_result << endl;
     ID_extension* id_extension = new ID_extension;
     trans.get_extension( id_extension ); 
     
@@ -232,7 +240,7 @@ struct CamaraSensTLM: sc_module
     //Delay
     wait(delay);
     
-    cout << name () << " BEGIN_RESP RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+    cout << name () << " BEGIN_RESP RECEIVED CAMARA" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     
     return tlm::TLM_ACCEPTED;   
   }

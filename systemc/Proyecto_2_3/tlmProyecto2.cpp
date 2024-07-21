@@ -153,7 +153,7 @@ struct DefaultTarget: sc_module
 
     // Wait for an event to pop out of the back end of the queue   
     wait(e1);
-	cout << "LAST TARGET MODULE" << endl << endl;
+	//cout << "LAST TARGET MODULE" << endl << endl;
     ID_extension* id_extension = new ID_extension;
     trans_pending->get_extension(id_extension); 
 
@@ -163,16 +163,16 @@ struct DefaultTarget: sc_module
     cout << "LAST TARGET MODULE" << endl << endl;
     cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
     
-    /*unsigned char* filtered_image = trans_pending->get_data_ptr();
+    unsigned char* filtered_image = trans_pending->get_data_ptr();
 
     // Save output image
     stbi_write_jpg("filtered.jpg", COLS/2, ROWS/2, 1, filtered_image, (ROWS/2)*(COLS/2));
 
-    free(filtered_image);*/
+    free(filtered_image);
 
     // Call on backward path to complete the transaction
-    /*tlm::tlm_phase phase = tlm::BEGIN_RESP;
-    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);*/
+    tlm::tlm_phase phase = tlm::BEGIN_RESP;
+    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
      sc_stop();
   }
 }
@@ -183,6 +183,7 @@ struct DefaultTarget: sc_module
     tlm::tlm_phase& phase,
     sc_time& delay)
   {
+  //cout << name() << "LAST TARGET MODULE!!!!!!!!!!!!!" << endl << endl;
     ID_extension* id_extension = new ID_extension;
     trans.get_extension(id_extension);
 

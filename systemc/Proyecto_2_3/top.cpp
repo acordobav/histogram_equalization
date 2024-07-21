@@ -1,6 +1,49 @@
+// Needed for the simple_target_socket
+#define SC_INCLUDE_DYNAMIC_PROCESSES
+
+// SYSTEMC related
+#include "utils.hpp"
+#include <systemc.h>
+#include <systemc-ams>
+
+#include "dist_calc.cpp"
+#include "camara_sensor.cpp"
+#include "equalization.cpp"
+
+#include "interpolation.cpp"
+
+#include "tlm.h"
+#include "tlm_utils/simple_initiator_socket.h"
+#include "tlm_utils/simple_target_socket.h"
+#include "tlm_utils/peq_with_cb_and_phase.h"
+
+// TLM MODULES
+// Ultrasonic Sensor
+#include "ultrasonicSensorTLM.cpp"
+#include "ultrasonicSensor.cpp"
+// CALC_DIST
+#include "calc_dist_TLM.cpp"
+//CAMARA SENSOR
+#include "camara_sensor_TLM.cpp"
+// EQUALIZER
 #include "equalizerTLM.cpp"
+// INTERPOLATION
 #include "InterpolationTLM.cpp"
+// ROUTER
 #include "routerTLM.cpp"
+// MEMORY
+
+// Required because of implemented registers
+#include "memory_map.h"
+#include "RegisterBank.hpp"
+#include "RegisterBank.cpp"
+#include "global_register_bank.hpp"
+#include "utils.hpp"
+
+// Required because of functionalities of the modules
+#include <iostream>
+#include <string>
+#include <cmath>
 
 struct DefaultInitiator: sc_module
 {
@@ -220,7 +263,7 @@ struct BlockingTarget: sc_module
 /*
 SC_MODULE(Top)
 {
-  #define ROUTER_INIT 1
+  #define ROUTER_INIT 5
   DefaultInitiator*       initiator[ROUTER_INIT];
   RouterTLM<ROUTER_INIT>* router;
   BlockingTarget*         blockingTarget;

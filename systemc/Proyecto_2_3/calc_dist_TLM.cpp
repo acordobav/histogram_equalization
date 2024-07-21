@@ -91,9 +91,9 @@ struct CalcDistTLM: sc_module
             memcpy(&echo_signal_result, data_ptr + sizeof(double), sizeof(double));
 
             cout << endl;
-          //  cout << "From CALC DIST TARGET" << endl;
-          //  cout << "Delay time coming from sensor : " << time_output << endl;
-          //  cout << "Echo signal coming from sensor: " << echo_signal_result << endl;
+            cout << "From CALC DIST TARGET" << endl;
+            cout << "Delay time coming from sensor : " << time_output << endl;
+            cout << "Echo signal coming from sensor: " << echo_signal_result << endl;
 
             //cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_1+0x2,0x1) << endl;
 
@@ -117,9 +117,9 @@ struct CalcDistTLM: sc_module
 
         //dist_result = calcDistMod->read_sens_active();
 
-       // cout << "From Dist Calc Module/Init" << endl;
-     //   cout << "Distance: " << dist_result << endl;
-     //   cout << "Sens Active value: " << sens_active_result << endl;
+        //cout << "From Dist Calc Module/Init" << endl;
+        ///cout << "Distance: " << dist_result << endl;
+        //cout << "Sens Active value: " << sens_active_result << endl;
 
         if (sens_active_result){
             //Register bit to indicate that an animal is in front of the camara
@@ -132,7 +132,7 @@ struct CalcDistTLM: sc_module
         tlm::tlm_phase phase = tlm::BEGIN_RESP;
         //cout << name() << "From TEST1" << endl;
         status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
-        //cout << name() << "From TEST2" << endl;
+//cout << name() << "From TEST2" << endl;
         // Check value returned from nb_transport   
         if (status != tlm::TLM_ACCEPTED) {
         cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
@@ -175,6 +175,7 @@ struct CalcDistTLM: sc_module
     tlm::tlm_phase& phase,
     sc_time& delay)
     {
+    //cout << "Será que no lo escribe8....     " << endl;
         ID_extension* id_extension = new ID_extension;
         trans.get_extension(id_extension);
 
@@ -207,7 +208,7 @@ struct CalcDistTLM: sc_module
     tlm::tlm_phase&           phase,
     sc_time&                  delay)
   {   
-  
+  //cout << "Será que no lo escribe7....     " <<endl;
     ID_extension* id_extension = new ID_extension;
     trans.get_extension( id_extension ); 
     
@@ -219,7 +220,7 @@ struct CalcDistTLM: sc_module
     // Initiator obliged to check response status   
     if (trans.is_response_error() )   
       SC_REPORT_ERROR("TLM2", "Response error from nb_transport");   
-       
+      //   cout << "Será que no lo escribe10....     " <<endl; 
     //Delay
     wait(delay);
     

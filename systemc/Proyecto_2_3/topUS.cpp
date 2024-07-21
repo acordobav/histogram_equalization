@@ -1,7 +1,7 @@
 #include "ultrasonicSensorTLM.cpp"
 #include "ultrasonicSensor.cpp"
 #include "calc_dist_TLM.cpp"
-#include "camara_sensor_TLM.cpp"
+//#include "camara_sensor_TLM.cpp"
 #include "equalizerTLM.cpp"
 #include "InterpolationTLM.cpp"
 
@@ -112,7 +112,7 @@ SC_MODULE(Top)
     uSensor       = new UltrasonicSensorTLM("UltrasonicSensorTLM");
     calcDist      = new CalcDistTLM("CalcDistTLM");
     cSens         = new CamaraSensTLM("CamaraSensTLM");
-    compressor    = new EqualizerTLM("equalizerTLM");
+    compressor    = new EqualizerTLM("equalizerTLM");  //descomentar
     //interpolation = new InterpolationTLM("InterpolationTlM");
     defaultTarget = new DefaultTarget("defaultTarget");
 
