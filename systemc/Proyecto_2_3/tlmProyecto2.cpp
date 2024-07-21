@@ -6,6 +6,12 @@
 #include <systemc.h>
 #include <systemc-ams>
 
+#include "dist_calc.cpp"
+#include "camara_sensor.cpp"
+#include "equalization.cpp"
+
+#include "interpolation.cpp"
+
 #include "tlm.h"
 #include "tlm_utils/simple_initiator_socket.h"
 #include "tlm_utils/simple_target_socket.h"
@@ -119,6 +125,7 @@ Router3 ------------------------------------> Memoria
 
 /*---------------------------------------------------------------------*/
 // BLOQUE: MEMORIA
+
 struct DefaultTarget: sc_module
 {
   // TLM-2 socket, defaults to 32-bits wide, base protocol
@@ -146,7 +153,7 @@ struct DefaultTarget: sc_module
 
     // Wait for an event to pop out of the back end of the queue   
     wait(e1);
-
+	cout << "LAST TARGET MODULE" << endl << endl;
     ID_extension* id_extension = new ID_extension;
     trans_pending->get_extension(id_extension); 
 
@@ -156,16 +163,17 @@ struct DefaultTarget: sc_module
     cout << "LAST TARGET MODULE" << endl << endl;
     cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
     
-    unsigned char* filtered_image = trans_pending->get_data_ptr();
+    /*unsigned char* filtered_image = trans_pending->get_data_ptr();
 
     // Save output image
     stbi_write_jpg("filtered.jpg", COLS/2, ROWS/2, 1, filtered_image, (ROWS/2)*(COLS/2));
 
-    free(filtered_image);
+    free(filtered_image);*/
 
     // Call on backward path to complete the transaction
-    tlm::tlm_phase phase = tlm::BEGIN_RESP;
-    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
+    /*tlm::tlm_phase phase = tlm::BEGIN_RESP;
+    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);*/
+     sc_stop();
   }
 }
 
@@ -255,23 +263,23 @@ SC_MODULE(Top)
     {
       sprintf(strDefault,"CamaraSensor_%d", i);
       cSens[i] = new CamaraSensTLM(strDefault);
-    }    
+    }  
 
-    // ECUALIZADOR
-    for (int i = 0; i < 8; i++)
+   // ECUALIZADOR
+   for (int i = 0; i < 8; i++)
     {
       sprintf(strDefault,"equalizerTLM_%d", i);
       compressor[i] = new EqualizerTLM(strDefault);
     }
 
     // COMPRESOR
-    /*
-    for (int i = 0; i < 8; i++)
+    
+    /*for (int i = 0; i < 8; i++)
     {
       sprintf(strDefault, "InterpolationTlM%d", i);
       interpolation[i] = new InterpolationTLM(strDefault);
-    }
-    */
+    }*/
+    
 
     /*
     // ROUTER
@@ -301,19 +309,19 @@ SC_MODULE(Top)
 
     //Conexion 3
     for (int i = 0; i < 8; i++)
-      cSens[i]->initiator_socket.bind( compressor[i]->target_socket );
+      cSens[i]->initiator_socket.bind(compressor[i]->target_socket );
 
     //Conexion 4
-    /*
-    for (int i = 0; i < 8; i++)
-      compressor[i]->initiator_socket.bind( interpolation[i]->target_socket );
     
-    //Conexion 5
-    for (int i = 0; i < 8; i++)
-      interpolation[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
-    */
     for (int i = 0; i < 8; i++)
       compressor[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
+    
+    //Conexion 5
+    //for (int i = 0; i < 8; i++)
+   //   interpolation[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
+    
+    //for (int i = 0; i < 8; i++)
+     //compressor[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
   }
 };
 
