@@ -135,11 +135,7 @@ struct CamaraSensTLM: sc_module
                     //cout << "Será que no lo escribe....     " << digital_image_result << endl;
             	}
             	//global_register_bank.write_bits(REG_BASE_2+0x2,0x1,0x0);
-			if (global_register_bank.read_bits(REG_BASE_3+0x2,0x1)){ 
 			
-			    
-			  }        
-            
             
             //}
             //break;
