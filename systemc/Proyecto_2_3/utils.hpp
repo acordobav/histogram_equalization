@@ -27,7 +27,13 @@
 //#define STB_IMAGE_WRITE_IMPLEMENTATION
 //#include "stb_image_write.h"
 
-
+#define RED      "\033[31m"
+#define GREEN    "\033[32m"
+#define YELLOW   "\033[33m"
+#define BLUE     "\033[34m"
+#define MAGENTA  "\033[35m"
+#define CYAN     "\033[36m"
+#define ENDCOLOR "\033[0m"
 
 // Global variables for ID counter and mutex
 int idCounter = 0;
@@ -54,12 +60,6 @@ struct ID_extension: tlm::tlm_extension<ID_extension> {
   }
   unsigned int transaction_id;
 };
-
-
-
-
-
-
 
 #define ROWS 323
 #define COLS 434

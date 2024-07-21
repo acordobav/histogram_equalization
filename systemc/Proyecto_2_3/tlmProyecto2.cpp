@@ -30,7 +30,7 @@
 // INTERPOLATION
 #include "InterpolationTLM.cpp"
 // ROUTER
-
+#include "routerTLM.cpp"
 // MEMORY
 
 // Required because of implemented registers
@@ -208,121 +208,130 @@ struct DefaultTarget: sc_module
   }
 };
 
+struct BlockingTarget: sc_module
+{
+  // TLM-2 socket, defaults to 32-bits wide, base protocol
+  tlm_utils::simple_target_socket<BlockingTarget> target_socket;
+
+  // Construct and name socket   
+  SC_CTOR(BlockingTarget)
+  : target_socket("BlockingTarget:target")
+  {
+    // Register callbacks for incoming interface method calls
+    target_socket.register_b_transport(this, &BlockingTarget::b_transport);
+  }
+
+  // TLM-2 non-blocking transport method
+  virtual void b_transport( tlm::tlm_generic_payload& trans, sc_time& delay )
+  {
+    ID_extension* id_extension = new ID_extension;
+    trans.get_extension(id_extension);
+
+    cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
+
+    //Delay
+    wait(delay);
+
+    cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+    
+    // Obliged to set response status to indicate successful completion
+    trans.set_response_status( tlm::TLM_OK_RESPONSE );
+  }
+};
+
+
 /*---------------------------------------------------------------------*/
 // BLOQUE: TOP
 
-SC_MODULE(Top)   
-{   
+#define LANES 8
+SC_MODULE(Top)
+{
   //InitiatorSensProx       *initiatorSensProx;
-  UltrasonicSensorTLM*      uSensor[8];
-  CalcDistTLM*              calcDist[8];
-  CamaraSensTLM*            cSens[8];
-  EqualizerTLM*             compressor[8];
-  //InterpolationTLM*         interpolation[8];
-  DefaultTarget*            defaultTarget[8];
+  UltrasonicSensorTLM*      uSensor[LANES];
+  CalcDistTLM*              calcDist[LANES];
+  CamaraSensTLM*            cSens[LANES];
+  EqualizerTLM*             equalizer[LANES];
+  // InterpolationTLM*         interpolation[LANES];
+  RouterTLM<LANES>*         router;
+  BlockingTarget*           blockingTarget;
+  // Memory*                   memory; 
 
-  /*
-  //InitiatorDetector       *initiatorDetector;
-  CalcDistInitiatorTLM*     calcDistTarget
-  InitiatorCamara           *initiatorCamara;
-  InitiatorEcualizador      *initiatorEcualizador;
-  InitiatorCompresor        *initiatorCompresor;
-
-  //TargetDetector          *targetDetector;
-  CalcDistTargetTLM*        calcDistTarget;
-  TargetCamara              *targetCamara;
-  TargetEcualizador         *targetEcualizador;
-  TargetCompresor           *targetCompresor;
-
-  RouterT1<8>               *routerT1;
-  RouterT2<2>               *routerT2;
-
-  Memory                    *memory; 
-  */
-   
   SC_CTOR(Top) //The quantity of samples to be simulated   
   {   
     // Instantiate components 
 
     // SENSOR PROXIMIDAD
-    char strDefault[40];
-    for (int i = 0; i < 8; i++)
+    char strDefault[50];
+    for (int i = 0; i < LANES; i++)
     {
-      sprintf(strDefault,"UltrasonicSensor_%d", i);
+      sprintf(strDefault,RED "UltrasonicSensor_%d" ENDCOLOR, i);
       uSensor[i] = new UltrasonicSensorTLM(strDefault);
     }
 
     // DETECTOR
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < LANES; i++)
     {
-      sprintf(strDefault,"CalcDistModule_%d", i);
+      sprintf(strDefault,GREEN "CalcDistModule_%d" ENDCOLOR, i);
       calcDist[i] = new CalcDistTLM(strDefault);
     }
 
     // CAMARA
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < LANES; i++)
     {
-      sprintf(strDefault,"CamaraSensor_%d", i);
+      sprintf(strDefault,YELLOW "CamaraSensor_%d" ENDCOLOR, i);
       cSens[i] = new CamaraSensTLM(strDefault);
     }  
 
    // ECUALIZADOR
-   for (int i = 0; i < 8; i++)
+   for (int i = 0; i < LANES; i++)
     {
-      sprintf(strDefault,"equalizerTLM_%d", i);
-      compressor[i] = new EqualizerTLM(strDefault);
+      sprintf(strDefault,BLUE "equalizerTLM_%d" ENDCOLOR, i);
+      equalizer[i] = new EqualizerTLM(strDefault);
     }
 
     // COMPRESOR
     
-    /*for (int i = 0; i < 8; i++)
+    /*for (int i = 0; i < LANES; i++)
     {
       sprintf(strDefault, "InterpolationTlM%d", i);
       interpolation[i] = new InterpolationTLM(strDefault);
     }*/
     
+    // ROUTER
+    router = new RouterTLM<LANES>(MAGENTA "routerTLM" ENDCOLOR);
 
     /*
-    // ROUTER
-    routerT1_Memory = new RouterT1<8>("routerT1_Camara");
-
     // MEMORIA
     memory = new Memory   ("memory");
     */
 
     //Temp Solution
-    for (int i = 0; i < 8; i++)
-    {
-      sprintf(strDefault,"defaultTarget_%d", i);
-      defaultTarget[i] = new DefaultTarget(strDefault);
-    }
+    blockingTarget = new BlockingTarget("blockingTarget");
    
    /*------------------------------------------------------------------*/
     // Bind initiator socket to target socket
     // See references to each "Conexion" at the beginning of the script
     //Conexion 1
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < LANES; i++)
       uSensor[i]->initiator_socket.bind( calcDist[i]->target_socket );
 
     //Conexion 2
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < LANES; i++)
       calcDist[i]->initiator_socket.bind( cSens[i]->target_socket );
 
     //Conexion 3
-    for (int i = 0; i < 8; i++)
-      cSens[i]->initiator_socket.bind(compressor[i]->target_socket );
+    for (int i = 0; i < LANES; i++)
+      cSens[i]->initiator_socket.bind(equalizer[i]->target_socket );
 
     //Conexion 4
-    
-    for (int i = 0; i < 8; i++)
-      compressor[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
-    
+    for (int i = 0; i < LANES; i++)
+      equalizer[i]->initiator_socket.bind(*router->target_socket[i]);
+
+    router->initiator_socket.bind(blockingTarget->target_socket);
+
     //Conexion 5
-    //for (int i = 0; i < 8; i++)
-   //   interpolation[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
-    
-    //for (int i = 0; i < 8; i++)
-     //compressor[i]->initiator_socket.bind( defaultTarget[i]->target_socket );
+    // Router con memoria
+
   }
 };
 
