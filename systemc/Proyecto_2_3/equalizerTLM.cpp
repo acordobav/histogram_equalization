@@ -40,6 +40,8 @@ struct EqualizerTLM: sc_module
 	if (global_register_bank.read_bits(REG_BASE_3+0x2,0x1)){ 
 	
 		cout << " Agregar esto como la condición de inicio para procesar la imagen :) " << endl;
+	// al finalizar limpiar el registro... 
+	//global_register_bank.write_bits(REG_BASE_3+0x2,0x1,0x0);
 	}
 
     // Wait for an event to pop out of the back end of the queue   
