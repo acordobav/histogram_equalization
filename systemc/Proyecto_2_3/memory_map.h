@@ -42,4 +42,6 @@
 #define REG_HISTOGRAM              0x10064
 #define REG_STADISTICS             0x10068
 
+#define REG_BASE_3                 0x10048
+#define REG_CAMARA_3               0x4
 #endif
