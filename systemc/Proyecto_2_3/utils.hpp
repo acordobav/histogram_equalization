@@ -1,6 +1,10 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 #include <systemc.h>
 #include <mutex>
 
@@ -10,18 +14,18 @@
 #include "tlm_utils/peq_with_cb_and_phase.h"
 
 //#include "./../Proyecto_1/Module_Distance/dist_calc.cpp"
-#include "./../ForVictor/dist_calc.cpp"
+/*#include "dist_calc.cpp"
+#include "camara_sensor.cpp"
+#include "equalization.cpp"
 
-#include "./../Proyecto_1/Module_Equalization/equalization.cpp"
-
-#include "./../Proyecto_1/Module_Compression/interpolation.cpp"
+#include "interpolation.cpp"*/
 
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "./../Proyecto_1/Module_Equalization/stb_image.h"
+//#define STB_IMAGE_IMPLEMENTATION
+//#include "stb_image.h"
 
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "./../Proyecto_1/Module_Equalization/stb_image_write.h"
+//#define STB_IMAGE_WRITE_IMPLEMENTATION
+//#include "stb_image_write.h"
 
 
 
@@ -76,19 +80,6 @@ void freeMatrix(uint8_t **matrix, int rows) {
     }
     free(matrix);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif
