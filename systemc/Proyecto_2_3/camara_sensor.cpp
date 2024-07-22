@@ -73,7 +73,7 @@ void camara_sensor::processing()
 		for (int y = 0; y < (original_width*original_height*channels); y++) {
 	//cout << "HOla3!!" << y << "\n";  
          	analog_prueba[y] = (static_cast<unsigned int>(original_image[y])*190); // representacion de 0 a 256, que representa 0.019, pero 19 para no trabajar con floats
-         //cout << "Listen!!" << y << "\n";  
+         
     		}
     		stbi_write_jpg(output_analog_filename, original_width, original_height, channels, analog_prueba, 100); // Calidad
 	
@@ -85,12 +85,12 @@ void camara_sensor::processing()
 	
 		for (int i=0; i<original_height; i++){
 			for (int j=0; j<original_width; j++){
-				for (int k=0; k<channels; k++){
+				for (int k=0; k<3; k++){
 					save_image[i][j][k] = digital_prueba[index];
 					index++;
 				//cout << "Listen!!" << index << "\n";  
 				}
-	       	 	}
+	       	}
 		}
 	
 		stbi_write_jpg(output_filename, original_width, original_height, channels, save_image, 100); // Calidad

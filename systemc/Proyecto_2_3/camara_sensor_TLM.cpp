@@ -7,6 +7,12 @@
 //#include "camara_sensor.h"
 //#include "systemc.h"
 //#include "systemc-ams.h"
+
+
+//unsigned char* save_image_digitalized[ROWS][COLS][3] = {0};
+uint8_t save_image_digitalized[ROWS][COLS][3] = {0};
+int width, height, channels;
+ 		 	
 class signal_driver2 : public sca_tdf::sca_module {
   public:
       sca_tdf::sca_out<bool> out;
@@ -112,9 +118,9 @@ struct CamaraSensTLM: sc_module
         // Obliged to set response status to indicate successful completion   
         trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
 
-        cout << name() << " BEGIN_RESP SENT 1" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+        cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
         
-        //Variables to store the incoming data
+       //Variables to store the incoming data
         	//sens_active_result = false;
  			//cout << "HI P E O P L E     " << endl;
         	  //if (global_register_bank.read_bits(REG_BASE_2+0x2,0x1)){
@@ -126,51 +132,61 @@ struct CamaraSensTLM: sc_module
             	
   
  		 	digital_image_result = digital_image_ready.read();
- 		 	//wait(10, SC_US);
- 		 	//cout << "HI P E O P L E     " << digital_image_result << endl;
+ 		 	wait(1, SC_US);
+ 		 	
+           	unsigned char* img = stbi_load("sydney.jpg", &width, &height, &channels, 0);
+           	uint8_t** imagen = createMatrix(ROWS, COLS);  
+           	
+ 		 	
            	if( digital_image_result){
-            
+            		int index= 0; 
+            		 // EXtracting the red channel
+            		for (int i=0; i<height; i++){
+					for (int j=0; j<width; j++){
+						int index = (i*width+j)*channels;
+						imagen[i][j] = img[index]; 
+	       			}
+				}
+
             		global_register_bank.write_bits(REG_BASE_3+0x2,0x1,0x1);
             		wait(20, SC_US);
-                    //cout << "Será que no lo escribe....     " << digital_image_result << endl;
-            	}
-            	//global_register_bank.write_bits(REG_BASE_2+0x2,0x1,0x0);
-			if (global_register_bank.read_bits(REG_BASE_3+0x2,0x1)){ 
-			
-			    //cout << "Será que no lo escribe....     " << digital_image_result << endl;
-			  }        
-            
-            
-            //}
-            //break;
-          
-            tlm::tlm_phase phase = tlm::BEGIN_RESP;
-           // cout << name() << "Será que no lo escribe4....     " << digital_image_result << endl;
-        	  /*status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);*/
-        	 // cout << name() << "Será que no lo escribe2....     " << digital_image_result << endl;
+           	}
+           	unsigned char** new_image_digitalized = (unsigned char**)(save_image_digitalized);
+           	
+          tlm::tlm_phase phase = tlm::BEGIN_RESP;
+        //  status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
            
-            /*if (status != tlm::TLM_ACCEPTED) {
-		    cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-              }*/
+          //if (status != tlm::TLM_ACCEPTED) {
+		//    cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+         // }
+
           // TLM2 generic payload transaction
         	tlm::tlm_generic_payload trans;
         	id_extension = new ID_extension;
         	trans.set_extension( id_extension ); // Add the extension to the transaction
-        	//cout << "Será que no lo escribe3....     " << digital_image_result << endl;
 
         	id_extension->transaction_id = generateUniqueID();
         	
 
         	phase = tlm::BEGIN_REQ;   
           sc_time delay = sc_time(10, SC_NS); 
-            	
+ 
+ 
+ 
+		trans.set_data_length( sizeof(imagen) ); 
+  		unsigned char data[sizeof(imagen)];
+    		memcpy(data, &imagen, sizeof(data));
+    		trans.set_data_ptr(data);  
 
-         digital_image_result=1; trans.set_data_length( sizeof(digital_image_result) );
-	    	unsigned char data2[sizeof(int)]; //Here it is going to be concatenated the data to be sent
-          memcpy(data2, &digital_image_result, sizeof(int));
-          trans.set_data_ptr( data2 ); 
-            	
-          //cout << "DATA output file digital: " << digital_image_result << endl;
+  		
+		/*
+		//------- FUNCIONAL ENVIO IMAGEN ---- 
+		trans.set_data_length( sizeof(image_digitalized) ); 
+  		unsigned char data[sizeof(image_digitalized)];
+    		memcpy(data, &image_digitalized, sizeof(data));
+    		trans.set_data_ptr(data);  
+		//------- FUNCIONAL ENVIO IMAGEN ---- 
+		*/
 	  
  		cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
 		status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
@@ -192,7 +208,6 @@ struct CamaraSensTLM: sc_module
     tlm::tlm_phase& phase,
     sc_time& delay)
     {
-    //cout << "Será que no lo escribe5....     " << digital_image_result << endl;
         ID_extension* id_extension = new ID_extension;
         trans.get_extension(id_extension);
 
@@ -201,7 +216,7 @@ struct CamaraSensTLM: sc_module
         return tlm::TLM_ACCEPTED;
         }
 
-        cout << name() << " BEGIN_REQ RECEIVED CAMARA NOTIFY" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
+        cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
 
         // Now queue the transaction until the annotated time has elapsed
         trans_pending=&trans;
@@ -225,7 +240,6 @@ struct CamaraSensTLM: sc_module
     tlm::tlm_phase&           phase,
     sc_time&                  delay)
   {   
-  //cout << "Será que no lo escribe6....     " << digital_image_result << endl;
     ID_extension* id_extension = new ID_extension;
     trans.get_extension( id_extension ); 
     
@@ -240,7 +254,7 @@ struct CamaraSensTLM: sc_module
     //Delay
     wait(delay);
     
-    cout << name () << " BEGIN_RESP RECEIVED CAMARA" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+    cout << name () << " BEGIN_RESP RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     
     return tlm::TLM_ACCEPTED;   
   }

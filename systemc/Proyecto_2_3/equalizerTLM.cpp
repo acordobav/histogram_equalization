@@ -1,5 +1,7 @@
 #include "utils.hpp"
 
+uint8_t imagen_prueba[ROWS][COLS][3] = {0};
+
 struct EqualizerTLM: sc_module
 {
   // TLM-2 socket, defaults to 32-bits wide, base protocol
@@ -29,73 +31,80 @@ struct EqualizerTLM: sc_module
   }
 
   void thread_process()  
-  {
-    tlm::tlm_sync_enum status;
+{
+  tlm::tlm_sync_enum status;
 
-    while(true) {
+  while(true) {
+	
+    // Wait for an event to pop out of the back end of the queue   
+    wait(e1);
 
-      // Wait for an event to pop out of the back end of the queue   
-      wait(e1);
+    ID_extension* id_extension = new ID_extension;
+    trans_pending->get_extension(id_extension); 
 
-      ID_extension* id_extension = new ID_extension;
-      trans_pending->get_extension(id_extension); 
+    // Obliged to set response status to indicate successful completion   
+    trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
 
-      // Obliged to set response status to indicate successful completion   
-      trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
+    cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+	
+    unsigned char* resultado;
+    uint8_t** image;
+ 
+    unsigned char* ptr = trans_pending->get_data_ptr(); 
+    memcpy(&image, ptr, sizeof(image));
+   // stbi_write_jpg("salida_imagen.jpg", COLS, ROWS, 1, image, 100);
+    
+    /*-----------RECIBIENDO BIEN LA IMAGEN ----- 
+    unsigned char* resultado;
+    unsigned char* ptr = trans_pending->get_data_ptr();
+    uint8_t** image = (uint8_t**)ptr;		
+    
+    memcpy(&resultado, ptr, sizeof(resultado));
+    uint8_t** filtered_image = createMatrix(ROWS, COLS);
+    stbi_write_jpg("salida3.jpg", COLS, ROWS, 3, resultado, 100);
+    -----------RECIBIENDO BIEN LA IMAGEN -----  */   
+    
 
-      cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+    // Call on backward path to complete the transaction
+    tlm::tlm_phase phase = tlm::BEGIN_RESP;
+    status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
 
-      unsigned char* ptr = trans_pending->get_data_ptr();
-      uint8_t** image = (uint8_t**)ptr;
+    // Check value returned from nb_transport   
+    if (status != tlm::TLM_ACCEPTED) {
+      cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+    }
 
-      // Call on backward path to complete the transaction
-      tlm::tlm_phase phase = tlm::BEGIN_RESP;
-      status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
+    // Process image here
+    uint8_t** filtered_image = createMatrix(ROWS, COLS);
+    equalizer->equalize(ROWS, COLS, image, filtered_image);   // generating segmentatio fault 
+    
+    sc_time process_delay = sc_time(300, SC_US);
+    wait(process_delay);
+    freeMatrix(image, ROWS);  // generating segmentatio fault  
 
-      // Check value returned from nb_transport   
-      if (status != tlm::TLM_ACCEPTED) {
-        cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-      }
 
-      //
-      //
-      //
-      // Process image here
-      uint8_t** filtered_image = createMatrix(ROWS, COLS);
+    tlm::tlm_generic_payload trans;
+    id_extension = new ID_extension;
+    trans.set_extension(id_extension);
+    
+    id_extension->transaction_id = generateUniqueID();
 
-      equalizer->equalize(ROWS, COLS, image, filtered_image);
+    phase = tlm::BEGIN_REQ;   
+    sc_time delay = sc_time(10, SC_NS);   
 
-      sc_time process_delay = sc_time(300, SC_US);   
-      wait(process_delay);
+    tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
+    trans.set_data_ptr( reinterpret_cast<unsigned char*>(filtered_image) );   
+    trans.set_data_length( sizeof(image) );   
 
-      freeMatrix(image, ROWS);
-
-      //
-      //
-      //
-
-      tlm::tlm_generic_payload* trans = new tlm::tlm_generic_payload;
-      id_extension = new ID_extension;
-      trans->set_extension(id_extension);
-
-      id_extension->transaction_id = generateUniqueID();
-
-      phase = tlm::BEGIN_REQ;   
-      sc_time delay = sc_time(10, SC_NS);   
-
-      tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
-      trans->set_data_ptr( reinterpret_cast<unsigned char*>(filtered_image) );   
-      trans->set_data_length( sizeof(image) );   
-
-      cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-      status = initiator_socket->nb_transport_fw(*trans, phase, delay);  // Non-blocking transport call   
-
-      // Check value returned from nb_transport   
-      if (status != tlm::TLM_ACCEPTED) {
-        cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-      }
+    cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+    status = initiator_socket->nb_transport_fw(trans, phase, delay);  // Non-blocking transport call   
+  
+    // Check value returned from nb_transport   
+    if (status != tlm::TLM_ACCEPTED) {
+      cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     }
   }
+}
 
 
   // TLM-2 non-blocking transport method
