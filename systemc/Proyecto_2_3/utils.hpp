@@ -33,6 +33,7 @@
 #define BLUE     "\033[34m"
 #define MAGENTA  "\033[35m"
 #define CYAN     "\033[36m"
+#define TEAL     "\033[38;5;37m"
 #define ENDCOLOR "\033[0m"
 
 // Global variables for ID counter and mutex
@@ -63,6 +64,8 @@ struct ID_extension: tlm::tlm_extension<ID_extension> {
 
 #define ROWS 323
 #define COLS 434
+#define newROWS 128
+#define newCOLS 256
 
 // Function to allocate memory for a matrix and return a pointer to it
 uint8_t** createMatrix(int rows, int cols) {

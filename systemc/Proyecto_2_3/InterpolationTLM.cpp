@@ -48,6 +48,7 @@ struct InterpolationTLM: sc_module
     unsigned char* ptr = trans_pending->get_data_ptr();
     uint8_t** image = (uint8_t**)ptr;
 
+
     // Call on backward path to complete the transaction
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
     status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
@@ -57,38 +58,65 @@ struct InterpolationTLM: sc_module
       cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     }
 
-    //
-    //
-    //
-    // Process image here
-    int width = ROWS; // Example width, adjust according to your image
-    int height = COLS; // Example height, adjust according to your image
-    int channels = 1; // RGBA format assumed
+    // Valores principales
+    int original_width = COLS; // Asumiendo que COLS es el ancho de la imagen
+    int original_height = ROWS; // Asumiendo que ROWS es la altura de la imagen
+    int channels = 1; // Asumiendo una imagen en escala de grises o un canal
+    int new_width = newCOLS;
+    int new_height = newROWS;
+    //int new_width = original_width/2;
+    //int new_height = original_height/2;
 
-    unsigned char* equalized_image = (unsigned char*)malloc(width * height * channels);
-    for (int i = 0; i < ROWS; i++) {
-      memcpy(equalized_image + (i * COLS), image[i], sizeof(uint8_t)*COLS);
+
+    uint8_t** interpol_image = createMatrix(new_height,new_width);
+
+    // Interpolar la imagen
+    inter->interpolate_image((uint8_t**)image, original_width, original_height, interpol_image, new_width, new_height);
+
+    sc_time process_delay = sc_time(100, SC_US);   
+    wait(process_delay);
+
+
+// [INFO] Para ver las imagenes:
+
+// Convertir imagen de SALIDA interpolada a un vector
+    unsigned char* interpolated_image = (unsigned char*)malloc(new_width * new_height * channels);
+    if (interpolated_image == NULL) {
+        cerr << "Error: no se pudo asignar memoria para interpolated_image" << endl;
+        exit(1);
     }
 
-    stbi_write_jpg("equalized.jpg", COLS, ROWS, channels, equalized_image, ROWS*COLS);
+    for (int i = 0; i < new_height; i++) {
+        memcpy(interpolated_image + (i * new_width * channels), interpol_image[i], sizeof(uint8_t) * new_width * channels);
+    }
 
-    // Instantiate interpolation module
+    // Guardar la imagen de entrada interpolada
+    if (!stbi_write_jpg("2_interpolated.jpg", new_width, new_height, channels, interpolated_image, 100)) {
+        cerr << "Error: no se pudo guardar la imagen" << endl;
+    }
+    free(interpolated_image);
+// Convertir imagen de ENTRADA  a un vector
+    unsigned char* test_image = (unsigned char*)malloc(original_width * original_height * channels);
+    if (test_image == NULL) {
+        cerr << "Error: no se pudo asignar memoria para interpolated_image" << endl;
+        exit(1);
+    }
+
+    for (int i = 0; i < original_height; i++) {
+        memcpy(test_image + (i * original_width * channels), image[i], sizeof(uint8_t) * original_width * channels);
+    }
+
+    // Guardar la imagen 
+    if (!stbi_write_jpg("1_entrada.jpg", original_width, original_height, channels, test_image, 100)) {
+        cerr << "Error: no se pudo guardar la imagen" << endl;
+    }
+    free(test_image);
+
+//-----------------------------------------
     
-    unsigned char* filtered_image = (unsigned char*)malloc(width/2 * height/2 * channels);
-
-    inter->interpolate_image((unsigned char*)equalized_image, width, height, filtered_image, width/2, height/2, channels);
-
-    stbi_write_jpg("interpolated.jpg", COLS/2, ROWS/2, channels, filtered_image, (ROWS/2)*(COLS/2));
-
-
-
+    // Liberar memoria del vector de imagen
     freeMatrix(image, ROWS);
-    // free(equalized_image);
-    
-    
-    //
-    //
-    //
+
 
     tlm::tlm_generic_payload trans;
     id_extension = new ID_extension;
@@ -100,9 +128,8 @@ struct InterpolationTLM: sc_module
     sc_time delay = sc_time(10, SC_NS);   
 
     tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
-    trans.set_data_ptr( filtered_image );   
-    trans.set_data_length( sizeof(filtered_image) );   
-
+    trans.set_data_ptr( reinterpret_cast<unsigned char*>(interpol_image)  );   
+    trans.set_data_length( sizeof(interpol_image) );   
     cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     status = initiator_socket->nb_transport_fw(trans, phase, delay);  // Non-blocking transport call   
   

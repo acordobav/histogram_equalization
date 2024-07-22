@@ -32,6 +32,7 @@
 // ROUTER
 #include "routerTLM.cpp"
 // MEMORY
+#include "MemoryTLM.cpp"
 
 // Required because of implemented registers
 #include "memory_map.h"
@@ -207,7 +208,7 @@ struct DefaultTarget: sc_module
     return tlm::TLM_ACCEPTED;
   }
 };
-
+/*
 struct BlockingTarget: sc_module
 {
   // TLM-2 socket, defaults to 32-bits wide, base protocol
@@ -239,7 +240,7 @@ struct BlockingTarget: sc_module
   }
 };
 
-
+*/
 /*---------------------------------------------------------------------*/
 // BLOQUE: TOP
 
@@ -251,10 +252,10 @@ SC_MODULE(Top)
   CalcDistTLM*              calcDist[LANES];
   CamaraSensTLM*            cSens[LANES];
   EqualizerTLM*             equalizer[LANES];
-  // InterpolationTLM*         interpolation[LANES];
+  InterpolationTLM*         interpolation[LANES];
   RouterTLM<LANES>*         router;
-  BlockingTarget*           blockingTarget;
-  // Memory*                   memory; 
+  //BlockingTarget*           blockingTarget;
+  MemoryTLM*                memory; 
 
   SC_CTOR(Top) //The quantity of samples to be simulated   
   {   
@@ -291,22 +292,22 @@ SC_MODULE(Top)
 
     // COMPRESOR
     
-    /*for (int i = 0; i < LANES; i++)
+    for (int i = 0; i < LANES; i++)
     {
-      sprintf(strDefault, "InterpolationTlM%d", i);
+      sprintf(strDefault,CYAN "InterpolationTlM%d" ENDCOLOR, i);
       interpolation[i] = new InterpolationTLM(strDefault);
-    }*/
+    }
     
     // ROUTER
     router = new RouterTLM<LANES>(MAGENTA "routerTLM" ENDCOLOR);
 
-    /*
+    
     // MEMORIA
-    memory = new Memory   ("memory");
-    */
+    memory = new MemoryTLM   (TEAL "memory" ENDCOLOR);
+    
 
     //Temp Solution
-    blockingTarget = new BlockingTarget("blockingTarget");
+    //blockingTarget = new BlockingTarget("blockingTarget");
    
    /*------------------------------------------------------------------*/
     // Bind initiator socket to target socket
@@ -325,12 +326,15 @@ SC_MODULE(Top)
 
     //Conexion 4
     for (int i = 0; i < LANES; i++)
-      equalizer[i]->initiator_socket.bind(*router->target_socket[i]);
-
-    router->initiator_socket.bind(blockingTarget->target_socket);
+      equalizer[i]->initiator_socket.bind(interpolation[i]->target_socket);
 
     //Conexion 5
+    for (int i = 0; i < LANES; i++)
+      interpolation[i]->initiator_socket.bind(*router->target_socket[i]);
+
+    //Conexion 6
     // Router con memoria
+    router->initiator_socket.bind(memory->target_socket);
 
   }
 };
