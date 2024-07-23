@@ -1,15 +1,7 @@
-//#include "utils.hpp"
 #include "memory_map.h"
 #include "global_register_bank.hpp"
 #include <cstdlib> 
-//#include "calc_dist_TLM.cpp"
-//#include <algorithm>
-//#include "camara_sensor.h"
-//#include "systemc.h"
-//#include "systemc-ams.h"
 
-
-//unsigned char* save_image_digitalized[ROWS][COLS][3] = {0};
 uint8_t save_image_digitalized[ROWS][COLS][3] = {0};
 int width, height, channels;
  		 	
@@ -35,11 +27,6 @@ class signal_driver2 : public sca_tdf::sca_module {
       double signal_value;
 };
 
-/*
--------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------
-*/
 
 struct CamaraSensTLM: sc_module
 {
@@ -66,7 +53,6 @@ struct CamaraSensTLM: sc_module
   //using namespace sc_core;
   double const_digitalization = 190;
   double tiempo;
-  //sc_signal<bool> sens_active;
   
   sc_signal<bool> sens_active_in;
   sca_tdf::sca_signal<double> echo_signal_cable;
@@ -74,33 +60,20 @@ struct CamaraSensTLM: sc_module
   sc_signal<bool> digital_image_ready;
   int data;
   int tmp;
-  
-  //bool image_ready_output; 
-  //bool sens_active_output;
   bool sens_active_result;
   bool digital_image_result;
-  //int digital_image_result;
 
   SC_CTOR(CamaraSensTLM)   
   : target_socket("CamaraSensTLM:target"),
   initiator_socket("CamaraSensTLM:initiator")  // Construct and name socket
   {
-    // Register callbacks for incoming interface method calls
     target_socket.register_nb_transport_fw(this, &CamaraSensTLM::target_nb_transport_fw);
     initiator_socket.register_nb_transport_bw(this, &CamaraSensTLM::initiator_nb_transport_bw);
-    
-    //calc_dist_TLM_Mod = new CalcDistTLM("cdTLMM");
-    //calc_dist_TLM_Mod->sens_active(sens_active);
-    //calcDistMod = new dist_calc("cdM");
-    //calcDistMod->sens_active(sens_active);
-    
-    
-    
+
     cs1 = new camara_sensor("cs1", const_digitalization, tiempo);
     cs1->sens_active_in(sens_active_in);
     cs1->digital_image_ready(digital_image_ready);
- 
-    
+
     SC_THREAD(thread_process);   
   }
 
@@ -111,7 +84,6 @@ struct CamaraSensTLM: sc_module
     while(true){
         // Wait for an event to pop out of the back end of the queue   
         wait(e1);
-        //tlm::tlm_generic_payload trans;
         ID_extension* id_extension = new ID_extension;
         trans_pending->get_extension(id_extension); 
 
@@ -120,63 +92,45 @@ struct CamaraSensTLM: sc_module
 
         cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
         
-       //Variables to store the incoming data
-        	//sens_active_result = false;
- 			//cout << "HI P E O P L E     " << endl;
-        	  //if (global_register_bank.read_bits(REG_BASE_2+0x2,0x1)){
-            	unsigned char* data_ptr = trans_pending->get_data_ptr();
-            	memcpy(&tmp, data_ptr, sizeof(int));
-               //cout << "HI P E O P L E     " << tmp << endl;
-            	sens_active_in.write(true);
-            	wait(1000, SC_US);
-            	
-  
- 		 	digital_image_result = digital_image_ready.read();
- 		 	wait(1, SC_US);
- 		 	
-           	unsigned char* img = stbi_load("sydney.jpg", &width, &height, &channels, 0);
-           	uint8_t** imagen = createMatrix(ROWS, COLS);  
-           	
- 		 	
-           	if( digital_image_result){
-            		int index= 0; 
+       unsigned char* data_ptr = trans_pending->get_data_ptr();
+       memcpy(&tmp, data_ptr, sizeof(int));
+       sens_active_in.write(true);
+       wait(1000, SC_US);
+       digital_image_result = digital_image_ready.read();
+       wait(1, SC_US);
+	unsigned char* img = stbi_load("sydney.jpg", &width, &height, &channels, 0);
+        uint8_t** imagen = createMatrix(ROWS, COLS);   	
+        if( digital_image_result){
+        	int index= 0; 
             		 // EXtracting the red channel
-            		for (int i=0; i<height; i++){
-					for (int j=0; j<width; j++){
-						int index = (i*width+j)*channels;
-						imagen[i][j] = img[index]; 
-	       			}
-				}
-
-            		global_register_bank.write_bits(REG_BASE_3+0x2,0x1,0x1);
-            		wait(20, SC_US);
-           	}
-           	unsigned char** new_image_digitalized = (unsigned char**)(save_image_digitalized);
-           	
-          tlm::tlm_phase phase = tlm::BEGIN_RESP;
+            	for (int i=0; i<height; i++){
+			for (int j=0; j<width; j++){
+				int index = (i*width+j)*channels;
+				imagen[i][j] = img[index]; 
+	       		}
+		}
+		global_register_bank.write_bits(REG_BASE_3+0x2,0x1,0x1);
+		wait(20, SC_US);
+        }
+        unsigned char** new_image_digitalized = (unsigned char**)(save_image_digitalized);
+	tlm::tlm_phase phase = tlm::BEGIN_RESP;
         //  status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
-           
           //if (status != tlm::TLM_ACCEPTED) {
 		//    cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
          // }
 
-          // TLM2 generic payload transaction
-        	tlm::tlm_generic_payload trans;
-        	id_extension = new ID_extension;
-        	trans.set_extension( id_extension ); // Add the extension to the transaction
-
-        	id_extension->transaction_id = generateUniqueID();
-        	
-
-        	phase = tlm::BEGIN_REQ;   
-          sc_time delay = sc_time(10, SC_NS); 
+        // TLM2 generic payload transaction
+        tlm::tlm_generic_payload trans;
+        id_extension = new ID_extension;
+        trans.set_extension( id_extension ); // Add the extension to the transaction
+	id_extension->transaction_id = generateUniqueID();
+        phase = tlm::BEGIN_REQ;   
+        sc_time delay = sc_time(10, SC_NS); 
  
- 
- 
-		trans.set_data_length( sizeof(imagen) ); 
-  		unsigned char data[sizeof(imagen)];
-    		memcpy(data, &imagen, sizeof(data));
-    		trans.set_data_ptr(data);  
+ 	trans.set_data_length( sizeof(imagen) ); 
+  	unsigned char data[sizeof(imagen)];
+    	memcpy(data, &imagen, sizeof(data));
+    	trans.set_data_ptr(data);  
 
   		
 		/*
@@ -188,18 +142,16 @@ struct CamaraSensTLM: sc_module
 		//------- FUNCIONAL ENVIO IMAGEN ---- 
 		*/
 	  
- 		cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-		status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
+ 	cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+	status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
 	    
 		// Check value returned from nb_transport   
-		if (status != tlm::TLM_ACCEPTED) {
-		    cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
-		    }
-		}
+	if (status != tlm::TLM_ACCEPTED) {
+		cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+	}
+}
         
-
-        
-    }   
+}   
 		
   
   // TLM-2 non-blocking transport method
