@@ -49,9 +49,11 @@ struct EqualizerTLM: sc_module
 	
     unsigned char* resultado;
     uint8_t** image;
- 
+    
     unsigned char* ptr = trans_pending->get_data_ptr(); 
     memcpy(&image, ptr, sizeof(image));
+    global_register_bank.write_bits(REG_COLS,0xFFFFFFFF,COLS);
+    global_register_bank.write_bits(REG_ROWS,0xFFFFFFFF,ROWS);	
    // stbi_write_jpg("salida_imagen.jpg", COLS, ROWS, 1, image, 100);
     
     /*-----------RECIBIENDO BIEN LA IMAGEN ----- 
@@ -74,8 +76,15 @@ struct EqualizerTLM: sc_module
       cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     }
 
+    
+    int colu = global_register_bank.read_bits(REG_COLS,0xFFFFFF);
+   //     cout<<"colu     value: " <<dec << colu  <<endl;
+    int rowi = global_register_bank.read_bits(REG_ROWS,0xFFFFFF);
+   // cout<<"rowi     value: " <<dec << rowi  <<endl;
+    
+    
     // Process image here
-    uint8_t** filtered_image = createMatrix(ROWS, COLS);
+    uint8_t** filtered_image = createMatrix(rowi, colu);
     equalizer->equalize(ROWS, COLS, image, filtered_image);   // generating segmentatio fault 
     
     sc_time process_delay = sc_time(300, SC_US);
