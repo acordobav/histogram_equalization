@@ -39,7 +39,7 @@ struct CalcDistTLM: sc_module
   //To be able to process data with the Dist Calc module
   double time_output;
   double echo_signal_result;
-  double dist_result;
+  int dist_result;
   bool sens_active_result;
   int sens_active_transmit;
 
@@ -81,7 +81,7 @@ struct CalcDistTLM: sc_module
         // Obliged to set response status to indicate successful completion   
         trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
 
-        cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
+        cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl; ///descomentar
         
         //Variables to store the incoming data
 
@@ -90,8 +90,7 @@ struct CalcDistTLM: sc_module
             memcpy(&time_output, data_ptr, sizeof(double));
             memcpy(&echo_signal_result, data_ptr + sizeof(double), sizeof(double));
 
-            cout << endl;
-            cout << "From CALC DIST TARGET" << endl;
+           cout << "From CALC DIST TARGET" << endl;
             cout << "Delay time coming from sensor : " << time_output << endl;
             cout << "Echo signal coming from sensor: " << echo_signal_result << endl;
 
@@ -102,15 +101,20 @@ struct CalcDistTLM: sc_module
         }
         sens_active_result = false;
         sens_active_transmit = 0;
-
+ 		//int j = global_register_bank.read_bits(REG_CONTADOR+0x2,0xFFFFFF);
+ 	//	cout<<"Read value: " <<hex << j  <<endl;
         // CALC DIST Module is going to provide the required data
         //cout << "Simulation of the Calc Dist module" << endl;
-
+	   //cout << "Delay time coming from sensor : " << time_output << endl;
         calcDistMod->delay_start(); 
-        echo_signal.write(echo_signal_result); // echo enabled
+        sc_time(1, SC_US);
         time_signal.write(time_output);
+        echo_signal.write(echo_signal_result); // echo enabled
         //cout << "Distance: " << dist_cm.read() << endl;
+        sc_time(1, SC_US);
         dist_result = calcDistMod->read_distance();
+        sc_time(1, SC_US);
+        //cout << "Distance2: " << dist_result << endl;
         sens_active_result = calcDistMod->read_sens_active();
         calcDistMod->e_wait();
         //cout << "Distance: " << dist_cm.read() << endl;
@@ -118,8 +122,8 @@ struct CalcDistTLM: sc_module
         //dist_result = calcDistMod->read_sens_active();
 
         //cout << "From Dist Calc Module/Init" << endl;
-        ///cout << "Distance: " << dist_result << endl;
-        //cout << "Sens Active value: " << sens_active_result << endl;
+       //cout << "Distance: " << dist_result << endl;
+      // cout << "Sens Active value: " << sens_active_result << endl;
 
         if (sens_active_result){
             //Register bit to indicate that an animal is in front of the camara
@@ -132,7 +136,7 @@ struct CalcDistTLM: sc_module
         tlm::tlm_phase phase = tlm::BEGIN_RESP;
         //cout << name() << "From TEST1" << endl;
         status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
-//cout << name() << "From TEST2" << endl;
+        //cout << name() << "From TEST2" << endl;
         // Check value returned from nb_transport   
         if (status != tlm::TLM_ACCEPTED) {
         cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
@@ -158,7 +162,7 @@ struct CalcDistTLM: sc_module
         memcpy(data, &sens_active_transmit, sizeof(int));
         trans.set_data_ptr( data ); 
 
-        cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+        cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl; ///descomentar
         status = initiator_socket->nb_transport_fw( trans, phase, delay );  // Non-blocking transport call   
     
         // Check value returned from nb_transport   
@@ -175,7 +179,6 @@ struct CalcDistTLM: sc_module
     tlm::tlm_phase& phase,
     sc_time& delay)
     {
-    //cout << "Será que no lo escribe8....     " << endl;
         ID_extension* id_extension = new ID_extension;
         trans.get_extension(id_extension);
 
@@ -184,7 +187,7 @@ struct CalcDistTLM: sc_module
         return tlm::TLM_ACCEPTED;
         }
 
-        cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
+        cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;  ///descomentar    
 
         // Now queue the transaction until the annotated time has elapsed
         trans_pending=&trans;
@@ -208,7 +211,7 @@ struct CalcDistTLM: sc_module
     tlm::tlm_phase&           phase,
     sc_time&                  delay)
   {   
-  //cout << "Será que no lo escribe7....     " <<endl;
+  
     ID_extension* id_extension = new ID_extension;
     trans.get_extension( id_extension ); 
     
@@ -220,11 +223,11 @@ struct CalcDistTLM: sc_module
     // Initiator obliged to check response status   
     if (trans.is_response_error() )   
       SC_REPORT_ERROR("TLM2", "Response error from nb_transport");   
-      //   cout << "Será que no lo escribe10....     " <<endl; 
+       
     //Delay
     wait(delay);
     
-    cout << name () << " BEGIN_RESP RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
+    cout << name () << " BEGIN_RESP RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;  ///descomentar
     
     return tlm::TLM_ACCEPTED;   
   }
