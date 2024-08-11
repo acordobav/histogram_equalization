@@ -91,7 +91,7 @@ SC_MODULE (dist_calc) {
 		wait(3, SC_US);
 		global_register_bank.write_bits(hex_cam[i],0xFFFFFFFF,0x0);
 		wait(3, SC_US);
-		cout << "i :      " << i << endl;
+		//cout << "i :      " << i << endl;
 		i=i+1;
 	   }
 	
