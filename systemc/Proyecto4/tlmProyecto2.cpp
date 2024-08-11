@@ -55,7 +55,7 @@ using namespace std;
 /*------------------------------------------------------------------------------------------*/
 //Global BANK OF REGISTERS
 //Need to remove it in the future
-RegisterBank global_register_bank(0x10000, 0x10072);
+RegisterBank global_register_bank(0x10000, 0x30072);
 
 /*------------------------------------------------------------------------------------------*/
 /*
@@ -160,7 +160,7 @@ struct DefaultTarget: sc_module
 
     // Obliged to set response status to indicate successful completion   
     trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
-
+    wait(200,SC_MS);
     cout << "LAST TARGET MODULE" << endl << endl;
     cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
     
