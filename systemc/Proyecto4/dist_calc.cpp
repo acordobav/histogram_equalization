@@ -3,9 +3,14 @@
 // #include <systemc>
 
  //-----------------------------------------------------
+#include "global_register_bank.hpp"
+//#include "RegisterBank.cpp"
+#include "memory_map.h"
 #include "systemc.h"
 #include <systemc-ams.h>
 
+int hex_sensor[8] = {0x10000, 0x101F4, 0x103E8, 0x105DC, 0x107D0, 0x109C4, 0x10BB8, 0x10DAC};
+int hex_cam[8] = {0x10FA0, 0x10FA2, 0x10FA4, 0x10FA6, 0x10FB1, 0x10FB3, 0x10FB5, 0x10FB7};
 
 SC_MODULE (dist_calc) {
   sc_out<double > dist_cm;
@@ -35,13 +40,14 @@ SC_MODULE (dist_calc) {
   sc_int <32> cuenta_half = 0;
   sc_int <32> cuenta_far = 0;
   sc_int <32> zero_value = 0;
+  sc_int <32> round = 0; 
   double time_signal_value =0;
   double distance_cm =0;    
   bool sensor_active = 0;      
-  //sc_int <32>  calc_voltage =0;
 
-  double distance_out_module;
+  int distance_out_module;
   bool sens_active_out_module;  
+  //REG_SENSOR global_register_bank(10);
 
   // Constructor 
   SC_CTOR(dist_calc) {
@@ -78,29 +84,36 @@ SC_MODULE (dist_calc) {
 	while(true) {
       if (echo_signal.read() != zero_value){
         //cout << "echo_signal being read: " << echo_signal.read() << endl;
-
-        wait(1, SC_US);	
-      	time_signal_value = time_signal.read()*1000000;
-      	wait(1, SC_US);	
-      	//cout << "time_signal_value " << time_signal_value << endl;
-      	wait(1, SC_US);	
-      	//cout<< "Inside the dist_cm... " <<endl;
+        wait(5, SC_US);	
+        time_signal_value = time_signal.read()*1000000;
         wait(1, SC_US);	
         distance_cm = time_signal_value*0.034;
         wait(1, SC_US);	
-        //cout << "dist_cm " << distance_cm << endl;
-        //dist_cm.write(distance_cm);
-        //cout << "LOGRADO  " <<  endl;
+        round = static_cast<int>(std::round(distance_cm));
+        // size_t index = get_register_index(0x10000);
+    		//registers.at(index) = value;
+    	   int random = 0 + (rand() % (7 -0+1));
+    	   cout << "nuevo INDEX:      " << random << endl;
+   	   global_register_bank.write_bits(hex_sensor[random],0xFFFFFFFF,round);
+
+        //wait(1, SC_US);	
+        global_register_bank.write_bits(hex_cam[random]+0x2,0x1,0x1);
+
+        wait(1, SC_US);	
+        
+      
         if (distance_cm != zero_value){
             //dist_cm.write(distance_cm);
             distance_out_module = distance_cm;
             calc_voltage = distance_cm*0.0016; //here!!!! 
         }
         //printf("- - -PROBANDO voltaje - - - \n");
-        wait(100, SC_US);
-      	sensor_range();
+        //wait(1000, SC_US);
+        sensor_range();
+        //cout << "cam still  INDEX:        " << random << endl;
+       // global_register_bank.write_bits(hex_cam[random],0xFFFFFFFF,0x0);
       };
-      wait(50, SC_US);
+      wait(5000, SC_US);
     }  
   }
   
@@ -168,7 +181,7 @@ SC_MODULE (dist_calc) {
       //cout << "Sensr Active: " << sens_active_out_module << endl;
   }
 
-  double read_distance(){
+  int read_distance(){
   	return distance_out_module;
   }
 
