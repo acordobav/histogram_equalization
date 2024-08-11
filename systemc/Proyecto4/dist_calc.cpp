@@ -11,6 +11,8 @@
 
 int hex_sensor[8] = {0x10000, 0x101F4, 0x103E8, 0x105DC, 0x107D0, 0x109C4, 0x10BB8, 0x10DAC};
 int hex_cam[8] = {0x10FA0, 0x10FA2, 0x10FA4, 0x10FA6, 0x10FB1, 0x10FB3, 0x10FB5, 0x10FB7};
+int j= 0;
+int i= 0;
 
 SC_MODULE (dist_calc) {
   sc_out<double > dist_cm;
@@ -83,6 +85,17 @@ SC_MODULE (dist_calc) {
     wait(d_start);
 	while(true) {
       if (echo_signal.read() != zero_value){
+      
+       while (i<8){
+		global_register_bank.write_bits(hex_sensor[i],0xFFFFFFFF,0x0);
+		wait(3, SC_US);
+		global_register_bank.write_bits(hex_cam[i],0xFFFFFFFF,0x0);
+		wait(3, SC_US);
+		cout << "i :      " << i << endl;
+		i=i+1;
+	   }
+	
+      
         //cout << "echo_signal being read: " << echo_signal.read() << endl;
         wait(5, SC_US);	
         time_signal_value = time_signal.read()*1000000;
@@ -93,7 +106,7 @@ SC_MODULE (dist_calc) {
         // size_t index = get_register_index(0x10000);
     		//registers.at(index) = value;
     	   int random = 0 + (rand() % (7 -0+1));
-    	   cout << "nuevo INDEX:      " << random << endl;
+    	   //cout << "nuevo INDEX:      " << random << endl;
    	   global_register_bank.write_bits(hex_sensor[random],0xFFFFFFFF,round);
 
         //wait(1, SC_US);	
@@ -112,9 +125,11 @@ SC_MODULE (dist_calc) {
         sensor_range();
         //cout << "cam still  INDEX:        " << random << endl;
        // global_register_bank.write_bits(hex_cam[random],0xFFFFFFFF,0x0);
+       // i=10;
       };
       wait(5000, SC_US);
     }  
+    
   }
   
   
