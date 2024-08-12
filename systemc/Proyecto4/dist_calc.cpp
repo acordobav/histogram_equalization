@@ -9,8 +9,8 @@
 #include "systemc.h"
 #include <systemc-ams.h>
 
-int hex_sensor[8] = {0x10000, 0x101F4, 0x103E8, 0x105DC, 0x107D0, 0x109C4, 0x10BB8, 0x10DAC};
-int hex_cam[8] = {0x10FA0, 0x10FA2, 0x10FA4, 0x10FA6, 0x10FB1, 0x10FB3, 0x10FB5, 0x10FB7};
+int hex_sensor[8] = {REG_SENSOR0, REG_SENSOR1 , REG_SENSOR2 , REG_SENSOR3 , REG_SENSOR4 , REG_SENSOR5, REG_SENSOR6 , REG_SENSOR7 };
+int hex_cam[8] = {REG_CAMARA_0 , REG_CAMARA_1 , REG_CAMARA_2 , REG_CAMARA_3 , REG_CAMARA_4, REG_CAMARA_5, REG_CAMARA_6, REG_CAMARA_7};
 int j= 0;
 int i= 0;
 

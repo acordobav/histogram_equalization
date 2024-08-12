@@ -90,9 +90,9 @@ struct CalcDistTLM: sc_module
             memcpy(&time_output, data_ptr, sizeof(double));
             memcpy(&echo_signal_result, data_ptr + sizeof(double), sizeof(double));
 
-           cout << "From CALC DIST TARGET" << endl;
-            cout << "Delay time coming from sensor : " << time_output << endl;
-            cout << "Echo signal coming from sensor: " << echo_signal_result << endl;
+           //cout << "From CALC DIST TARGET" << endl;
+           // cout << "Delay time coming from sensor : " << time_output << endl;
+          //  cout << "Echo signal coming from sensor: " << echo_signal_result << endl;
 
             //cout << "FROM REGISTER STATUS OF SENS_ACTIVE: " << global_register_bank.read_bits(REG_BASE_1+0x2,0x1) << endl;
 

@@ -55,7 +55,7 @@ using namespace std;
 /*------------------------------------------------------------------------------------------*/
 //Global BANK OF REGISTERS
 //Need to remove it in the future
-RegisterBank global_register_bank(0x10000, 0x30072);
+RegisterBank global_register_bank(0x10000, 0x60000000);
 
 /*------------------------------------------------------------------------------------------*/
 /*

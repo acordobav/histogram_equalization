@@ -53,14 +53,14 @@
 // Registers ----------------------------------------------
 //Considering 1 register per sensor (8 sensors max)
 
-#define REG_SENSOR0                   0x10000
-#define REG_SENSOR1                   0x101F4
-#define REG_SENSOR2                   0x103E8
-#define REG_SENSOR3                   0x105DC
-#define REG_SENSOR4                   0x107D0
-#define REG_SENSOR5                   0x109C4
-#define REG_SENSOR6                   0x10BB8
-#define REG_SENSOR7                   0x10DAC
+#define REG_SENSOR0                   0x50000000+0x0
+#define REG_SENSOR1                   0x50000000+0x4
+#define REG_SENSOR2                   0x50000000+0x8
+#define REG_SENSOR3                   0x50000000+0xC
+#define REG_SENSOR4                   0x50000000+0x10
+#define REG_SENSOR5                   0x50000000+0x14
+#define REG_SENSOR6                   0x50000000+0x18
+#define REG_SENSOR7                   0x50000000+0x1C
 
 /*
 typedef enum{
