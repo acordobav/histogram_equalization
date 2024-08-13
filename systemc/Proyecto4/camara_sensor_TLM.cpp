@@ -145,9 +145,7 @@ struct CamaraSensTLM : sc_module
       sc_time delay = sc_time(10, SC_NS);
 
       trans.set_data_length(sizeof(imagen));
-      unsigned char data[sizeof(imagen)];
-      memcpy(data, &imagen, sizeof(data));
-      trans.set_data_ptr(data);
+      trans.set_data_ptr((unsigned char*)imagen);
 
       /*
       //------- FUNCIONAL ENVIO IMAGEN ----

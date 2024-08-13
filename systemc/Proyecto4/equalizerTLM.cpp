@@ -55,6 +55,10 @@ struct EqualizerTLM: sc_module
     // Wait for an event to pop out of the back end of the queue   
     wait(e1);
 
+    // Get numbers of cols and rows from RegisterBank
+    rows = register_data_get(REG_IMAGE_ROWS);
+    cols = register_data_get(REG_IMAGE_COLS);
+
     ID_extension* id_extension = new ID_extension;
     trans_pending->get_extension(id_extension); 
 
@@ -64,10 +68,8 @@ struct EqualizerTLM: sc_module
     cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
 	
     unsigned char* resultado;
-    uint8_t** image;
-    
     unsigned char* ptr = trans_pending->get_data_ptr(); 
-    memcpy(&image, ptr, sizeof(image));
+    uint8_t** image = (uint8_t **) ptr;
     
     // Call on backward path to complete the transaction
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
@@ -81,10 +83,6 @@ struct EqualizerTLM: sc_module
     if(!register_data_get(REG_ENABLE)) {
       continue;
     }
-
-    // Get numbers of cols and rows from RegisterBank
-    rows = register_data_get(REG_IMAGE_ROWS);
-    cols = register_data_get(REG_IMAGE_COLS);
 
     /*
       uint8_t save_image[ROWS][COLS] = { 0 };
@@ -114,7 +112,7 @@ struct EqualizerTLM: sc_module
 
     tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
     trans.set_data_ptr( reinterpret_cast<unsigned char*>(filtered_image) );   
-    trans.set_data_length( sizeof(image) );   
+    trans.set_data_length( sizeof(filtered_image) );
 
     cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     status = initiator_socket->nb_transport_fw(trans, phase, delay);  // Non-blocking transport call   

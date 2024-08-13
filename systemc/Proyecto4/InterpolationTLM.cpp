@@ -86,42 +86,18 @@ struct InterpolationTLM: sc_module
     uint8_t** interpol_image = createMatrix(new_height,new_width);
 
     // Interpolar la imagen
-    inter->interpolate_image((uint8_t**)image, original_width, original_height, interpol_image, new_width, new_height);
+    // inter->interpolate_image((uint8_t**)image, original_width, original_height, interpol_image, new_width, new_height);
 
+    // Workaround due to segmentation fault on the Interpolation module
+    for (uint16_t i = 0; i < ROWS; i++) {
+      for (uint16_t j = 0; j < COLS; j++) {
+        cout << "i: " << i + 0 << "j: " << j + 0 << endl;
+        interpol_image[i][j] = image[i][j];
+      }
+    }
+    
     sc_time process_delay = sc_time(100, SC_US);   
     wait(process_delay);
-
-
-// [INFO] Para ver las imagenes:
-
-// Convertir imagen de SALIDA interpolada a un vector
-    unsigned char* interpolated_image = (unsigned char*)malloc(new_width * new_height * channels);
-    if (interpolated_image == NULL) {
-        cerr << "Error: no se pudo asignar memoria para interpolated_image" << endl;
-        exit(1);
-    }
-
-    for (int i = 0; i < new_height; i++) {
-        memcpy(interpolated_image + (i * new_width * channels), interpol_image[i], sizeof(uint8_t) * new_width * channels);
-    }
-
-    // Guardar la imagen de entrada interpolada
-    // stbi_write_jpg("2_interpolated.jpg", new_width, new_height, channels, interpolated_image, 100)
-    free(interpolated_image);
-// Convertir imagen de ENTRADA  a un vector
-    unsigned char* test_image = (unsigned char*)malloc(original_width * original_height * channels);
-    if (test_image == NULL) {
-        cerr << "Error: no se pudo asignar memoria para interpolated_image" << endl;
-        exit(1);
-    }
-
-    for (int i = 0; i < original_height; i++) {
-        memcpy(test_image + (i * original_width * channels), image[i], sizeof(uint8_t) * original_width * channels);
-    }
-
-    // Guardar la imagen 
-    // stbi_write_jpg("1_entrada.jpg", original_width, original_height, channels, test_image, 100);
-    free(test_image);
 
 //-----------------------------------------
     

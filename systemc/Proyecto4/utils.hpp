@@ -81,23 +81,23 @@ struct mask_extension: tlm::tlm_extension<mask_extension> {
 
 #define ROWS 323
 #define COLS 434
-#define newROWS 128
-#define newCOLS 256
+#define newROWS ROWS
+#define newCOLS COLS
 
 // Function to allocate memory for a matrix and return a pointer to it
 uint8_t** createMatrix(int rows, int cols) {
+    uint8_t *mem_space = (uint8_t *)malloc(rows * cols * sizeof(uint8_t));
+
     uint8_t **matrix = (uint8_t **)malloc(rows * sizeof(uint8_t *));
     for (int i = 0; i < rows; i++) {
-        matrix[i] = (uint8_t *)malloc(cols * sizeof(uint8_t));
+        matrix[i] = mem_space + i * cols; 
     }
     return matrix;
 }
 
 // Function to free the memory allocated for the matrix
 void freeMatrix(uint8_t **matrix, int rows) {
-    for (int i = 0; i < rows; i++) {
-        free(matrix[i]);
-    }
+    free(matrix[0]);
     free(matrix);
 }
 
