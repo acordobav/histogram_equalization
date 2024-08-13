@@ -29,47 +29,47 @@
 		<link>
 			<name>source</name>
 			<type>2</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/.apc/.src</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/.apc/.src</location>
 		</link>
 		<link>
 			<name>testbench</name>
 			<type>2</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/.apc/.tb</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/.apc/.tb</location>
 		</link>
 		<link>
 			<name>solution1/constraints</name>
 			<type>2</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/.tcls</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/.tcls</location>
 		</link>
 		<link>
 			<name>source/CalsDis.cpp</name>
 			<type>1</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/CalsDis.cpp</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/CalsDis.cpp</location>
 		</link>
 		<link>
 			<name>source/CalsDis.h</name>
 			<type>1</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/CalsDis.h</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/CalsDis.h</location>
 		</link>
 		<link>
 			<name>testbench/TB.cpp</name>
 			<type>1</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp</location>
 		</link>
 		<link>
 			<name>solution1/constraints/.xml.directive</name>
 			<type>1</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/solution1.directive</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/solution1.directive</location>
 		</link>
 		<link>
 			<name>solution1/constraints/directives.tcl</name>
 			<type>1</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/directives.tcl</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/directives.tcl</location>
 		</link>
 		<link>
 			<name>solution1/constraints/script.tcl</name>
 			<type>1</type>
-			<location>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/script.tcl</location>
+			<location>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/script.tcl</location>
 		</link>
 	</linkedResources>
 </projectDescription>

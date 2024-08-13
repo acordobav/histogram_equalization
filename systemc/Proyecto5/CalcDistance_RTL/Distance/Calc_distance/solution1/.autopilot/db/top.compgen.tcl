@@ -185,14 +185,14 @@ set axilite_register_dict [dict create]
 if {${::AESL::PGuard_autoexp_gen}} {
 eval "cg_default_interface_gen_dc { \
     id 5 \
-    name echo \
+    name trigger \
     type other \
     dir I \
     reset_level 1 \
     sync_rst true \
-    corename dc_echo \
+    corename dc_trigger \
     op interface \
-    ports { echo { I 32 vector } } \
+    ports { trigger { I 32 vector } } \
 } "
 }
 

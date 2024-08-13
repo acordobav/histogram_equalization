@@ -1,6 +1,6 @@
 <InterfaceSummary>
 <RtlPorts>
-<name>echo</name>
+<name>trigger</name>
 <CType>
 <TypeName>int</TypeName>
 <TypeWidth>32</TypeWidth>

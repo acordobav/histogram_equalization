@@ -207,7 +207,7 @@ top::top(sc_module_name name) : sc_module(name), mVcdFile(0) {
     sensitive << ( ap_CS_fsm_state7 );
 
     SC_METHOD(thread_icmp_ln8_fu_293_p2);
-    sensitive << ( echo );
+    sensitive << ( trigger );
     sensitive << ( ap_CS_fsm_state7 );
 
     SC_METHOD(thread_isNeg_fu_189_p3);
@@ -352,7 +352,7 @@ top::top(sc_module_name name) : sc_module(name), mVcdFile(0) {
     sc_trace(mVcdFile, ap_done, "(port)ap_done");
     sc_trace(mVcdFile, ap_idle, "(port)ap_idle");
     sc_trace(mVcdFile, ap_ready, "(port)ap_ready");
-    sc_trace(mVcdFile, echo, "(port)echo");
+    sc_trace(mVcdFile, trigger, "(port)trigger");
     sc_trace(mVcdFile, simulated_time, "(port)simulated_time");
     sc_trace(mVcdFile, dist_cm, "(port)dist_cm");
     sc_trace(mVcdFile, dist_cm_ap_vld, "(port)dist_cm_ap_vld");
@@ -638,7 +638,7 @@ void top::thread_icmp_ln16_fu_319_p2() {
 }
 
 void top::thread_icmp_ln8_fu_293_p2() {
-    icmp_ln8_fu_293_p2 = (!echo.read().is_01() || !ap_const_lv32_1.is_01())? sc_lv<1>(): sc_lv<1>(echo.read() == ap_const_lv32_1);
+    icmp_ln8_fu_293_p2 = (!trigger.read().is_01() || !ap_const_lv32_1.is_01())? sc_lv<1>(): sc_lv<1>(trigger.read() == ap_const_lv32_1);
 }
 
 void top::thread_isNeg_fu_189_p3() {
@@ -854,7 +854,7 @@ void top::thread_hdltv_gen() {
         mHdltvoutHandle << mComma << "{"  <<  " \"ap_done\" :  \"" << ap_done.read() << "\" ";
         mHdltvoutHandle << " , " <<  " \"ap_idle\" :  \"" << ap_idle.read() << "\" ";
         mHdltvoutHandle << " , " <<  " \"ap_ready\" :  \"" << ap_ready.read() << "\" ";
-        mHdltvinHandle << " , " <<  " \"echo\" :  \"" << echo.read() << "\" ";
+        mHdltvinHandle << " , " <<  " \"trigger\" :  \"" << trigger.read() << "\" ";
         mHdltvinHandle << " , " <<  " \"simulated_time\" :  \"" << simulated_time.read() << "\" ";
         mHdltvoutHandle << " , " <<  " \"dist_cm\" :  \"" << dist_cm.read() << "\" ";
         mHdltvoutHandle << " , " <<  " \"dist_cm_ap_vld\" :  \"" << dist_cm_ap_vld.read() << "\" ";

@@ -14,14 +14,14 @@
 `define AUTOTB_MAX_ALLOW_LATENCY  15000000
 `define AUTOTB_CLOCK_PERIOD_DIV2 5.00
 
-`define AESL_DEPTH_echo 1
+`define AESL_DEPTH_trigger 1
 `define AESL_DEPTH_simulated_time 1
 `define AESL_DEPTH_dist_cm 1
 `define AESL_DEPTH_calc_voltage 1
 `define AESL_DEPTH_sens_range 1
-`define AUTOTB_TVIN_echo  "../tv/cdatafile/c.top.autotvin_echo.dat"
+`define AUTOTB_TVIN_trigger  "../tv/cdatafile/c.top.autotvin_trigger.dat"
 `define AUTOTB_TVIN_simulated_time  "../tv/cdatafile/c.top.autotvin_simulated_time.dat"
-`define AUTOTB_TVIN_echo_out_wrapc  "../tv/rtldatafile/rtl.top.autotvin_echo.dat"
+`define AUTOTB_TVIN_trigger_out_wrapc  "../tv/rtldatafile/rtl.top.autotvin_trigger.dat"
 `define AUTOTB_TVIN_simulated_time_out_wrapc  "../tv/rtldatafile/rtl.top.autotvin_simulated_time.dat"
 `define AUTOTB_TVOUT_dist_cm  "../tv/cdatafile/c.top.autotvout_dist_cm.dat"
 `define AUTOTB_TVOUT_calc_voltage  "../tv/cdatafile/c.top.autotvout_calc_voltage.dat"
@@ -34,7 +34,7 @@ module `AUTOTB_TOP;
 parameter AUTOTB_TRANSACTION_NUM = 8;
 parameter PROGRESS_TIMEOUT = 10000000;
 parameter LATENCY_ESTIMATION = 15;
-parameter LENGTH_echo = 1;
+parameter LENGTH_trigger = 1;
 parameter LENGTH_simulated_time = 1;
 parameter LENGTH_dist_cm = 1;
 parameter LENGTH_calc_voltage = 1;
@@ -72,7 +72,7 @@ wire ap_start;
 wire ap_done;
 wire ap_idle;
 wire ap_ready;
-wire [31 : 0] echo;
+wire [31 : 0] trigger;
 wire [63 : 0] simulated_time;
 wire [31 : 0] dist_cm;
 wire  dist_cm_ap_vld;
@@ -101,7 +101,7 @@ wire ap_rst_n;
     .ap_done(ap_done),
     .ap_idle(ap_idle),
     .ap_ready(ap_ready),
-    .echo(echo),
+    .trigger(trigger),
     .simulated_time(simulated_time),
     .dist_cm(dist_cm),
     .dist_cm_ap_vld(dist_cm_ap_vld),
@@ -140,10 +140,10 @@ assign AESL_continue = tb_continue;
             end
         end
     end
-// The signal of port echo
-reg [31: 0] AESL_REG_echo = 0;
-assign echo = AESL_REG_echo;
-initial begin : read_file_process_echo
+// The signal of port trigger
+reg [31: 0] AESL_REG_trigger = 0;
+assign trigger = AESL_REG_trigger;
+initial begin : read_file_process_trigger
     integer fp;
     integer err;
     integer ret;
@@ -154,9 +154,9 @@ initial begin : read_file_process_echo
     integer transaction_idx;
     transaction_idx = 0;
     wait(AESL_reset === 0);
-    fp = $fopen(`AUTOTB_TVIN_echo,"r");
+    fp = $fopen(`AUTOTB_TVIN_trigger,"r");
     if(fp == 0) begin       // Failed to open file
-        $display("Failed to open file \"%s\"!", `AUTOTB_TVIN_echo);
+        $display("Failed to open file \"%s\"!", `AUTOTB_TVIN_trigger);
         $display("ERROR: Simulation using HLS TB failed.");
         $finish;
     end
@@ -179,7 +179,7 @@ initial begin : read_file_process_echo
                 # 0.2;
             end
         if(token != "[[/transaction]]") begin
-            ret = $sscanf(token, "0x%x", AESL_REG_echo);
+            ret = $sscanf(token, "0x%x", AESL_REG_trigger);
               if (ret != 1) begin
                   $display("Failed to parse token!");
                 $display("ERROR: Simulation using HLS TB failed.");
@@ -469,9 +469,9 @@ initial begin
 end
 
 
-reg end_echo;
-reg [31:0] size_echo;
-reg [31:0] size_echo_backup;
+reg end_trigger;
+reg [31:0] size_trigger;
+reg [31:0] size_trigger_backup;
 reg end_simulated_time;
 reg [31:0] size_simulated_time;
 reg [31:0] size_simulated_time_backup;

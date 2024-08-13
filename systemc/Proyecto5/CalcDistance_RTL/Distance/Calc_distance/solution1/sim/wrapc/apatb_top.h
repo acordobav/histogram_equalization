@@ -4,7 +4,7 @@
 // ==============================================================
 
 extern void AESL_WRAP_top (
-int echo,
+int trigger,
 double simulated_time,
 int* dist_cm,
 double* calc_voltage,

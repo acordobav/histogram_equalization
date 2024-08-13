@@ -29,8 +29,8 @@ using namespace sc_dt;
 // [dump_enumeration [get_enumeration_list]] ---------->
 
 
-// wrapc file define: "echo"
-#define AUTOTB_TVIN_echo  "../tv/cdatafile/c.top.autotvin_echo.dat"
+// wrapc file define: "trigger"
+#define AUTOTB_TVIN_trigger  "../tv/cdatafile/c.top.autotvin_trigger.dat"
 // wrapc file define: "simulated_time"
 #define AUTOTB_TVIN_simulated_time  "../tv/cdatafile/c.top.autotvin_simulated_time.dat"
 // wrapc file define: "dist_cm"
@@ -53,7 +53,7 @@ class INTER_TCL_FILE {
 	public:
 		INTER_TCL_FILE(const char* name) {
 			mName = name;
-			echo_depth = 0;
+			trigger_depth = 0;
 			simulated_time_depth = 0;
 			dist_cm_depth = 0;
 			calc_voltage_depth = 0;
@@ -77,7 +77,7 @@ class INTER_TCL_FILE {
 
 		string get_depth_list () {
 			stringstream total_list;
-			total_list << "{echo " << echo_depth << "}\n";
+			total_list << "{trigger " << trigger_depth << "}\n";
 			total_list << "{simulated_time " << simulated_time_depth << "}\n";
 			total_list << "{dist_cm " << dist_cm_depth << "}\n";
 			total_list << "{calc_voltage " << calc_voltage_depth << "}\n";
@@ -89,7 +89,7 @@ class INTER_TCL_FILE {
 			(*class_num) = (*class_num) > num ? (*class_num) : num;
 		}
 	public:
-		int echo_depth;
+		int trigger_depth;
 		int simulated_time_depth;
 		int dist_cm_depth;
 		int calc_voltage_depth;
@@ -102,14 +102,14 @@ class INTER_TCL_FILE {
 };
 
 extern void top (
-int echo,
+int trigger,
 double simulated_time,
 int* dist_cm,
 double* calc_voltage,
 int* sens_range);
 
 void AESL_WRAP_top (
-int echo,
+int trigger,
 double simulated_time,
 int* dist_cm,
 double* calc_voltage,
@@ -542,9 +542,9 @@ int* sens_range)
 
 		static AESL_FILE_HANDLER aesl_fh;
 
-		// "echo"
-		char* tvin_echo = new char[50];
-		aesl_fh.touch(AUTOTB_TVIN_echo);
+		// "trigger"
+		char* tvin_trigger = new char[50];
+		aesl_fh.touch(AUTOTB_TVIN_trigger);
 
 		// "simulated_time"
 		char* tvin_simulated_time = new char[50];
@@ -567,30 +567,30 @@ int* sens_range)
 		int leading_zero;
 
 		// [[transaction]]
-		sprintf(tvin_echo, "[[transaction]] %d\n", AESL_transaction);
-		aesl_fh.write(AUTOTB_TVIN_echo, tvin_echo);
+		sprintf(tvin_trigger, "[[transaction]] %d\n", AESL_transaction);
+		aesl_fh.write(AUTOTB_TVIN_trigger, tvin_trigger);
 
-		sc_bv<32> echo_tvin_wrapc_buffer;
+		sc_bv<32> trigger_tvin_wrapc_buffer;
 
-		// RTL Name: echo
+		// RTL Name: trigger
 		{
 			// bitslice(31, 0)
 			{
-				// celement: echo(31, 0)
+				// celement: trigger(31, 0)
 				{
 					// carray: (0) => (0) @ (0)
 					{
 						// sub                   : 
-						// ori_name              : echo
+						// ori_name              : trigger
 						// sub_1st_elem          : 
-						// ori_name_1st_elem     : echo
-						// regulate_c_name       : echo
-						// input_type_conversion : echo
-						if (&(echo) != NULL) // check the null address if the c port is array or others
+						// ori_name_1st_elem     : trigger
+						// regulate_c_name       : trigger
+						// input_type_conversion : trigger
+						if (&(trigger) != NULL) // check the null address if the c port is array or others
 						{
-							sc_lv<32> echo_tmp_mem;
-							echo_tmp_mem = echo;
-							echo_tvin_wrapc_buffer.range(31, 0) = echo_tmp_mem.range(31, 0);
+							sc_lv<32> trigger_tmp_mem;
+							trigger_tmp_mem = trigger;
+							trigger_tvin_wrapc_buffer.range(31, 0) = trigger_tmp_mem.range(31, 0);
 						}
 					}
 				}
@@ -600,13 +600,13 @@ int* sens_range)
 		// dump tv to file
 		for (int i = 0; i < 1; i++)
 		{
-			sprintf(tvin_echo, "%s\n", (echo_tvin_wrapc_buffer).to_string(SC_HEX).c_str());
-			aesl_fh.write(AUTOTB_TVIN_echo, tvin_echo);
+			sprintf(tvin_trigger, "%s\n", (trigger_tvin_wrapc_buffer).to_string(SC_HEX).c_str());
+			aesl_fh.write(AUTOTB_TVIN_trigger, tvin_trigger);
 		}
 
-		tcl_file.set_num(1, &tcl_file.echo_depth);
-		sprintf(tvin_echo, "[[/transaction]] \n");
-		aesl_fh.write(AUTOTB_TVIN_echo, tvin_echo);
+		tcl_file.set_num(1, &tcl_file.trigger_depth);
+		sprintf(tvin_trigger, "[[/transaction]] \n");
+		aesl_fh.write(AUTOTB_TVIN_trigger, tvin_trigger);
 
 		// [[transaction]]
 		sprintf(tvin_simulated_time, "[[transaction]] %d\n", AESL_transaction);
@@ -653,7 +653,7 @@ int* sens_range)
 // [call_c_dut] ---------->
 
 		CodeState = CALL_C_DUT;
-		top(echo, simulated_time, dist_cm, calc_voltage, sens_range);
+		top(trigger, simulated_time, dist_cm, calc_voltage, sens_range);
 
 		CodeState = DUMP_OUTPUTS;
 
@@ -802,8 +802,8 @@ int* sens_range)
 		delete [] sens_range_tvout_wrapc_buffer;
 
 		CodeState = DELETE_CHAR_BUFFERS;
-		// release memory allocation: "echo"
-		delete [] tvin_echo;
+		// release memory allocation: "trigger"
+		delete [] tvin_trigger;
 		// release memory allocation: "simulated_time"
 		delete [] tvin_simulated_time;
 		// release memory allocation: "dist_cm"

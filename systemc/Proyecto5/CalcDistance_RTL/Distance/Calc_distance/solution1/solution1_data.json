@@ -16,12 +16,12 @@
     
   },
   "Args": {
-    "echo": {
+    "trigger": {
       "index": "0",
       "type": {
         "dataType": "int",
         "dataWidth": "32",
-        "interfaceRef": "echo"
+        "interfaceRef": "trigger"
       }
     },
     "simulated_time": {
@@ -100,9 +100,9 @@
       "impl\/misc\/top_ap_dmul_3_max_dsp_64_ip.tcl",
       "impl\/misc\/top_ap_sitodp_2_no_dsp_32_ip.tcl"
     ],
-    "DesignXml": "\/home\/jpv\/Msc\/DisAltNiv\/vivadoFiles\/Example\/OtherExampleForDistance\/Distance\/Calc_distance\/solution1\/.autopilot\/db\/top.design.xml",
-    "DebugDir": "\/home\/jpv\/Msc\/DisAltNiv\/vivadoFiles\/Example\/OtherExampleForDistance\/Distance\/Calc_distance\/solution1\/.debug",
-    "ProtoInst": ["\/home\/jpv\/Msc\/DisAltNiv\/vivadoFiles\/Example\/OtherExampleForDistance\/Distance\/Calc_distance\/solution1\/.debug\/top.protoinst"]
+    "DesignXml": "\/home\/jpv\/Msc\/DisAltNiv\/Repo\/histogram_equalization\/systemc\/Proyecto5\/CalcDistance_RTL\/Distance\/Calc_distance\/solution1\/.autopilot\/db\/top.design.xml",
+    "DebugDir": "\/home\/jpv\/Msc\/DisAltNiv\/Repo\/histogram_equalization\/systemc\/Proyecto5\/CalcDistance_RTL\/Distance\/Calc_distance\/solution1\/.debug",
+    "ProtoInst": ["\/home\/jpv\/Msc\/DisAltNiv\/Repo\/histogram_equalization\/systemc\/Proyecto5\/CalcDistance_RTL\/Distance\/Calc_distance\/solution1\/.debug\/top.protoinst"]
   },
   "SubcoreInfo": {
     "HasXpmMemory": false,
@@ -167,17 +167,6 @@
       "bundle_name": "dist_cm",
       "bundle_role": "default"
     },
-    "echo": {
-      "type": "data",
-      "dir": "in",
-      "width": "32",
-      "ctype": {"DATA": {
-          "Type": "integer signed",
-          "Width": "32"
-        }},
-      "bundle_name": "echo",
-      "bundle_role": "default"
-    },
     "sens_range": {
       "type": "data",
       "dir": "out",
@@ -198,6 +187,17 @@
           "Width": "64"
         }},
       "bundle_name": "simulated_time",
+      "bundle_role": "default"
+    },
+    "trigger": {
+      "type": "data",
+      "dir": "in",
+      "width": "32",
+      "ctype": {"DATA": {
+          "Type": "integer signed",
+          "Width": "32"
+        }},
+      "bundle_name": "trigger",
       "bundle_role": "default"
     }
   },
@@ -226,7 +226,7 @@
       "dir": "out",
       "width": "1"
     },
-    "echo": {
+    "trigger": {
       "dir": "in",
       "width": "32"
     },
@@ -301,7 +301,7 @@
   },
   "GenData": {
     "DataVersion": "0.2",
-    "Time": "2024-08-13 01:17:00 CST",
+    "Time": "2024-08-13 14:55:47 CST",
     "ToolName": "vivado_hls",
     "ToolVersion": "2019.1"
   }

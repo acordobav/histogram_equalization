@@ -7,7 +7,7 @@ open_project Calc_distance
 set_top top
 add_files ../files/CalsDis.cpp
 add_files ../files/CalsDis.h
-add_files -tb ../files/TB.cpp
+add_files -tb ../files/TB.cpp -cflags "-Wno-unknown-pragmas"
 open_solution "solution1"
 set_part {xc7vx485t-ffg1157-1}
 create_clock -period 10 -name default

@@ -6,58 +6,58 @@ INFO: [SIM 4] CSIM will launch GCC as the compiler.
         SystemC 2.3.1-Accellera --- Mar  5 2018 14:23:08
         Copyright (c) 1996-2014 by all Contributors,
         ALL RIGHTS RESERVED
-
-Info: (I702) default timescale unit used for tracing: 1 ps (wave.vcd)
 Medición número: 1
 Distance (cm): 10
 Voltage: 0.016
 Sensor range: cercano
-Test 1 pasado.
+[INFO] Test 1 PASS.
+
+Info: (I702) default timescale unit used for tracing: 1 ps (waves.vcd)
 
 Medición número: 2
 Distance (cm): 50
 Voltage: 0.080
 Sensor range: cercano
-Test 2 pasado.
+[INFO] Test 2 PASS.
 
 Medición número: 3
 Distance (cm): 120
 Voltage: 0.192
 Sensor range: medio
-Test 3 pasado.
+[INFO] Test 3 PASS.
 
 Medición número: 4
 Distance (cm): 180
 Voltage: 0.288
 Sensor range: medio
-Test 4 pasado.
+[INFO] Test 4 PASS.
 
 Medición número: 5
 Distance (cm): 220
 Voltage: 0.352
 Sensor range: lejano
-Test 5 pasado.
+[INFO] Test 5 PASS.
 
 Medición número: 6
 Distance (cm): 280
 Voltage: 0.448
 Sensor range: lejano
-Test 6 pasado.
+[INFO] Test 6 PASS.
 
 Medición número: 7
 Distance (cm): 350
 Voltage: 0.560
 Sensor range: fuera de rango
-Test 7 pasado.
+[INFO] Test 7 PASS.
 
 Medición número: 8
 Distance (cm): 320
 Voltage: 0.512
 Sensor range: fuera de rango
-Test 8 pasado.
+[INFO] Test 8 PASS.
 
 
-Info: Test: Todos los tests pasaron correctamente.
+Info: Test: All the tests passed.
 
 INFO: [SIM 1] CSim done with 0 errors.
 INFO: [SIM 3] *************** CSIM finish ***************

@@ -14,8 +14,8 @@ add_wave /apatb_top_top/AESL_inst_top/dist_cm -into $dist_cm_group -radix hex
 set cinputgroup [add_wave_group "C Inputs" -into $designtopgroup]
 set simulated_time_group [add_wave_group simulated_time(wire) -into $cinputgroup]
 add_wave /apatb_top_top/AESL_inst_top/simulated_time -into $simulated_time_group -radix hex
-set echo_group [add_wave_group echo(wire) -into $cinputgroup]
-add_wave /apatb_top_top/AESL_inst_top/echo -into $echo_group -radix hex
+set trigger_group [add_wave_group trigger(wire) -into $cinputgroup]
+add_wave /apatb_top_top/AESL_inst_top/trigger -into $trigger_group -radix hex
 set blocksiggroup [add_wave_group "Block-level IO Handshake" -into $designtopgroup]
 add_wave /apatb_top_top/AESL_inst_top/ap_start -into $blocksiggroup
 add_wave /apatb_top_top/AESL_inst_top/ap_done -into $blocksiggroup
@@ -32,7 +32,7 @@ set tb_portdepth_group [add_wave_group "Port Depth" -into $tbinternalsiggroup]
 add_wave /apatb_top_top/AUTOTB_TRANSACTION_NUM -into $tb_simstatus_group -radix hex
 add_wave /apatb_top_top/ready_cnt -into $tb_simstatus_group -radix hex
 add_wave /apatb_top_top/done_cnt -into $tb_simstatus_group -radix hex
-add_wave /apatb_top_top/LENGTH_echo -into $tb_portdepth_group -radix hex
+add_wave /apatb_top_top/LENGTH_trigger -into $tb_portdepth_group -radix hex
 add_wave /apatb_top_top/LENGTH_simulated_time -into $tb_portdepth_group -radix hex
 add_wave /apatb_top_top/LENGTH_dist_cm -into $tb_portdepth_group -radix hex
 add_wave /apatb_top_top/LENGTH_calc_voltage -into $tb_portdepth_group -radix hex
@@ -50,8 +50,8 @@ add_wave /apatb_top_top/dist_cm -into $tb_dist_cm_group -radix hex
 set tbcinputgroup [add_wave_group "C Inputs" -into $testbenchgroup]
 set tb_simulated_time_group [add_wave_group simulated_time(wire) -into $tbcinputgroup]
 add_wave /apatb_top_top/simulated_time -into $tb_simulated_time_group -radix hex
-set tb_echo_group [add_wave_group echo(wire) -into $tbcinputgroup]
-add_wave /apatb_top_top/echo -into $tb_echo_group -radix hex
+set tb_trigger_group [add_wave_group trigger(wire) -into $tbcinputgroup]
+add_wave /apatb_top_top/trigger -into $tb_trigger_group -radix hex
 save_wave_config top.wcfg
 run all
 quit

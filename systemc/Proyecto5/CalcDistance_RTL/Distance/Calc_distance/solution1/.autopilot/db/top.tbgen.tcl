@@ -14,14 +14,14 @@ set isEnableWaveformDebug 1
 set C_modelName {top}
 set C_modelType { void 0 }
 set C_modelArgList {
-	{ echo int 32 regular  }
+	{ trigger int 32 regular  }
 	{ simulated_time double 64 regular  }
 	{ dist_cm int 32 regular {pointer 1}  }
 	{ calc_voltage double 64 regular {pointer 1}  }
 	{ sens_range int 32 regular {pointer 1}  }
 }
 set C_modelArgMapList {[ 
-	{ "Name" : "echo", "interface" : "wire", "bitwidth" : 32, "direction" : "READONLY", "bitSlice":[{"low":0,"up":31,"cElement": [{"cName": "echo","cData": "int","bit_use": { "low": 0,"up": 31},"cArray": [{"low" : 0,"up" : 0,"step" : 0}]}]}]} , 
+	{ "Name" : "trigger", "interface" : "wire", "bitwidth" : 32, "direction" : "READONLY", "bitSlice":[{"low":0,"up":31,"cElement": [{"cName": "trigger","cData": "int","bit_use": { "low": 0,"up": 31},"cArray": [{"low" : 0,"up" : 0,"step" : 0}]}]}]} , 
  	{ "Name" : "simulated_time", "interface" : "wire", "bitwidth" : 64, "direction" : "READONLY", "bitSlice":[{"low":0,"up":63,"cElement": [{"cName": "simulated_time","cData": "double","bit_use": { "low": 0,"up": 63},"cArray": [{"low" : 0,"up" : 0,"step" : 0}]}]}]} , 
  	{ "Name" : "dist_cm", "interface" : "wire", "bitwidth" : 32, "direction" : "WRITEONLY", "bitSlice":[{"low":0,"up":31,"cElement": [{"cName": "dist_cm","cData": "int","bit_use": { "low": 0,"up": 31},"cArray": [{"low" : 0,"up" : 0,"step" : 1}]}]}]} , 
  	{ "Name" : "calc_voltage", "interface" : "wire", "bitwidth" : 64, "direction" : "WRITEONLY", "bitSlice":[{"low":0,"up":63,"cElement": [{"cName": "calc_voltage","cData": "double","bit_use": { "low": 0,"up": 63},"cArray": [{"low" : 0,"up" : 0,"step" : 1}]}]}]} , 
@@ -35,7 +35,7 @@ set portList {
 	{ ap_done sc_out sc_logic 1 predone -1 } 
 	{ ap_idle sc_out sc_logic 1 done -1 } 
 	{ ap_ready sc_out sc_logic 1 ready -1 } 
-	{ echo sc_in sc_lv 32 signal 0 } 
+	{ trigger sc_in sc_lv 32 signal 0 } 
 	{ simulated_time sc_in sc_lv 64 signal 1 } 
 	{ dist_cm sc_out sc_lv 32 signal 2 } 
 	{ dist_cm_ap_vld sc_out sc_logic 1 outvld 2 } 
@@ -51,7 +51,7 @@ set NewPortList {[
  	{ "name": "ap_done", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "predone", "bundle":{"name": "ap_done", "role": "default" }} , 
  	{ "name": "ap_idle", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "done", "bundle":{"name": "ap_idle", "role": "default" }} , 
  	{ "name": "ap_ready", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "ready", "bundle":{"name": "ap_ready", "role": "default" }} , 
- 	{ "name": "echo", "direction": "in", "datatype": "sc_lv", "bitwidth":32, "type": "signal", "bundle":{"name": "echo", "role": "default" }} , 
+ 	{ "name": "trigger", "direction": "in", "datatype": "sc_lv", "bitwidth":32, "type": "signal", "bundle":{"name": "trigger", "role": "default" }} , 
  	{ "name": "simulated_time", "direction": "in", "datatype": "sc_lv", "bitwidth":64, "type": "signal", "bundle":{"name": "simulated_time", "role": "default" }} , 
  	{ "name": "dist_cm", "direction": "out", "datatype": "sc_lv", "bitwidth":32, "type": "signal", "bundle":{"name": "dist_cm", "role": "default" }} , 
  	{ "name": "dist_cm_ap_vld", "direction": "out", "datatype": "sc_logic", "bitwidth":1, "type": "outvld", "bundle":{"name": "dist_cm", "role": "ap_vld" }} , 
@@ -75,7 +75,7 @@ set RtlHierarchyInfo {[
 		"InDataflowNetwork" : "0",
 		"HasNonBlockingOperation" : "0",
 		"Port" : [
-			{"Name" : "echo", "Type" : "None", "Direction" : "I"},
+			{"Name" : "trigger", "Type" : "None", "Direction" : "I"},
 			{"Name" : "simulated_time", "Type" : "None", "Direction" : "I"},
 			{"Name" : "dist_cm", "Type" : "Vld", "Direction" : "O"},
 			{"Name" : "calc_voltage", "Type" : "Vld", "Direction" : "O"},
@@ -86,7 +86,7 @@ set RtlHierarchyInfo {[
 
 set ArgLastReadFirstWriteLatency {
 	top {
-		echo {Type I LastRead 6 FirstWrite -1}
+		trigger {Type I LastRead 6 FirstWrite -1}
 		simulated_time {Type I LastRead 0 FirstWrite -1}
 		dist_cm {Type O LastRead -1 FirstWrite 6}
 		calc_voltage {Type O LastRead -1 FirstWrite 15}
@@ -103,7 +103,7 @@ set PipelineEnableSignalInfo {[
 ]}
 
 set Spec2ImplPortList { 
-	echo { ap_none {  { echo in_data 0 32 } } }
+	trigger { ap_none {  { trigger in_data 0 32 } } }
 	simulated_time { ap_none {  { simulated_time in_data 0 64 } } }
 	dist_cm { ap_vld {  { dist_cm out_data 1 32 }  { dist_cm_ap_vld out_vld 1 1 } } }
 	calc_voltage { ap_vld {  { calc_voltage out_data 1 64 }  { calc_voltage_ap_vld out_vld 1 1 } } }

@@ -2,12 +2,12 @@
 # xsim v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
 # IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
-# Start of session at: Tue Aug 13 01:11:01 2024
-# Process ID: 340142
-# Current directory: /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog
+# Start of session at: Tue Aug 13 13:54:05 2024
+# Process ID: 27159
+# Current directory: /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog
 # Command line: xsim -mode tcl -source {xsim.dir/top/xsim_script.tcl}
-# Log file: /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/xsim.log
-# Journal file: /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/xsim.jou
+# Log file: /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/xsim.log
+# Journal file: /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/xsim.jou
 #-----------------------------------------------------------
 source xsim.dir/top/xsim_script.tcl
 source top.tcl

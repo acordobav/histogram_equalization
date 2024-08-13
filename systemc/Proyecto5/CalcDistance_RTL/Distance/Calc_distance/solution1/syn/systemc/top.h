@@ -24,7 +24,7 @@ struct top : public sc_module {
     sc_out< sc_logic > ap_done;
     sc_out< sc_logic > ap_idle;
     sc_out< sc_logic > ap_ready;
-    sc_in< sc_lv<32> > echo;
+    sc_in< sc_lv<32> > trigger;
     sc_in< sc_lv<64> > simulated_time;
     sc_out< sc_lv<32> > dist_cm;
     sc_out< sc_logic > dist_cm_ap_vld;

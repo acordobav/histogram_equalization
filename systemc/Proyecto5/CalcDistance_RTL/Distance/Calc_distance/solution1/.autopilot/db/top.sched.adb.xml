@@ -577,10 +577,10 @@ _ifconv:35  %tmp_4 = call i30 @_ssdm_op_PartSelect.i30.i32.i32.i32(i32 %p_Val2_6
 
 <Node id="13" bw="32" op_0_bw="32" op_1_bw="32">
 <![CDATA[
-_ifconv:7  %echo_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %echo) nounwind
+_ifconv:7  %trigger_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %trigger) nounwind
 
 ]]></Node>
-<StgValue><ssdm name="echo_read"/></StgValue>
+<StgValue><ssdm name="trigger_read"/></StgValue>
 </operation>
 
 <operation id="48" st_id="7" stage="1" lat="1">
@@ -592,7 +592,7 @@ _ifconv:7  %echo_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %echo) nounwind
 
 <Node id="14" bw="1" op_0_bw="32" op_1_bw="32">
 <![CDATA[
-_ifconv:8  %icmp_ln8 = icmp eq i32 %echo_read, 1
+_ifconv:8  %icmp_ln8 = icmp eq i32 %trigger_read, 1
 
 ]]></Node>
 <StgValue><ssdm name="icmp_ln8"/></StgValue>
@@ -1144,7 +1144,7 @@ _ifconv:34  %tmp_3 = fmul double %tmp_2, 1.600000e-03
 
 <Node id="6" bw="0" op_0_bw="0" op_1_bw="32">
 <![CDATA[
-_ifconv:0  call void (...)* @_ssdm_op_SpecBitsMap(i32 %echo) nounwind, !map !7
+_ifconv:0  call void (...)* @_ssdm_op_SpecBitsMap(i32 %trigger) nounwind, !map !7
 
 ]]></Node>
 <StgValue><ssdm name="specbitsmap_ln0"/></StgValue>

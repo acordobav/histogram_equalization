@@ -3,37 +3,41 @@
 #include <cmath>  // Para fabs
 #include "CalsDis.h" // Incluye solo el encabezado
 
-
 SC_MODULE(Testbench) {
-    sc_signal<int> all_tests_passed;  // Cambiado a sc_signal
+    sc_out<int> all_tests_passed;  // Cambiado a sc_signal
+    sc_out<int> distance;
+    sc_out<double> voltaje;
+    sc_out<int> sensor;
 
     void run_tests() {
         int dist_cm;
         double calc_voltage;
         int sens_range;
 
-        const int num_measurements = 8;
-        int echo = 1;
+        // Mediciones a realizar
+        int expected_dist[] = {10, 50, 120, 180, 220, 280, 350, 320};
 
+        // Mediciones esperadas para el "self-checking"
         double echo_times[] = {
             10 / 0.034, 50 / 0.034, 120 / 0.034, 180 / 0.034,
-            220 / 0.034, 280 / 0.034, 350 / 0.034, 320 / 0.034
-        };
-
-        int expected_dist[] = {10, 50, 120, 180, 220, 280, 350, 320};
+            220 / 0.034, 280 / 0.034, 350 / 0.034, 320 / 0.034};
         double expected_voltage[] = {0.016, 0.080, 0.192, 0.288, 0.352, 0.448, 0.560, 0.512};
         int expected_range[] = {1, 1, 2, 2, 3, 3, 0, 0};
 
+        // Flags para el "self-checking" y tolerancias
         int all_tests_passed_val = 1;
-        const int toleranceDistance = 1;
+        const int toleranceDistance = 0;
         const double toleranceVoltage = 0.005;
 
+        // Inicio de las mediciones
+        const int num_measurements = sizeof(echo_times) / sizeof(double);
+        const int trigger=1;
         for (int i = 0; i < num_measurements; ++i) {
-        	//sc_time wait_time(echo_times[i], SC_NS);
-        	sc_time wait_time(500, SC_MS);
-        	wait(wait_time);
-            top(echo, echo_times[i], &dist_cm, &calc_voltage, &sens_range);
 
+            // Llamada al módulo
+            top(trigger, echo_times[i], &dist_cm, &calc_voltage, &sens_range);
+
+            // Visualización en Consola
             printf("Medición número: %d\n", i + 1);
             printf("Distance (cm): %d\n", dist_cm);
             printf("Voltage: %.3f\n", calc_voltage);
@@ -53,37 +57,63 @@ SC_MODULE(Testbench) {
                     break;
             }
 
+            // "SELF-CHECKING"
             if (fabs(dist_cm - expected_dist[i]) > toleranceDistance ||
-                fabs(expected_voltage[i]-calc_voltage) > toleranceVoltage ||
+                fabs(expected_voltage[i] - calc_voltage) > toleranceVoltage ||
                 sens_range != expected_range[i]) {
-                SC_REPORT_ERROR("Test", "fallido");
+
+                SC_REPORT_ERROR("Test", "FAILED");
                 all_tests_passed_val = 0;
             } else {
-                printf("Test %d pasado.\n", i + 1);
+                printf("[INFO] Test %d PASS.\n", i + 1);
             }
+            all_tests_passed.write(all_tests_passed_val);  // Escribe el valor en el sc_signal
+            distance.write(dist_cm);
+            voltaje.write(calc_voltage);
+            distance.write(dist_cm);
+            sensor.write(sens_range);
+
+            wait(sc_time(1, SC_SEC));
             printf("\n");
         }
 
-        all_tests_passed.write(all_tests_passed_val);  // Escribe el valor en el sc_signal
-
         if (all_tests_passed_val) {
-            SC_REPORT_INFO("Test", "Todos los tests pasaron correctamente.\n");
+            SC_REPORT_INFO("Test", "All the tests passed.\n");
         } else {
-            SC_REPORT_ERROR("Test", "Algunos tests fallaron.\n");
+            SC_REPORT_ERROR("Test", "Some tests failed.\n");
         }
     }
 
+
     SC_CTOR(Testbench) {
         SC_THREAD(run_tests);
-
     }
 };
 
 int sc_main(int argc, char* argv[]) {
-    Testbench tb("tb");
-    sc_trace_file *wf = sc_create_vcd_trace_file("wave");
-    sc_trace(wf, tb.all_tests_passed, "all_tests_passed");
-    sc_start(sc_time(20, SC_SEC));
-    sc_close_vcd_trace_file(wf);
+	Testbench tb("tb");
+
+	// Para el archivo de señales "gtwave"
+	sc_signal<int> all_tests_passed_signal;
+	sc_signal<int> distance_signal;
+	sc_signal<double> voltaje_signal;
+	sc_signal<int> sensor_signal;
+
+    tb.all_tests_passed(all_tests_passed_signal);  // Conectar la señal
+    tb.distance(distance_signal);
+    tb.voltaje(voltaje_signal);
+    tb.sensor(sensor_signal);
+
+	sc_trace_file *wf = sc_create_vcd_trace_file("waves");
+	sc_trace(wf, all_tests_passed_signal, "tests_passed");
+	sc_trace(wf, distance_signal, "distance");
+	sc_trace(wf, voltaje_signal, "voltaje");
+	sc_trace(wf, sensor_signal, "sensor");
+
+	// Iniciar la simulación
+	sc_start(sc_time(10, SC_SEC));  // Limitar el tiempo de simulación a 10 segundos
+
+	// Cerrar el archivo de trazas
+	sc_close_vcd_trace_file(wf);
     return 0;
 }

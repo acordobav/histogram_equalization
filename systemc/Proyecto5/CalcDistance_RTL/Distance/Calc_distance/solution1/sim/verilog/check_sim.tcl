@@ -80,7 +80,7 @@ proc check_tvin_file {} {
 		puts stdout "[debug_prompt arg check_sim.tcl] start...";
 	}
     set rtlfilelist {
-         "c.top.autotvin_echo.dat"
+         "c.top.autotvin_trigger.dat"
          "c.top.autotvin_simulated_time.dat"
          "c.top.autotvout_dist_cm.dat"
          "c.top.autotvout_calc_voltage.dat"

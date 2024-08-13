@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'top'
 ================================================================
-* Date:           Tue Aug 13 01:16:59 2024
+* Date:           Tue Aug 13 14:55:46 2024
 
 * Version:        2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)
 * Project:        Calc_distance
@@ -167,7 +167,7 @@
 |ap_done              | out |    1| ap_ctrl_hs |       top      | return value |
 |ap_idle              | out |    1| ap_ctrl_hs |       top      | return value |
 |ap_ready             | out |    1| ap_ctrl_hs |       top      | return value |
-|echo                 |  in |   32|   ap_none  |      echo      |    scalar    |
+|trigger              |  in |   32|   ap_none  |     trigger    |    scalar    |
 |simulated_time       |  in |   64|   ap_none  | simulated_time |    scalar    |
 |dist_cm              | out |   32|   ap_vld   |     dist_cm    |    pointer   |
 |dist_cm_ap_vld       | out |    1|   ap_vld   |     dist_cm    |    pointer   |

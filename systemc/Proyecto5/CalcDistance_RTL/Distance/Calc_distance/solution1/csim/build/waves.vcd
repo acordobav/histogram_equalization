@@ -1,0 +1,62 @@
+$date
+     Aug 13, 2024       14:18:26
+$end
+
+$version
+ SystemC 2.3.1-Accellera --- Mar  5 2018 14:23:08
+$end
+
+$timescale
+     1 ps
+$end
+
+$scope module SystemC $end
+$var wire   32  aaaaa  tests_passed [31:0]  $end
+$var wire   32  aaaab  distance [31:0]  $end
+$var real    1  aaaac  voltaje       $end
+$var wire   32  aaaad  sensor [31:0]  $end
+$upscope $end
+$enddefinitions  $end
+
+$comment
+All initial values are dumped below at time 0 sec = 0 timescale units.
+$end
+
+$dumpvars
+b1 aaaaa
+b1010 aaaab
+r0.016 aaaac
+b1 aaaad
+$end
+
+#1000000000000
+b110010 aaaab
+r0.08 aaaac
+
+#2000000000000
+b1111000 aaaab
+r0.192 aaaac
+b10 aaaad
+
+#3000000000000
+b10110100 aaaab
+r0.288 aaaac
+
+#4000000000000
+b11011100 aaaab
+r0.352 aaaac
+b11 aaaad
+
+#5000000000000
+b100011000 aaaab
+r0.448 aaaac
+
+#6000000000000
+b101011110 aaaab
+r0.5600000000000001 aaaac
+b0 aaaad
+
+#7000000000000
+b101000000 aaaab
+r0.512 aaaac
+

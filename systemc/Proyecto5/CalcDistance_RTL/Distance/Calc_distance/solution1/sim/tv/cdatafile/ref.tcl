@@ -1,5 +1,5 @@
 set depth_list {
-{echo 1}
+{trigger 1}
 {simulated_time 1}
 {dist_cm 1}
 {calc_voltage 1}

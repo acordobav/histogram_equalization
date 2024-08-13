@@ -15,7 +15,7 @@
 					<Obj class_id="5" tracking_level="0" version="0">
 						<type>1</type>
 						<id>1</id>
-						<name>echo</name>
+						<name>trigger</name>
 						<fileName></fileName>
 						<fileDirectory></fileDirectory>
 						<lineNumber>0</lineNumber>
@@ -24,7 +24,7 @@
 							<count>0</count>
 							<item_version>0</item_version>
 						</inlineStackInfo>
-						<originalName>echo</originalName>
+						<originalName>trigger</originalName>
 						<rtlName></rtlName>
 						<coreName></coreName>
 					</Obj>
@@ -161,14 +161,14 @@
 						<id>12</id>
 						<name>simulated_time_read</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>3</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item class_id="10" tracking_level="0" version="0">
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second class_id="11" tracking_level="0" version="0">
 									<count>1</count>
 									<item_version>0</item_version>
@@ -208,16 +208,16 @@
 					<Obj>
 						<type>0</type>
 						<id>13</id>
-						<name>echo_read</name>
+						<name>trigger_read</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>3</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -231,7 +231,7 @@
 								</second>
 							</item>
 						</inlineStackInfo>
-						<originalName>echo</originalName>
+						<originalName>trigger</originalName>
 						<rtlName></rtlName>
 						<coreName></coreName>
 					</Obj>
@@ -259,14 +259,14 @@
 						<id>14</id>
 						<name>icmp_ln8</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>8</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -308,14 +308,14 @@
 						<id>15</id>
 						<name>x_assign</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>9</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -364,7 +364,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -447,7 +447,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -532,7 +532,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -618,7 +618,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -701,7 +701,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -780,7 +780,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -856,7 +856,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -939,7 +939,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1023,7 +1023,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1101,7 +1101,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1178,7 +1178,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1254,7 +1254,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1332,7 +1332,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1408,7 +1408,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1484,7 +1484,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1560,7 +1560,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1637,7 +1637,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1714,7 +1714,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1792,7 +1792,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1868,7 +1868,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -1947,7 +1947,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2025,7 +2025,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2102,7 +2102,7 @@
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2173,14 +2173,14 @@
 						<id>39</id>
 						<name>tmp_2</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>10</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2221,14 +2221,14 @@
 						<id>40</id>
 						<name>tmp_3</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>10</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2270,14 +2270,14 @@
 						<id>41</id>
 						<name>tmp_4</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2321,14 +2321,14 @@
 						<id>42</id>
 						<name>icmp_ln12</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2370,14 +2370,14 @@
 						<id>43</id>
 						<name>icmp_ln12_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2419,14 +2419,14 @@
 						<id>44</id>
 						<name>icmp_ln14</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>14</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2468,14 +2468,14 @@
 						<id>45</id>
 						<name>icmp_ln14_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>14</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2517,14 +2517,14 @@
 						<id>46</id>
 						<name>icmp_ln16</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>16</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2566,14 +2566,14 @@
 						<id>47</id>
 						<name>icmp_ln16_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>16</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2615,14 +2615,14 @@
 						<id>48</id>
 						<name>and_ln16</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>16</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2664,14 +2664,14 @@
 						<id>49</id>
 						<name>select_ln8</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>8</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2714,14 +2714,14 @@
 						<id>50</id>
 						<name>and_ln12</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2763,14 +2763,14 @@
 						<id>51</id>
 						<name>xor_ln12</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2812,14 +2812,14 @@
 						<id>52</id>
 						<name>and_ln14</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>14</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2861,14 +2861,14 @@
 						<id>53</id>
 						<name>and_ln14_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>14</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2910,14 +2910,14 @@
 						<id>54</id>
 						<name>and_ln14_2</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>14</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -2959,14 +2959,14 @@
 						<id>55</id>
 						<name>select_ln14</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>14</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3009,14 +3009,14 @@
 						<id>56</id>
 						<name>and_ln12_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3058,14 +3058,14 @@
 						<id>57</id>
 						<name>and_ln12_2</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3107,14 +3107,14 @@
 						<id>58</id>
 						<name>select_ln12</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3157,14 +3157,14 @@
 						<id>59</id>
 						<name>select_ln8_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>8</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3207,14 +3207,14 @@
 						<id>60</id>
 						<name>select_ln14_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>14</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3257,14 +3257,14 @@
 						<id>61</id>
 						<name>select_ln12_1</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3307,14 +3307,14 @@
 						<id>62</id>
 						<name>and_ln8</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>8</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3356,14 +3356,14 @@
 						<id>63</id>
 						<name>select_ln8_2</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>8</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3406,14 +3406,14 @@
 						<id>64</id>
 						<name>select_ln12_2</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3456,14 +3456,14 @@
 						<id>65</id>
 						<name>or_ln12</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3505,14 +3505,14 @@
 						<id>66</id>
 						<name>select_ln12_3</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3555,14 +3555,14 @@
 						<id>67</id>
 						<name>zext_ln12</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>12</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3603,14 +3603,14 @@
 						<id>68</id>
 						<name>sens_range_write_ln6</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>6</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3653,14 +3653,14 @@
 						<id>69</id>
 						<name>calc_voltage_write_ln5</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>5</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3703,14 +3703,14 @@
 						<id>70</id>
 						<name>dist_cm_write_ln4</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>4</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -3753,14 +3753,14 @@
 						<id>71</id>
 						<name>_ln22</name>
 						<fileName>../files/CalsDis.cpp</fileName>
-						<fileDirectory>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</fileDirectory>
+						<fileDirectory>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</fileDirectory>
 						<lineNumber>22</lineNumber>
 						<contextFuncName>top</contextFuncName>
 						<inlineStackInfo>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>
-								<first>/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance</first>
+								<first>/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance</first>
 								<second>
 									<count>1</count>
 									<item_version>0</item_version>
@@ -7483,19 +7483,19 @@
 		<count>5</count>
 		<item_version>0</item_version>
 		<item>
-			<first>echo_read_read_fu_98</first>
-			<second>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>13</item>
-			</second>
-		</item>
-		<item>
 			<first>simulated_time_read_read_fu_92</first>
 			<second>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>12</item>
+			</second>
+		</item>
+		<item>
+			<first>trigger_read_read_fu_98</first>
+			<second>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>13</item>
 			</second>
 		</item>
 		<item>
@@ -7711,21 +7711,6 @@
 			</second>
 		</item>
 		<item>
-			<first>echo</first>
-			<second>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>
-					<first>read</first>
-					<second>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>13</item>
-					</second>
-				</item>
-			</second>
-		</item>
-		<item>
 			<first>sens_range</first>
 			<second>
 				<count>1</count>
@@ -7751,6 +7736,21 @@
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>12</item>
+					</second>
+				</item>
+			</second>
+		</item>
+		<item>
+			<first>trigger</first>
+			<second>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>
+					<first>read</first>
+					<second>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>13</item>
 					</second>
 				</item>
 			</second>

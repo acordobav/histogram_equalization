@@ -16,7 +16,7 @@ module top (
         ap_done,
         ap_idle,
         ap_ready,
-        echo,
+        trigger,
         simulated_time,
         dist_cm,
         dist_cm_ap_vld,
@@ -49,7 +49,7 @@ input   ap_start;
 output   ap_done;
 output   ap_idle;
 output   ap_ready;
-input  [31:0] echo;
+input  [31:0] trigger;
 input  [63:0] simulated_time;
 output  [31:0] dist_cm;
 output   dist_cm_ap_vld;
@@ -380,7 +380,7 @@ assign icmp_ln16_1_fu_324_p2 = (($signed(p_Val2_6_reg_467) < $signed(32'd301)) ?
 
 assign icmp_ln16_fu_319_p2 = (($signed(p_Val2_6_reg_467) > $signed(32'd200)) ? 1'b1 : 1'b0);
 
-assign icmp_ln8_fu_293_p2 = ((echo == 32'd1) ? 1'b1 : 1'b0);
+assign icmp_ln8_fu_293_p2 = ((trigger == 32'd1) ? 1'b1 : 1'b0);
 
 assign isNeg_fu_189_p3 = add_ln502_fu_183_p2[32'd11];
 

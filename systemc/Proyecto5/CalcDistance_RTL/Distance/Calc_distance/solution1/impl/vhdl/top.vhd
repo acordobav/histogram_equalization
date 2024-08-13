@@ -17,7 +17,7 @@ port (
     ap_done : OUT STD_LOGIC;
     ap_idle : OUT STD_LOGIC;
     ap_ready : OUT STD_LOGIC;
-    echo : IN STD_LOGIC_VECTOR (31 downto 0);
+    trigger : IN STD_LOGIC_VECTOR (31 downto 0);
     simulated_time : IN STD_LOGIC_VECTOR (63 downto 0);
     dist_cm : OUT STD_LOGIC_VECTOR (31 downto 0);
     dist_cm_ap_vld : OUT STD_LOGIC;
@@ -424,7 +424,7 @@ begin
     icmp_ln14_fu_309_p2 <= "1" when (signed(p_Val2_6_reg_467) > signed(ap_const_lv32_64)) else "0";
     icmp_ln16_1_fu_324_p2 <= "1" when (signed(p_Val2_6_reg_467) < signed(ap_const_lv32_12D)) else "0";
     icmp_ln16_fu_319_p2 <= "1" when (signed(p_Val2_6_reg_467) > signed(ap_const_lv32_C8)) else "0";
-    icmp_ln8_fu_293_p2 <= "1" when (echo = ap_const_lv32_1) else "0";
+    icmp_ln8_fu_293_p2 <= "1" when (trigger = ap_const_lv32_1) else "0";
     isNeg_fu_189_p3 <= add_ln502_fu_183_p2(11 downto 11);
     mantissa_V_fu_165_p4 <= ((ap_const_lv1_1 & tmp_V_1_fu_161_p1) & ap_const_lv1_0);
     or_ln12_fu_421_p2 <= (and_ln14_2_fu_366_p2 or and_ln12_2_fu_385_p2);

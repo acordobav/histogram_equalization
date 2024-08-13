@@ -1,0 +1,417 @@
+/*
+
+Xilinx Vivado v2019.1 (64-bit) [Major: 2019, Minor: 1]
+SW Build: 2552052 on Fri May 24 14:47:09 MDT 2019
+IP Build: 2548770 on Fri May 24 18:01:18 MDT 2019
+
+Process ID (PID): 27381
+License: Customer
+
+Current time: 	Tue Aug 13 13:54:59 CST 2024
+Time zone: 	Central Standard Time (America/Costa_Rica)
+
+OS: Ubuntu
+OS Version: 6.5.0-45-generic
+OS Architecture: amd64
+Available processors (cores): 8
+
+Display: :1
+Screen size: 1920x1080
+Screen resolution (DPI): 100
+Available screens: 2
+Available disk space: 58 GB
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	9.0.4 64-bit
+Java home: 	/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/tps/lnx64/jre9.0.4
+Java executable location: 	/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/tps/lnx64/jre9.0.4/bin/java
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	jpv
+User home directory: /home/jpv
+User working directory: /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado
+HDI_APPROOT: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1
+RDI_DATADIR: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data
+RDI_BINDIR: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/bin
+
+Vivado preferences file location: /home/jpv/.Xilinx/Vivado/2019.1/vivado.xml
+Vivado preferences directory: /home/jpv/.Xilinx/Vivado/2019.1/
+Vivado layouts directory: /home/jpv/.Xilinx/Vivado/2019.1/layouts
+PlanAhead jar file location: 	/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lib/classes/planAhead.jar
+Vivado log file location: 	/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/vivado.log
+Vivado journal file location: 	/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/vivado.jou
+Engine tmp dir: 	./.Xil/Vivado-27381-jpv
+
+Xilinx Environment Variables
+----------------------------
+AUTOESL_VIVADO_HLS_VERSION: true
+VIVADO_HLS_ARG_DBG: 0
+VIVADO_HLS_ARG_M32: 0
+XILINX: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/ids_lite/ISE
+XILINX_DSP: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/ids_lite/ISE
+XILINX_OPENCL: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1
+XILINX_OPENCL_CLANG: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/clang
+XILINX_PLANAHEAD: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1
+XILINX_SDK: /home/jpv/Msc/DisAltNiv/xilinx/vivado/SDK/2019.1
+XILINX_VIVADO: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1
+XILINX_VIVADO_HLS: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1
+
+
+GUI allocated memory:	189 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,012 MB
+
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: START_PROGRESS_DIALOG
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// by (cl):  Sourcing Tcl script 'open_wave.tcl' : addNotify
+// Tcl Message: source open_wave.tcl 
+// Tcl Message: # current_fileset 
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_ADD
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 76 MB (+77095kb) [00:00:08]
+// [Engine Memory]: 984 MB (+880011kb) [00:00:08]
+// [GUI Memory]: 101 MB (+22294kb) [00:00:08]
+// [GUI Memory]: 111 MB (+5607kb) [00:00:09]
+// WARNING: HEventQueue.dispatchEvent() is taking  1436 ms.
+// TclEventType: LOAD_FEATURE
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/ip'. 
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_SCOPE_TREE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_PROTOCOL_INSTANCE_TREE
+// [GUI Memory]: 118 MB (+1074kb) [00:00:09]
+// Tcl Message: # open_wave_database top.wdb 
+// TclEventType: SIMULATION_UPDATE_SCOPE_TREE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_PROTOCOL_INSTANCE_TREE
+// TclEventType: SIMULATION_UPDATE_SCOPE_TREE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_PROTOCOL_INSTANCE_TREE
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: SIMULATION_UPDATE_SCOPE_TREE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_PROTOCOL_INSTANCE_TREE
+// [Engine Memory]: 1,047 MB (+15053kb) [00:00:10]
+// HMemoryUtils.trashcanNow. Engine heap size: 1,040 MB. GUI used memory: 55 MB. Current time: 8/13/24, 1:55:00 PM CST
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: WAVEFORM_DELAYED_MODEL_EVENT
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// Waveform: addNotify
+// Tcl Message: open_wave_config /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/top.wcfg 
+// TclEventType: STOP_PROGRESS_DIALOG
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,049 MB. GUI used memory: 59 MB. Current time: 8/13/24, 1:55:01 PM CST
+dismissDialog("Sourcing Tcl script 'open_wave.tcl'"); // by (cl)
+// TclEventType: STOP_PROGRESS_DIALOG
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_MODEL_EVENT
+// HMemoryUtils.trashcanNow. Engine heap size: 1,047 MB. GUI used memory: 57 MB. Current time: 8/13/24, 1:55:54 PM CST
+// Elapsed time: 1712 seconds
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals]", 0); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs]", 1); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,064 MB. GUI used memory: 70 MB. Current time: 8/13/24, 2:23:42 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 11 seconds
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, dist_cm(wire)]", 4); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, sens_range(wire)]", 2); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,075 MB. GUI used memory: 111 MB. Current time: 8/13/24, 2:23:51 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire)]", 5); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Inputs]", 11); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Inputs, simulated_time(wire)]", 12); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Inputs, trigger(wire)]", 14); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,076 MB. GUI used memory: 115 MB. Current time: 8/13/24, 2:24:00 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals]", 19); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, Internal Signals]", 20); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, Internal Signals, Port Depth]", 22); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,077 MB. GUI used memory: 88 MB. Current time: 8/13/24, 2:24:07 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, Internal Signals, Port Depth]", 19); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, Internal Signals, Simulation Status]", 18); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,078 MB. GUI used memory: 75 MB. Current time: 8/13/24, 2:24:11 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, Internal Signals, Simulation Status]", 18); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs]", 20); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, sens_range(wire)]", 21); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, sens_range(wire)]", 21); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,079 MB. GUI used memory: 59 MB. Current time: 8/13/24, 2:24:25 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, sens_range(wire)]", 21); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, sens_range(wire)]", 21); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, calc_voltage(wire)]", 22); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,079 MB. GUI used memory: 75 MB. Current time: 8/13/24, 2:24:29 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, calc_voltage(wire)]", 22); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, dist_cm(wire)]", 23); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Outputs, dist_cm(wire)]", 23); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,080 MB. GUI used memory: 59 MB. Current time: 8/13/24, 2:24:34 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Inputs]", 24); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals, C Inputs]", 24); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Test Bench Signals]", 16); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectButton(RDIResource.GraphicalView_ZOOM_FIT, "Waveform Viewer_zoom_fit"); // B (f, cl)
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals]", 0, true, false, false, false, true, false); // a (r, cl) - Popup Trigger - Node
+selectMenu("Name"); // ae (an, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 193, 568); // n (o, cl)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// HMemoryUtils.trashcanNow. Engine heap size: 1,083 MB. GUI used memory: 116 MB. Current time: 8/13/24, 2:24:49 PM CST
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 193, 88); // n (o, cl)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// HMemoryUtils.trashcanNow. Engine heap size: 1,083 MB. GUI used memory: 66 MB. Current time: 8/13/24, 2:24:51 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,084 MB. GUI used memory: 69 MB. Current time: 8/13/24, 2:24:54 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,084 MB. GUI used memory: 73 MB. Current time: 8/13/24, 2:24:57 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,085 MB. GUI used memory: 59 MB. Current time: 8/13/24, 2:24:59 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 10 seconds
+selectMenu("Waveform Style"); // ae (an, cl)
+selectMenu("Signal Color"); // ae (an, cl)
+selectMenu("Radix"); // ae (an, cl)
+selectMenuItem((HResource) null, "Unsigned Decimal"); // V (cl)
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 38 seconds
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,086 MB. GUI used memory: 109 MB. Current time: 8/13/24, 2:25:44 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+collapseTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 36 seconds
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 233, 219); // n (o, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// HMemoryUtils.trashcanNow. Engine heap size: 1,087 MB. GUI used memory: 99 MB. Current time: 8/13/24, 2:26:22 PM CST
+selectGraphicalView(RDIResource.RDIViews_WAVEFORM_VIEWER, 235, 202); // n (o, cl)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// HMemoryUtils.trashcanNow. Engine heap size: 1,087 MB. GUI used memory: 64 MB. Current time: 8/13/24, 2:26:24 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// HMemoryUtils.trashcanNow. Engine heap size: 1,087 MB. GUI used memory: 63 MB. Current time: 8/13/24, 2:26:24 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// HMemoryUtils.trashcanNow. Engine heap size: 1,087 MB. GUI used memory: 60 MB. Current time: 8/13/24, 2:26:24 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7, true); // a (r, cl) - Node
+// HMemoryUtils.trashcanNow. Engine heap size: 1,087 MB. GUI used memory: 65 MB. Current time: 8/13/24, 2:26:25 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// Elapsed time: 131 seconds
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7, true, false, false, false, true, false); // a (r, cl) - Popup Trigger - Node
+selectMenu("Name"); // ae (an, cl)
+selectMenu("Waveform Style"); // ae (an, cl)
+selectMenu("Signal Color"); // ae (an, cl)
+selectMenu("Radix"); // ae (an, cl)
+selectMenu("Radix"); // ae (an, cl)
+selectMenuItem((HResource) null, "Signed Magnitude"); // V (cl)
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7, true, false, false, false, true, false); // a (r, cl) - Popup Trigger - Node
+selectMenu("Name"); // ae (an, cl)
+selectMenu("Name"); // ae (an, cl)
+selectMenu("Waveform Style"); // ae (an, cl)
+selectMenu("Signal Color"); // ae (an, cl)
+selectMenu("Radix"); // ae (an, cl)
+selectMenuItem((HResource) null, "Unsigned Decimal"); // V (cl)
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7, true, false, false, false, true, false); // a (r, cl) - Popup Trigger - Node
+selectMenu("Name"); // ae (an, cl)
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Inputs, simulated_time(wire), simulated_time[63:0]]", 13, true); // a (r, cl) - Node
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, dist_cm(wire), dist_cm[31:0]]", 10, true); // a (r, cl) - Node
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Inputs, simulated_time(wire), simulated_time[63:0]]", 13, true); // a (r, cl) - Node
+// HMemoryUtils.trashcanNow. Engine heap size: 1,088 MB. GUI used memory: 70 MB. Current time: 8/13/24, 2:29:17 PM CST
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7, true); // a (r, cl) - Node
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+selectTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, C Outputs, calc_voltage(wire), calc_voltage[63:0]]", 7, true, false, false, false, true, false); // a (r, cl) - Popup Trigger - Node
+selectMenu("Name"); // ae (an, cl)
+selectMenu("Waveform Style"); // ae (an, cl)
+selectMenu("Signal Color"); // ae (an, cl)
+selectMenu("Radix"); // ae (an, cl)
+selectMenuItem((HResource) null, "Real Settings..."); // ah (cl)
+// f (cl): Real Settings: addNotify
+selectRadioButton(RDIResource.WaveformRealSettingsDialog_DOUBLE_PRECISION, "Double precision"); // a (Q, f)
+selectButton(RDIResource.BaseDialog_APPLY, "Apply"); // a (f)
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// Elapsed time: 16 seconds
+selectRadioButton(RDIResource.WaveformRealSettingsDialog_SINGLE_PRECISION, "Single precision"); // a (Q, f)
+selectButton(RDIResource.BaseDialog_APPLY, "Apply"); // a (f)
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// HMemoryUtils.trashcanNow. Engine heap size: 1,090 MB. GUI used memory: 63 MB. Current time: 8/13/24, 2:29:53 PM CST
+selectRadioButton(RDIResource.WaveformRealSettingsDialog_CUSTOM_PRECISION, "Custom precision"); // a (Q, f)
+selectRadioButton(RDIResource.WaveformRealSettingsDialog_DOUBLE_PRECISION, "Double precision"); // a (Q, f)
+selectButton(RDIResource.BaseDialog_APPLY, "Apply"); // a (f)
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (f)
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+dismissDialog("Real Settings"); // f (cl)
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Elapsed time: 55 seconds
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, Reset]", 17); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// HMemoryUtils.trashcanNow. Engine heap size: 1,092 MB. GUI used memory: 61 MB. Current time: 8/13/24, 2:31:01 PM CST
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+expandTree(RDIResource.WaveformNameTree_WAVEFORM_NAME_TREE, "[true, Design Top Signals, Clock]", 19); // a (r, cl)
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM

@@ -1,5 +1,5 @@
 $date
-     Aug 13, 2024       01:11:11
+     Aug 13, 2024       13:54:15
 $end
 
 $version
@@ -20,9 +20,6 @@ All initial values are dumped below at time 0 sec = 0 timescale units.
 $end
 
 $dumpvars
-b0 aaaaa
-$end
-
-#8000000000000
 b1 aaaaa
+$end
 

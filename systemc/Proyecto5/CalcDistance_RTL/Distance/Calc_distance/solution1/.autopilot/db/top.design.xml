@@ -100,8 +100,8 @@
 <Attribute>control</Attribute>
 </RtlPorts>
 <RtlPorts>
-<name>echo</name>
-<Object>echo</Object>
+<name>trigger</name>
+<Object>trigger</Object>
 <Type>scalar</Type>
 <Scope></Scope>
 <IOProtocol>ap_none</IOProtocol>

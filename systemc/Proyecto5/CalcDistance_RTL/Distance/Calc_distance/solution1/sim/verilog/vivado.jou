@@ -2,14 +2,13 @@
 # Vivado v2019.1 (64-bit)
 # SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
 # IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
-# Start of session at: Tue Aug 13 01:19:24 2024
-# Process ID: 342000
-# Current directory: /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog
+# Start of session at: Tue Aug 13 13:54:41 2024
+# Process ID: 27381
+# Current directory: /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog
 # Command line: vivado -source open_wave.tcl
-# Log file: /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/vivado.log
-# Journal file: /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/vivado.jou
+# Log file: /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/vivado.log
+# Journal file: /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/vivado.jou
 #-----------------------------------------------------------
 start_gui
 source open_wave.tcl
-open_wave_config /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/top.wcfg
-close_sim
+open_wave_config /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/sim/verilog/top.wcfg

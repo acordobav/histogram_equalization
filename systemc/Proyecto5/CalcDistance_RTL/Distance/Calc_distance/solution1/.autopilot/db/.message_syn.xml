@@ -2,10 +2,10 @@
 <Messages>
 	<Message severity="INFO" prefix="[SCHED 204-61]" key="SCHED_PIPELINING_STATUS_631" tag="SCHEDULE" content="Option &apos;relax_ii_for_timing&apos; is enabled, will increase II to preserve clock frequency constraints."/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1312" tag="" content="Analyzing design file &apos;../files/CalsDis.cpp&apos; ..."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Linking Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 1548 ; free virtual = 5437"/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Checking Pragmas Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 1555 ; free virtual = 5445"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Linking Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 930 ; free virtual = 6954"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Checking Pragmas Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 930 ; free virtual = 6954"/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1467" tag="" content="Starting code transformations ..."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Standard Transforms Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 1508 ; free virtual = 5406"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Standard Transforms Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 872 ; free virtual = 6921"/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1472" tag="" content="Checking synthesizability ..."/>
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;fp_struct&lt;double&gt;::mantissa&apos; into &apos;generic_cast_IEEE754&lt;int, (ap_q_mode)6, double&gt;&apos; (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:15) automatically."/>
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;fp_struct&lt;double&gt;::expv&apos; into &apos;generic_cast_IEEE754&lt;int, (ap_q_mode)6, double&gt;&apos; (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:18) automatically."/>
@@ -13,7 +13,7 @@
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;generic_cast_IEEE754&lt;int, (ap_q_mode)6, double&gt;&apos; into &apos;generic_cast_IEEE754&lt;int, double&gt;&apos; (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:117) automatically."/>
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;generic_cast_IEEE754&lt;int, double&gt;&apos; into &apos;__hls_fptosi_double_i32&apos; (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/src/lib_floatconversion.cpp:55) automatically."/>
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;__hls_fptosi_double_i32&apos; into &apos;top&apos; (../files/CalsDis.cpp:9) automatically."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Checking Synthesizability Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1473 ; free virtual = 5377"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Checking Synthesizability Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 833 ; free virtual = 6884"/>
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;fp_struct&lt;double&gt;::mantissa&apos; into &apos;generic_cast_IEEE754&lt;int, (ap_q_mode)6, double&gt;&apos; (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:15) automatically."/>
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;fp_struct&lt;double&gt;::expv&apos; into &apos;generic_cast_IEEE754&lt;int, (ap_q_mode)6, double&gt;&apos; (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:18) automatically."/>
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;fp_struct&lt;double&gt;::__signbit&apos; into &apos;generic_cast_IEEE754&lt;int, (ap_q_mode)6, double&gt;&apos; (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:59) automatically."/>
@@ -22,8 +22,8 @@
 	<Message severity="INFO" prefix="[XFORM 203-602]" key="XFORM_AUTO_INLINE_STATUS_223" tag="" content="Inlining function &apos;__hls_fptosi_double_i32&apos; into &apos;top&apos; (../files/CalsDis.cpp:9) automatically."/>
 	<Message severity="INFO" prefix="[XFORM 203-401]" key="XFORM_IFCONV_STATUS_239" tag="" content="Performing if-conversion on hyperblock to (../files/CalsDis.cpp:22:1) in function &apos;top&apos;... converting 5 basic blocks."/>
 	<Message severity="INFO" prefix="[XFORM 203-11]" key="XFORM_EXPR_BALANCE_STATUS_178" tag="" content="Balancing expressions in function &apos;top&apos; (../files/CalsDis.cpp:3)...3 expression(s) balanced."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Pre-synthesis Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1407 ; free virtual = 5323"/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Architecture Synthesis Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1392 ; free virtual = 5311"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Pre-synthesis Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 767 ; free virtual = 6825"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished Architecture Synthesis Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 753 ; free virtual = 6812"/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1317" tag="" content="Starting hardware synthesis ..."/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1385" tag="" content="Synthesizing &apos;top&apos; ..."/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1477" tag="" content="----------------------------------------------------------------"/>
@@ -31,17 +31,17 @@
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1478" tag="" content="----------------------------------------------------------------"/>
 	<Message severity="INFO" prefix="[SCHED 204-11]" key="SCHED_SCHED_STATUS_597" tag="" content="Starting scheduling ..."/>
 	<Message severity="INFO" prefix="[SCHED 204-11]" key="SCHED_SCHED_STATUS_596" tag="" content="Finished scheduling."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 9.73 seconds; current allocated memory: 219.534 MB."/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 9.87 seconds; current allocated memory: 219.523 MB."/>
 	<Message severity="INFO" prefix="[BIND 205-100]" key="BIND_100_926" tag="" content="Starting micro-architecture generation ..."/>
 	<Message severity="INFO" prefix="[BIND 205-101]" key="BIND_101_698" tag="" content="Performing variable lifetime analysis."/>
 	<Message severity="INFO" prefix="[BIND 205-101]" key="BIND_101_697" tag="" content="Exploring resource sharing."/>
 	<Message severity="INFO" prefix="[BIND 205-101]" key="BIND_101_693" tag="" content="Binding ..."/>
 	<Message severity="INFO" prefix="[BIND 205-100]" key="BIND_100_925" tag="" content="Finished micro-architecture generation."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 0.04 seconds; current allocated memory: 219.843 MB."/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 0.04 seconds; current allocated memory: 219.849 MB."/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1483" tag="" content="----------------------------------------------------------------"/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1484" tag="" content="-- Generating RTL for module &apos;top&apos;"/>
 	<Message severity="INFO" prefix="[HLS 200-10]" key="HLS_10_1485" tag="" content="----------------------------------------------------------------"/>
-	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;top/echo&apos; to &apos;ap_none&apos;."/>
+	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;top/trigger&apos; to &apos;ap_none&apos;."/>
 	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;top/simulated_time&apos; to &apos;ap_none&apos;."/>
 	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;top/dist_cm&apos; to &apos;ap_vld&apos;."/>
 	<Message severity="INFO" prefix="[RTGEN 206-500]" key="PREPROC_IO_COMP_CONFLICT_1950" tag="" content="Setting interface mode on port &apos;top/calc_voltage&apos; to &apos;ap_vld&apos;."/>
@@ -50,8 +50,8 @@
 	<Message severity="INFO" prefix="[RTGEN 206-100]" key="RTGEN_100_855" tag="" content="Generating core module &apos;top_dmul_64ns_64ns_64_5_max_dsp_1&apos;: 1 instance(s)."/>
 	<Message severity="INFO" prefix="[RTGEN 206-100]" key="RTGEN_100_855" tag="" content="Generating core module &apos;top_sitodp_32ns_64_4_1&apos;: 1 instance(s)."/>
 	<Message severity="INFO" prefix="[RTGEN 206-100]" key="RTGEN_100_856" tag="" content="Finished creating RTL model for &apos;top&apos;."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 0.08 seconds; current allocated memory: 220.580 MB."/>
-	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished generating all RTL models Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1389 ; free virtual = 5309"/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_966" tag="" content=" Elapsed time: 0.07 seconds; current allocated memory: 220.569 MB."/>
+	<Message severity="INFO" prefix="[HLS 200-111]" key="HLS_111_965" tag="" content="Finished generating all RTL models Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 764 ; free virtual = 6810"/>
 	<Message severity="INFO" prefix="[VHDL 208-304]" key="VHDL_304_1066" tag="" content="Generating VHDL RTL for top."/>
 	<Message severity="INFO" prefix="[VLOG 209-307]" key="VLOG_307_1067" tag="" content="Generating Verilog RTL for top."/>
 </Messages>

@@ -3,7 +3,7 @@
 ================================================================
 == Vivado HLS Report for 'top'
 ================================================================
-* Date:           Tue Aug 13 01:16:59 2024
+* Date:           Tue Aug 13 14:55:46 2024
 
 * Version:        2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)
 * Project:        Calc_distance
@@ -132,8 +132,8 @@ ST_6 : Operation 45 [1/1] (0.61ns)   --->   "%p_Val2_6 = select i1 %p_Result_s, 
 ST_6 : Operation 46 [1/1] (0.00ns)   --->   "%tmp_4 = call i30 @_ssdm_op_PartSelect.i30.i32.i32.i32(i32 %p_Val2_6, i32 2, i32 31)" [../files/CalsDis.cpp:12]   --->   Operation 46 'partselect' 'tmp_4' <Predicate = true> <Delay = 0.00>
 
 State 7 <SV = 6> <Delay = 6.85>
-ST_7 : Operation 47 [1/1] (0.00ns)   --->   "%echo_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %echo) nounwind" [../files/CalsDis.cpp:3]   --->   Operation 47 'read' 'echo_read' <Predicate = true> <Delay = 0.00>
-ST_7 : Operation 48 [1/1] (1.57ns)   --->   "%icmp_ln8 = icmp eq i32 %echo_read, 1" [../files/CalsDis.cpp:8]   --->   Operation 48 'icmp' 'icmp_ln8' <Predicate = true> <Delay = 1.57> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.57> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_7 : Operation 47 [1/1] (0.00ns)   --->   "%trigger_read = call i32 @_ssdm_op_Read.ap_auto.i32(i32 %trigger) nounwind" [../files/CalsDis.cpp:3]   --->   Operation 47 'read' 'trigger_read' <Predicate = true> <Delay = 0.00>
+ST_7 : Operation 48 [1/1] (1.57ns)   --->   "%icmp_ln8 = icmp eq i32 %trigger_read, 1" [../files/CalsDis.cpp:8]   --->   Operation 48 'icmp' 'icmp_ln8' <Predicate = true> <Delay = 1.57> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.57> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
 ST_7 : Operation 49 [4/4] (6.85ns)   --->   "%tmp_2 = sitofp i32 %p_Val2_6 to double" [../files/CalsDis.cpp:10]   --->   Operation 49 'sitodp' 'tmp_2' <Predicate = true> <Delay = 6.85> <Core = "Int2Double">   --->   Core 122 'Int2Double' <Latency = 3> <II = 1> <Delay = 6.85> <FuncUnit> <Opcode : 'sitodp' 'uitodp'> <InPorts = 1> <OutPorts = 1>
 ST_7 : Operation 50 [1/1] (1.55ns)   --->   "%icmp_ln12 = icmp sgt i30 %tmp_4, 0" [../files/CalsDis.cpp:12]   --->   Operation 50 'icmp' 'icmp_ln12' <Predicate = true> <Delay = 1.55> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.57> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
 ST_7 : Operation 51 [1/1] (1.57ns)   --->   "%icmp_ln12_1 = icmp slt i32 %p_Val2_6, 101" [../files/CalsDis.cpp:12]   --->   Operation 51 'icmp' 'icmp_ln12_1' <Predicate = true> <Delay = 1.57> <Core = "Cmp">   --->   Core 25 'Cmp' <Latency = 0> <II = 1> <Delay = 1.57> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
@@ -186,7 +186,7 @@ State 15 <SV = 14> <Delay = 8.41>
 ST_15 : Operation 82 [1/5] (8.41ns)   --->   "%tmp_3 = fmul double %tmp_2, 1.600000e-03" [../files/CalsDis.cpp:10]   --->   Operation 82 'dmul' 'tmp_3' <Predicate = true> <Delay = 8.41> <Core = "DMul">   --->   Core 116 'DMul' <Latency = 4> <II = 1> <Delay = 8.41> <FuncUnit> <Opcode : 'dmul'> <InPorts = 2> <OutPorts = 1>
 
 State 16 <SV = 15> <Delay = 0.76>
-ST_16 : Operation 83 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(i32 %echo) nounwind, !map !7"   --->   Operation 83 'specbitsmap' <Predicate = true> <Delay = 0.00>
+ST_16 : Operation 83 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(i32 %trigger) nounwind, !map !7"   --->   Operation 83 'specbitsmap' <Predicate = true> <Delay = 0.00>
 ST_16 : Operation 84 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(double %simulated_time) nounwind, !map !13"   --->   Operation 84 'specbitsmap' <Predicate = true> <Delay = 0.00>
 ST_16 : Operation 85 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(i32* %dist_cm) nounwind, !map !17"   --->   Operation 85 'specbitsmap' <Predicate = true> <Delay = 0.00>
 ST_16 : Operation 86 [1/1] (0.00ns)   --->   "call void (...)* @_ssdm_op_SpecBitsMap(double* %calc_voltage) nounwind, !map !23"   --->   Operation 86 'specbitsmap' <Predicate = true> <Delay = 0.00>
@@ -210,7 +210,7 @@ STG Binding:
 - Is pipelined: 0
 - Is top level: 1
 Port [ Return ] is wired: 1; IO mode=ap_ctrl_hs:ce=0
-Port [ echo]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
+Port [ trigger]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ simulated_time]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=0; type=0; pingpong=0; private_global=0; IO mode=ap_none:ce=0
 Port [ dist_cm]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=1; type=0; pingpong=0; private_global=0; IO mode=ap_vld:ce=0
 Port [ calc_voltage]:  wired=1; compound=0; hidden=0; nouse=0; global=0; static=0; extern=0; dir=1; type=0; pingpong=0; private_global=0; IO mode=ap_vld:ce=0
@@ -247,7 +247,7 @@ p_Val2_5            (select        ) [ 00000000000000000]
 result_V_1          (sub           ) [ 00000000000000000]
 p_Val2_6            (select        ) [ 00000001111000000]
 tmp_4               (partselect    ) [ 00000001000000000]
-echo_read           (read          ) [ 00000000000000000]
+trigger_read        (read          ) [ 00000000000000000]
 icmp_ln8            (icmp          ) [ 00000000111111111]
 icmp_ln12           (icmp          ) [ 00000000000000000]
 icmp_ln12_1         (icmp          ) [ 00000000000000000]
@@ -292,12 +292,12 @@ ret_ln22            (ret           ) [ 00000000000000000]
 <model>
 
 <comp_list>
-<comp id="0" class="1000" name="echo">
+<comp id="0" class="1000" name="trigger">
 <pin_list>
 <pin id="1" dir="1" index="0" bw="1" slack="0"/>
 </pin_list>
 <bind>
-<StgValue><ssdm name="echo"/></StgValue>
+<StgValue><ssdm name="trigger"/></StgValue>
 </bind>
 </comp>
 
@@ -718,7 +718,7 @@ ret_ln22            (ret           ) [ 00000000000000000]
 </bind>
 </comp>
 
-<comp id="98" class="1004" name="echo_read_read_fu_98">
+<comp id="98" class="1004" name="trigger_read_read_fu_98">
 <pin_list>
 <pin id="99" dir="0" index="0" bw="32" slack="0"/>
 <pin id="100" dir="0" index="1" bw="32" slack="0"/>
@@ -726,7 +726,7 @@ ret_ln22            (ret           ) [ 00000000000000000]
 </pin_list>
 <bind>
 <opcode="read(1150) " fcode="read"/>
-<opset="echo_read/7 "/>
+<opset="trigger_read/7 "/>
 </bind>
 </comp>
 
@@ -1795,7 +1795,7 @@ ret_ln22            (ret           ) [ 00000000000000000]
 	Port: calc_voltage | {16 }
 	Port: sens_range | {7 }
  - Input state : 
-	Port: top : echo | {7 }
+	Port: top : trigger | {7 }
 	Port: top : simulated_time | {1 }
   - Chain level:
 	State 1
@@ -1917,7 +1917,7 @@ ret_ln22            (ret           ) [ 00000000000000000]
 |    or    |         or_ln12_fu_421         |    0    |    0    |    2    |
 |----------|--------------------------------|---------|---------|---------|
 |   read   | simulated_time_read_read_fu_92 |    0    |    0    |    0    |
-|          |      echo_read_read_fu_98      |    0    |    0    |    0    |
+|          |     trigger_read_read_fu_98    |    0    |    0    |    0    |
 |----------|--------------------------------|---------|---------|---------|
 |          |     write_ln6_write_fu_104     |    0    |    0    |    0    |
 |   write  |     write_ln4_write_fu_111     |    0    |    0    |    0    |

@@ -55,6 +55,8 @@
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/auto_cc/include"/>
                                     									
+                                    <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance"/>
+                                    									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/etc"/>
@@ -88,6 +90,8 @@
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/auto_cc/include"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/ap_sysc"/>
                                     									
@@ -157,6 +161,36 @@
                         					
                     </folderInfo>
                     					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.debug.748967007.1266963951" name="TB.cpp" rcbsApplicability="disable" resourcePath="testbench/TB.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1808495874.2123695414">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1808495874.2123695414" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1808495874">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1587703437" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.1495336501" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/systemc/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.1228668423" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.84196559" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
+                    					
                     <sourceEntries>
                         						
                         <entry excluding="solution1|*.c*|*.C*" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
@@ -223,6 +257,8 @@
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/auto_cc/include"/>
                                     									
+                                    <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance"/>
+                                    									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/ap_sysc"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/etc"/>
@@ -246,6 +282,8 @@
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/auto_cc/include"/>
+                                    									
+                                    <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance"/>
                                     									
                                     <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/ap_sysc"/>
                                     									
@@ -304,6 +342,36 @@
                         </toolChain>
                         					
                     </folderInfo>
+                    					
+                    <fileInfo id="cdt.managedbuild.config.gnu.exe.release.87287358.1024589133" name="TB.cpp" rcbsApplicability="disable" resourcePath="testbench/TB.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.2141826291.31460710">
+                        						
+                        <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.2141826291.31460710" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.2141826291">
+                            							
+                            <option id="gnu.cpp.compiler.option.preprocessor.def.1015130382" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
+                            							
+                            <option id="gnu.cpp.compiler.option.include.paths.128257588" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/auto_cc/include"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/ap_sysc"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/include/etc"/>
+                                								
+                                <listOptionValue builtIn="false" value="/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/systemc/include"/>
+                                							
+                            </option>
+                            							
+                            <option id="gnu.cpp.compiler.option.other.other.466591101" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-Wno-unknown-pragmas -c -fmessage-length=0" valueType="string"/>
+                            							
+                            <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1663800726" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+                            						
+                        </tool>
+                        					
+                    </fileInfo>
                     					
                     <sourceEntries>
                         						

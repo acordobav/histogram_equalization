@@ -42,7 +42,7 @@ set SCTraceOption all
 set TargetInfo xc7vx485t:-ffg1157:-1
 set SourceFiles {sc {} c ../../../files/CalsDis.cpp}
 set SourceFlags {sc {} c {{}}}
-set DirectiveFile /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/solution1.directive
+set DirectiveFile /home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/Distance/Calc_distance/solution1/solution1.directive
 set TBFiles {verilog ../../../files/TB.cpp bc ../../../files/TB.cpp vhdl ../../../files/TB.cpp sc ../../../files/TB.cpp cas ../../../files/TB.cpp c {}}
 set SpecLanguage C
 set TVInFiles {bc {} c {} sc {} cas {} vhdl {} verilog {}}

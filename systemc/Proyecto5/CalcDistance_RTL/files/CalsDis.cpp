@@ -1,11 +1,11 @@
 // CalsDis.cpp
 #include "CalsDis.h"
-void top(int echo, double simulated_time, int *dist_cm, double *calc_voltage, int *sens_range) {
+void top(int trigger, double simulated_time, int *dist_cm, double *calc_voltage, int *sens_range) {
 	*dist_cm = 0;
 	*calc_voltage = 0.0;
 	*sens_range = 0;
 
-	if (echo == 1) {
+	if (trigger == 1) {
 		*dist_cm = (int)(simulated_time * 0.034);
 		*calc_voltage = *dist_cm * 0.0016;
 

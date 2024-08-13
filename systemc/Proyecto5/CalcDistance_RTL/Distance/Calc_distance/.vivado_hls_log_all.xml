@@ -12,8 +12,8 @@
   <warningLogs>
     <logs>
       <synLog>
-        <logs message="WARNING: [HLS 200-40] Cannot find library 'xilinx/Virtex-7/Virtex-7'." projectName="Calc_distance" solutionName="solution1" date="2024-08-13T01:16:50.588-0600" type="Warning"/>
-        <logs message="WARNING: [HLS 200-40] Cannot find library '/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/common/technology/xilinx/Virtex-7/Virtex-7.lib'." projectName="Calc_distance" solutionName="solution1" date="2024-08-13T01:16:49.781-0600" type="Warning"/>
+        <logs message="WARNING: [HLS 200-40] Cannot find library 'xilinx/Virtex-7/Virtex-7'." projectName="Calc_distance" solutionName="solution1" date="2024-08-13T14:55:37.520-0600" type="Warning"/>
+        <logs message="WARNING: [HLS 200-40] Cannot find library '/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/common/technology/xilinx/Virtex-7/Virtex-7.lib'." projectName="Calc_distance" solutionName="solution1" date="2024-08-13T14:55:36.674-0600" type="Warning"/>
       </synLog>
       <simLog/>
       <mgLog/>

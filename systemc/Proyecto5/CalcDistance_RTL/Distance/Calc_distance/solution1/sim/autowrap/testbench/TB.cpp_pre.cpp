@@ -1,9 +1,9 @@
-# 1 "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp"
+# 1 "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
-# 1 "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp"
+# 1 "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp"
 
 # 1 "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/systemc/include/systemc.h" 1
 # 43 "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/lnx64/tools/systemc/include/systemc.h"
@@ -87239,50 +87239,51 @@ using namespace sc_core;
 
 
     using ::sc_core::wait;
-# 3 "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp" 2
+# 3 "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp" 2
 # 1 "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cmath" 1 3
 # 39 "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cmath" 3
        
 # 40 "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/tps/lnx64/gcc-6.2.0/include/c++/6.2.0/cmath" 3
-# 4 "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp" 2
-# 1 "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/CalsDis.h" 1
+# 4 "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp" 2
+# 1 "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/CalsDis.h" 1
 
 
 
 
 void top(int echo, double simulated_time_microseconds, int *dist_cm, double *calc_voltage, int *sens_range);
-# 5 "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp" 2
-
+# 5 "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp" 2
 
 struct Testbench : ::sc_core::sc_module {
-    sc_signal<int> all_tests_passed;
+    sc_out<int> all_tests_passed;
 
     void run_tests() {
         int dist_cm;
         double calc_voltage;
         int sens_range;
 
-        const int num_measurements = 8;
-        int echo = 1;
+
+        int expected_dist[] = {10, 50, 120, 180, 220, 280, 350, 320};
+
 
         double echo_times[] = {
             10 / 0.034, 50 / 0.034, 120 / 0.034, 180 / 0.034,
-            220 / 0.034, 280 / 0.034, 350 / 0.034, 320 / 0.034
-        };
-
-        int expected_dist[] = {10, 50, 120, 180, 220, 280, 350, 320};
+            220 / 0.034, 280 / 0.034, 350 / 0.034, 320 / 0.034};
         double expected_voltage[] = {0.016, 0.080, 0.192, 0.288, 0.352, 0.448, 0.560, 0.512};
         int expected_range[] = {1, 1, 2, 2, 3, 3, 0, 0};
 
+
         int all_tests_passed_val = 1;
-        const int toleranceDistance = 1;
+        const int toleranceDistance = 0;
         const double toleranceVoltage = 0.005;
 
+
+        const int num_measurements = sizeof(echo_times) / sizeof(double);
+        const int trigger=1;
         for (int i = 0; i < num_measurements; ++i) {
 
-         sc_time wait_time(1, SC_SEC);
-         wait(wait_time);
-            top(echo, echo_times[i], &dist_cm, &calc_voltage, &sens_range);
+
+            top(trigger, echo_times[i], &dist_cm, &calc_voltage, &sens_range);
+
 
             printf("Medición número: %d\n", i + 1);
             printf("Distance (cm): %d\n", dist_cm);
@@ -87303,37 +87304,49 @@ struct Testbench : ::sc_core::sc_module {
                     break;
             }
 
+
             if (fabs(dist_cm - expected_dist[i]) > toleranceDistance ||
-                fabs(expected_voltage[i]-calc_voltage) > toleranceVoltage ||
+                fabs(expected_voltage[i] - calc_voltage) > toleranceVoltage ||
                 sens_range != expected_range[i]) {
-                ::sc_core::sc_report_handler::report( ::sc_core::SC_ERROR, "Test", "fallido", "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp", 59 );
+
+                ::sc_core::sc_report_handler::report( ::sc_core::SC_ERROR, "Test", "FAILED", "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp", 62 );
                 all_tests_passed_val = 0;
             } else {
-                printf("Test %d pasado.\n", i + 1);
+                printf("[INFO] Test %d PASS.\n", i + 1);
             }
+            all_tests_passed.write(all_tests_passed_val);
             printf("\n");
         }
 
-        all_tests_passed.write(all_tests_passed_val);
-
         if (all_tests_passed_val) {
-            ::sc_core::sc_report_handler::report( ::sc_core::SC_INFO, "Test", "Todos los tests pasaron correctamente.\n", "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp", 70 );
+            ::sc_core::sc_report_handler::report( ::sc_core::SC_INFO, "Test", "All the tests passed.\n", "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp", 72 );
         } else {
-            ::sc_core::sc_report_handler::report( ::sc_core::SC_ERROR, "Test", "Algunos tests fallaron.\n", "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp", 72 );
+            ::sc_core::sc_report_handler::report( ::sc_core::SC_ERROR, "Test", "Some tests failed.\n", "/home/jpv/Msc/DisAltNiv/Repo/histogram_equalization/systemc/Proyecto5/CalcDistance_RTL/files/TB.cpp", 74 );
         }
     }
 
+
     typedef Testbench SC_CURRENT_USER_MODULE; Testbench( ::sc_core::sc_module_name ) {
         { ::sc_core::sc_process_handle run_tests_handle = sc_core::sc_get_curr_simcontext()->create_thread_process( "run_tests", false, static_cast<sc_core::SC_ENTRY_FUNC>(&SC_CURRENT_USER_MODULE::run_tests), this, 0 ); this->sensitive << run_tests_handle; this->sensitive_pos << run_tests_handle; this->sensitive_neg << run_tests_handle; };
-
     }
 };
 
 int sc_main(int argc, char* argv[]) {
+
     Testbench tb("tb");
-    sc_trace_file *wf = sc_create_vcd_trace_file("wave");
-    sc_trace(wf, tb.all_tests_passed, "all_tests_passed");
+    sc_signal<int> test_signal;
+
+
+    tb.all_tests_passed(test_signal);
+
+
+    sc_trace_file *wf = sc_create_vcd_trace_file("waves");
+    sc_trace(wf, test_signal, "all_tests_passed");
+
+
     sc_start();
+
+
     sc_close_vcd_trace_file(wf);
     return 0;
 }
