@@ -100,7 +100,7 @@ Router3 ------------------------------------> Memoria
 // BLOQUE: TOP
 
 #define LANES 1
-#define NUM_MODULES 4
+#define NUM_MODULES 5
 #define REGBANK_T (LANES * NUM_MODULES)
 SC_MODULE(Top)
 {
@@ -174,32 +174,39 @@ SC_MODULE(Top)
     // Bind initiator socket to target socket
     // See references to each "Conexion" at the beginning of the script
     //Conexion 1
-    for (int i = 0; i < LANES; i++)
+    for (int i = 0; i < LANES; i++) {
       uSensor[i]->initiator_socket.bind( calcDist[i]->target_socket );
+      uSensor[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
+      regbank_i++;
+    }
 
     //Conexion 2
-    for (int i = 0; i < LANES; i++)
+    for (int i = 0; i < LANES; i++) {
       calcDist[i]->initiator_socket.bind( cSens[i]->target_socket );
       calcDist[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
+    }
 
     //Conexion 3
-    for (int i = 0; i < LANES; i++)
+    for (int i = 0; i < LANES; i++) {
       cSens[i]->initiator_socket.bind(equalizer[i]->target_socket );
       cSens[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
+    }
 
     //Conexion 4
-    for (int i = 0; i < LANES; i++)
+    for (int i = 0; i < LANES; i++) {
       equalizer[i]->initiator_socket.bind(interpolation[i]->target_socket);
       equalizer[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
+    }
 
     //Conexion 5
-    for (int i = 0; i < LANES; i++)
+    for (int i = 0; i < LANES; i++) {
       interpolation[i]->initiator_socket.bind(*router->target_socket[i]);
       interpolation[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
+    }
 
     //Conexion 6
     // Router con memoria

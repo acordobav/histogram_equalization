@@ -69,7 +69,7 @@ struct CamaraSensTLM : sc_module
   SC_CTOR(CamaraSensTLM)
     : target_socket("CamaraSensTLM:target")
     , initiator_socket("CamaraSensTLM:initiator") // Construct and name socket
-    , register_socket("CalcDistTLM:register")
+    , register_socket("CamaraSensTLM:register")
   {
     target_socket.register_nb_transport_fw(this, &CamaraSensTLM::target_nb_transport_fw);
     initiator_socket.register_nb_transport_bw(this, &CamaraSensTLM::initiator_nb_transport_bw);
@@ -81,7 +81,7 @@ struct CamaraSensTLM : sc_module
     SC_THREAD(thread_process);
   }
 
-  uint32_t register_data_set(uint64_t address, uint32_t mask, uint32_t value)
+  void register_data_set(uint64_t address, uint32_t mask, uint32_t value)
   {
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
@@ -91,12 +91,10 @@ struct CamaraSensTLM : sc_module
     trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_WRITE_COMMAND);
     trans.set_data_ptr((uint8_t *)&value);
-    trans.set_data_length(sizeof(data));
+    trans.set_data_length(sizeof(uint32_t));
     trans.set_address(address);
 
     register_socket->b_transport(trans, delay);
-
-    return data;
   }
 
   void thread_process()

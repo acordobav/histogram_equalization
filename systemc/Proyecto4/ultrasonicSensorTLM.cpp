@@ -9,7 +9,6 @@
 
 #include "memory_map.h"
 #include "ultrasonicSensor.hpp"
-#include "global_register_bank.hpp"
 
 class signal_driver : public sca_tdf::sca_module {
   public:
@@ -43,6 +42,7 @@ struct UltrasonicSensorTLM: sc_module
 {
   // TLM-2 socket, defaults to 32-bits wide, generic payload, generic DMI mode   
   tlm_utils::simple_initiator_socket<UltrasonicSensorTLM> initiator_socket;
+  tlm_utils::simple_initiator_socket<UltrasonicSensorTLM> register_socket;
 
   //Internal Data
   ultrasonic_sensor* us1;
@@ -55,6 +55,7 @@ struct UltrasonicSensorTLM: sc_module
   // Construct and name socket   
   SC_CTOR(UltrasonicSensorTLM) 
   : initiator_socket("UltrasonicSensorTLM:initiator")
+  , register_socket("UltrasonicSensorTLM:register")
   {
     // Register callbacks for incoming interface method calls
     initiator_socket.register_nb_transport_bw(this, &UltrasonicSensorTLM::initiator_nb_transport_bw);    
@@ -74,8 +75,24 @@ struct UltrasonicSensorTLM: sc_module
   //----------------------------------------------------------------------------------------------------------------
   //----------------------------------------------------------------------------------------------------------------
 
+  void register_data_set(uint64_t address, uint32_t mask, uint32_t value)
+  {
+    tlm::tlm_generic_payload trans;
+    sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+    mask_extension *ext_mask = new mask_extension;
+    ext_mask->mask = mask;
+
+    trans.set_extension(ext_mask);
+    trans.set_command(tlm::TLM_WRITE_COMMAND);
+    trans.set_data_ptr((uint8_t *)&value);
+    trans.set_data_length(sizeof(uint32_t));
+    trans.set_address(address);
+
+    register_socket->b_transport(trans, delay);
+  }
+
   void thread_process()  
-{
+  {
     tlm::tlm_sync_enum status;
 
     // TLM2 generic payload transaction
@@ -113,7 +130,7 @@ struct UltrasonicSensorTLM: sc_module
         //Prepare to write register
         if (echo_signal_val != 0.0){
             //cout << "Writting REGISTER" << endl;
-            global_register_bank.write_bits(REG_BASE_1+0x2,0x1,0x1);
+            register_data_set(REG_BASE_1+0x2,0x1,0x1);
         }
 
         //Generating unique id and fields required for the communication
@@ -141,7 +158,7 @@ struct UltrasonicSensorTLM: sc_module
         }
     }
     return;
-}
+  }
 
   // ************************************************
   // TLM2 backward path non-blocking transport method   

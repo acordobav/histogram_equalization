@@ -42,9 +42,9 @@ struct CalcDistTLM : sc_module
   int sens_active_transmit;
 
   SC_CTOR(CalcDistTLM)
-      : target_socket("CalcDistTLM:target")
-      , initiator_socket("CalcDistTLM:initiator") // Construct and name socket
-      , register_socket("CalcDistTLM:register")
+    : target_socket("CalcDistTLM:target")
+    , initiator_socket("CalcDistTLM:initiator") // Construct and name socket
+    , register_socket("CalcDistTLM:register")
   {
     // Register callbacks for incoming interface method calls
     target_socket.register_nb_transport_fw(this, &CalcDistTLM::target_nb_transport_fw);
@@ -65,7 +65,7 @@ struct CalcDistTLM : sc_module
     SC_THREAD(thread_process);
   }
 
-  uint32_t register_data_set(uint64_t address, uint32_t mask, uint32_t value)
+  void register_data_set(uint64_t address, uint32_t mask, uint32_t value)
   {
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
@@ -75,12 +75,10 @@ struct CalcDistTLM : sc_module
     trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_WRITE_COMMAND);
     trans.set_data_ptr((uint8_t *)&value);
-    trans.set_data_length(sizeof(data));
+    trans.set_data_length(sizeof(uint32_t));
     trans.set_address(address);
 
     register_socket->b_transport(trans, delay);
-
-    return data;
   }
 
   uint32_t register_data_get(uint64_t address, uint32_t mask)
