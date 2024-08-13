@@ -111,8 +111,8 @@ struct EqualizerTLM: sc_module
     sc_time delay = sc_time(10, SC_NS);   
 
     tlm::tlm_command cmd = static_cast<tlm::tlm_command>(rand() % 2);   
-    trans.set_data_ptr( reinterpret_cast<unsigned char*>(filtered_image) );   
-    trans.set_data_length( sizeof(filtered_image) );
+    trans.set_data_ptr( reinterpret_cast<unsigned char*>(&filtered_image) );   
+    trans.set_data_length( sizeof(*filtered_image) );
 
     cout << name() << " BEGIN_REQ SENT" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     status = initiator_socket->nb_transport_fw(trans, phase, delay);  // Non-blocking transport call   

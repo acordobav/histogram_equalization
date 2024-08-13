@@ -63,9 +63,8 @@ struct InterpolationTLM: sc_module
 
     cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
 
-    unsigned char* ptr = trans_pending->get_data_ptr();
-    uint8_t** image = (uint8_t**)ptr;
-
+    unsigned char* ptr = (unsigned char*) trans_pending->get_data_ptr(); 
+    uint8_t** image = (uint8_t**) ptr;
 
     // Call on backward path to complete the transaction
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
@@ -89,10 +88,10 @@ struct InterpolationTLM: sc_module
     // inter->interpolate_image((uint8_t**)image, original_width, original_height, interpol_image, new_width, new_height);
 
     // Workaround due to segmentation fault on the Interpolation module
+    int index = 0;
     for (uint16_t i = 0; i < ROWS; i++) {
       for (uint16_t j = 0; j < COLS; j++) {
-        cout << "i: " << i + 0 << "j: " << j + 0 << endl;
-        interpol_image[i][j] = image[i][j];
+        interpol_image[i][j] = *image[index];
       }
     }
     
@@ -102,7 +101,8 @@ struct InterpolationTLM: sc_module
 //-----------------------------------------
     
     // Liberar memoria del vector de imagen
-    freeMatrix(image, ROWS);
+    // freeMatrix(image, ROWS);
+    free(*image);
 
 
     tlm::tlm_generic_payload trans;

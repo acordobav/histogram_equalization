@@ -167,9 +167,8 @@ struct UltrasonicSensorTLM : sc_module {
         {
           cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
         }
-
-        wait(10, SC_NS);
       }
+      wait(10, SC_NS);
     }
 
     cout << "Exiting..." << endl;

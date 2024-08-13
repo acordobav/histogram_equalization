@@ -9,7 +9,7 @@ struct MemoryTLM : sc_module {
   tlm_utils::simple_target_socket<MemoryTLM> target_socket;
 
   // Tamaño de la memoria
-  enum { SIZE = 32768 }; // Ajusta el tamaño según sea necesario
+  enum { SIZE = 0x30D40 }; // Ajusta el tamaño según sea necesario
   unsigned char mem[SIZE];
 
   SC_CTOR(MemoryTLM) : target_socket("target_socket") {
