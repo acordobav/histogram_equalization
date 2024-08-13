@@ -1,0 +1,5 @@
+   Build using "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/tps/lnx64/gcc-6.2.0/bin/g++"
+   Compiling apatb_interpolate_image.cpp
+   Compiling interpolation_RTL.cpp_pre.cpp.tb.cpp
+   Compiling interpolation_tb_RTL.cpp_pre.cpp.tb.cpp
+   Generating cosim.tv.exe

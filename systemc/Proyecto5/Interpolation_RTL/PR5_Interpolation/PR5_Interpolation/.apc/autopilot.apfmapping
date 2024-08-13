@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="interpolation_RTL.cpp" path="/home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/files/interpolation_RTL.cpp"/>
+  </source>
+  <testbench>
+    <originFiles name="stb_image_write.h" path="/home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/files/stb_image_write.h"/>
+    <originFiles name="stb_image.h" path="/home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/files/stb_image.h"/>
+    <originFiles name="interpolation_tb_RTL.cpp" path="/home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/files/interpolation_tb_RTL.cpp"/>
+    <originFiles name="filtered.jpg" path="/home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/files/filtered.jpg"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Mon Aug 12 10:14:48 2024
+# Process ID: 206564
+# Current directory: /home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/PR5_Interpolation/PR5_Interpolation/solution1/sim/verilog
+# Command line: vivado -source open_wave.tcl
+# Log file: /home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/PR5_Interpolation/PR5_Interpolation/solution1/sim/verilog/vivado.log
+# Journal file: /home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/PR5_Interpolation/PR5_Interpolation/solution1/sim/verilog/vivado.jou
+#-----------------------------------------------------------
+start_gui
+source open_wave.tcl
+# current_fileset
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/ip'.
+current_fileset: Time (s): cpu = 00:00:13 ; elapsed = 00:00:05 . Memory (MB): peak = 6439.879 ; gain = 113.715 ; free physical = 488 ; free virtual = 7393
+# open_wave_database interpolate_image.wdb
+open_wave_config /home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/PR5_Interpolation/PR5_Interpolation/solution1/sim/verilog/interpolate_image.wcfg
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Aug 12 13:03:12 2024...

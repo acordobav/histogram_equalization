@@ -1,0 +1,1 @@
+set ::AESL_AUTOSIM::gTopFileName /home/jpv/Msc/DisAltNiv/Proyectos/Proyecto5/vivado_interpolation/PR5_Interpolation/PR5_Interpolation/solution1/./sim/autowrap/testbench/interpolation_RTL.cpp_pre.cpp.tb.cpp
