@@ -100,18 +100,19 @@ Router3 ------------------------------------> Memoria
 // BLOQUE: TOP
 
 #define LANES 1
+#define NUM_MODULES 2
+#define REGBANK_T (LANES * NUM_MODULES)
 SC_MODULE(Top)
 {
-  //InitiatorSensProx       *initiatorSensProx;
-  UltrasonicSensorTLM*      uSensor[LANES];
-  CalcDistTLM*              calcDist[LANES];
-  CamaraSensTLM*            cSens[LANES];
-  EqualizerTLM*             equalizer[LANES];
-  InterpolationTLM*         interpolation[LANES];
-  RouterTLM<LANES>*         router;
-  BlockingRouterTLM<LANES>* blockingRouter;
-  MemoryTLM*                memory; 
-  RegisterBankTLM*          registerBank;
+  UltrasonicSensorTLM*          uSensor[LANES];
+  CalcDistTLM*                  calcDist[LANES];
+  CamaraSensTLM*                cSens[LANES];
+  EqualizerTLM*                 equalizer[LANES];
+  InterpolationTLM*             interpolation[LANES];
+  RouterTLM<LANES>*             router;
+  BlockingRouterTLM<REGBANK_T>* blockingRouter;
+  MemoryTLM*                    memory; 
+  RegisterBankTLM*              registerBank;
 
 
   SC_CTOR(Top) //The quantity of samples to be simulated   
@@ -159,7 +160,7 @@ SC_MODULE(Top)
     
     // ROUTERS
     router = new RouterTLM<LANES>(MAGENTA "routerTLM" ENDCOLOR);
-    blockingRouter = new BlockingRouterTLM<LANES>("blockingRouterTLM");
+    blockingRouter = new BlockingRouterTLM<REGBANK_T>("blockingRouterTLM");
 
     // MEMORIA
     memory = new MemoryTLM(TEAL "memory" ENDCOLOR);
@@ -167,10 +168,6 @@ SC_MODULE(Top)
     // REGISTER BANK
     registerBank = new RegisterBankTLM("registerBank");
 
-
-    //Temp Solution
-    //blockingTarget = new BlockingTarget("blockingTarget");
-   
     /*------------------------------------------------------------------*/
     uint32_t regbank_i = 0;
 
@@ -197,6 +194,8 @@ SC_MODULE(Top)
     //Conexion 5
     for (int i = 0; i < LANES; i++)
       interpolation[i]->initiator_socket.bind(*router->target_socket[i]);
+      interpolation[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
+      regbank_i++;
 
     //Conexion 6
     // Router con memoria

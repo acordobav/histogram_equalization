@@ -7,6 +7,7 @@ struct InterpolationTLM: sc_module
 
   // TLM-2 socket, defaults to 32-bits wide, generic payload, generic DMI mode   
   tlm_utils::simple_initiator_socket<InterpolationTLM> initiator_socket;
+  tlm_utils::simple_initiator_socket<EqualizerTLM> register_socket;
 
   sc_event  e1;
   tlm::tlm_generic_payload* trans_pending;   
@@ -18,6 +19,7 @@ struct InterpolationTLM: sc_module
   SC_CTOR(InterpolationTLM) 
   : target_socket("InterpolationTLM:target")
   , initiator_socket("InterpolationTLM:initiator")
+  , register_socket("InterpolationTLM:register")
   {
     // Register callbacks for incoming interface method calls
     target_socket.register_nb_transport_fw(this, &InterpolationTLM::target_nb_transport_fw);
@@ -26,6 +28,25 @@ struct InterpolationTLM: sc_module
     inter = new interpolation("it");
 
     SC_THREAD(thread_process);
+  }
+
+  uint32_t register_data_get(uint64_t address, uint32_t mask) {
+    uint32_t data = 0;
+    
+    tlm::tlm_generic_payload trans;
+    sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+    mask_extension* ext_mask = new mask_extension;
+    ext_mask->mask = mask;
+
+    trans.set_extension(ext_mask);
+    trans.set_command(tlm::TLM_READ_COMMAND);
+    trans.set_data_ptr((uint8_t*)&data);
+    trans.set_data_length(sizeof(uint32_t));
+    trans.set_address(address);
+
+    register_socket->b_transport(trans, delay);
+
+    return data;  
   }
 
   void thread_process()  
@@ -59,8 +80,8 @@ struct InterpolationTLM: sc_module
     }
 
     // Valores principales
-    int original_width = COLS; // Asumiendo que COLS es el ancho de la imagen
-    int original_height = ROWS; // Asumiendo que ROWS es la altura de la imagen
+    int original_width = register_data_get(REG_COLS, 0xFFFFFFFF); // Asumiendo que COLS es el ancho de la imagen
+    int original_height = register_data_get(REG_ROWS,0xFFFFFFFF); // Asumiendo que ROWS es la altura de la imagen
     int channels = 1; // Asumiendo una imagen en escala de grises o un canal
     int new_width = newCOLS;
     int new_height = newROWS;
