@@ -9,8 +9,23 @@
 #include "systemc.h"
 #include <systemc-ams.h>
 
-int hex_sensor[8] = {REG_SENSOR0, REG_SENSOR1, REG_SENSOR2, REG_SENSOR3, REG_SENSOR4, REG_SENSOR5, REG_SENSOR6, REG_SENSOR7};
-int hex_cam[8] = {REG_CAMARA_0, REG_CAMARA_1, REG_CAMARA_2, REG_CAMARA_3, REG_CAMARA_4, REG_CAMARA_5, REG_CAMARA_6, REG_CAMARA_7};
+int hex_sensor[8] = {REG_DISTANCE0,
+                     REG_DISTANCE1,
+                     REG_DISTANCE2,
+                     REG_DISTANCE3,
+                     REG_DISTANCE4,
+                     REG_DISTANCE5,
+                     REG_DISTANCE6,
+                     REG_DISTANCE7};
+
+int hex_cam[8] = {REG_CAPTURE0,
+                  REG_CAPTURE1,
+                  REG_CAPTURE2,
+                  REG_CAPTURE3,
+                  REG_CAPTURE4,
+                  REG_CAPTURE5,
+                  REG_CAPTURE6,
+                  REG_CAPTURE7};
 int j = 0;
 int i = 0;
 
@@ -84,6 +99,7 @@ SC_MODULE(dist_calc)
 
   void pulse_echo()
   {
+    uint32_t wr_value = 0;
     wait(d_start);
     while (true)
     {
@@ -92,9 +108,10 @@ SC_MODULE(dist_calc)
 
         while (i < 8)
         {
-          global_register_bank.write_bits(hex_sensor[i], 0xFFFFFFFF, 0x0);
+          wr_value = 0x0;
+          global_register_bank.write(hex_sensor[i], &wr_value, sizeof(wr_value));
           wait(3, SC_US);
-          global_register_bank.write_bits(hex_cam[i], 0xFFFFFFFF, 0x0);
+          global_register_bank.write(hex_cam[i], &wr_value, sizeof(wr_value));
           wait(3, SC_US);
           // cout << "i :      " << i << endl;
           i = i + 1;
@@ -111,10 +128,11 @@ SC_MODULE(dist_calc)
         // registers.at(index) = value;
         int random = 0 + (rand() % (7 - 0 + 1));
         // cout << "nuevo INDEX:      " << random << endl;
-        global_register_bank.write_bits(hex_sensor[random], 0xFFFFFFFF, round);
+        global_register_bank.write(hex_sensor[random], &round, sizeof(round));
 
         // wait(1, SC_US);
-        global_register_bank.write_bits(hex_cam[random] + 0x2, 0x1, 0x1);
+        wr_value = 0x1;
+        global_register_bank.write(hex_cam[random], &wr_value, sizeof(wr_value));
 
         wait(1, SC_US);
 

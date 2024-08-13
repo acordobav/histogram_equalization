@@ -2,106 +2,67 @@
 #define _MEMORY_MAP_H
 
 // Register Info ------------------------------------------
-#define REG_WIDTH                  32
-#define REG_BYTES                  4
-#define TOTAL_REGS                 18 //8*sensor+8*camera+Histogram+Stadistics
-
-// Mod: Distance ------------------------------------------
-#define MASK_DISTANCE              0xFFFF
-#define MASK_IS_ACTIVE             0x10000
-#define MASK_RANGE                 0x60000
-
-// Mod: Camera --------------------------------------------
-#define MASK_IDENTIFIER            0xFFFF
-#define MASK_CAPTURE               0x10000
-
-// Mod: Histogram Equalization ----------------------------
-#define MASK_IMAGE_ROWS           0xFFFF
-#define MASK_IMAGE_COLS           0xFFFF0000
-
-//#define IMG_ROWS 323 //define provisional, despues manejado por registro
-//#define IMG_COLS 434 //define provisional, despues manejado por registro
-//#define IMG_H_LENGTH 256 //define provisional, despues manejado por registro
-
-// Mod: Estadistics ---------------------------------------
-#define MASK_FLAG_SAVE_DATA_HOUR  0x0
-#define MASK_HOURS_TO_SAVE_DAY    0x3FE
-#define MASK_RESET                0x400
-
 #define HOURS_TO_SAVE_DAY          24 //define provisional, despues manejado por registro
 
 // Registers ----------------------------------------------
-//Considering 1 register per sensor (8 sensors max)
-#define REG_BASE_1                 0x10000
-//#define REG_SENSOR                 0x4
 
-//Considering 1 register per camera (8 cameras max)
-#define REG_BASE_2                 0x10000
-//#define REG_CAMARA                 0x4
+#define OFFSET          0x50000000
 
-#define REG_HISTOGRAM              0x20064
-#define REG_STADISTICS             0x20068
+#define BASE_DISTANCE   (OFFSET + 0x04)
+#define BASE_IS_ACTIVE  (OFFSET + 0x24)
+#define BASE_RANGE      (OFFSET + 0x44)
+#define BASE_IDENTIFIER (OFFSET + 0x64)
+#define BASE_CAPTURE    (OFFSET + 0x84)
 
-#define REG_BASE_3                 0x10000
-//#define REG_CAMARA_3               0x4
-//#endif
+#define REG_ENABLE      OFFSET
+#define REG_IMAGE_ROWS  (OFFSET + 0xA4)
+#define REG_IMAGE_COLS  (OFFSET + 0xA8)
 
+#define REG_DISTANCE0   (BASE_DISTANCE + 0x0)
+#define REG_DISTANCE1   (BASE_DISTANCE + 0x4)
+#define REG_DISTANCE2   (BASE_DISTANCE + 0x8)
+#define REG_DISTANCE3   (BASE_DISTANCE + 0xC)
+#define REG_DISTANCE4   (BASE_DISTANCE + 0x10)
+#define REG_DISTANCE5   (BASE_DISTANCE + 0x14)
+#define REG_DISTANCE6   (BASE_DISTANCE + 0x18)
+#define REG_DISTANCE7   (BASE_DISTANCE + 0x1C)
 
+#define REG_IS_ACTIVE0  (BASE_IS_ACTIVE + 0x0)
+#define REG_IS_ACTIVE1  (BASE_IS_ACTIVE + 0x4)
+#define REG_IS_ACTIVE2  (BASE_IS_ACTIVE + 0x8)
+#define REG_IS_ACTIVE3  (BASE_IS_ACTIVE + 0xC)
+#define REG_IS_ACTIVE4  (BASE_IS_ACTIVE + 0x10)
+#define REG_IS_ACTIVE5  (BASE_IS_ACTIVE + 0x14)
+#define REG_IS_ACTIVE6  (BASE_IS_ACTIVE + 0x18)
+#define REG_IS_ACTIVE7  (BASE_IS_ACTIVE + 0x1C)
 
-//////////////////////////////////////////
+#define REG_RANGE0      (BASE_RANGE + 0x0)
+#define REG_RANGE1      (BASE_RANGE + 0x4)
+#define REG_RANGE2      (BASE_RANGE + 0x8)
+#define REG_RANGE3      (BASE_RANGE + 0xC)
+#define REG_RANGE4      (BASE_RANGE + 0x10)
+#define REG_RANGE5      (BASE_RANGE + 0x14)
+#define REG_RANGE6      (BASE_RANGE + 0x18)
+#define REG_RANGE7      (BASE_RANGE + 0x1C)
 
-// Registers ----------------------------------------------
-//Considering 1 register per sensor (8 sensors max)
+#define REG_IDENTIFIER0 (BASE_IDENTIFIER + 0x0)
+#define REG_IDENTIFIER1 (BASE_IDENTIFIER + 0x4)
+#define REG_IDENTIFIER2 (BASE_IDENTIFIER + 0x8)
+#define REG_IDENTIFIER3 (BASE_IDENTIFIER + 0xC)
+#define REG_IDENTIFIER4 (BASE_IDENTIFIER + 0x10)
+#define REG_IDENTIFIER5 (BASE_IDENTIFIER + 0x14)
+#define REG_IDENTIFIER6 (BASE_IDENTIFIER + 0x18)
+#define REG_IDENTIFIER7 (BASE_IDENTIFIER + 0x1C)
+#define REG_IDENTIFIER7 (BASE_IDENTIFIER + 0x1C)
 
-#define REG_SENSOR0                   0x50000000+0x0
-#define REG_SENSOR1                   0x50000000+0x4
-#define REG_SENSOR2                   0x50000000+0x8
-#define REG_SENSOR3                   0x50000000+0xC
-#define REG_SENSOR4                   0x50000000+0x10
-#define REG_SENSOR5                   0x50000000+0x14
-#define REG_SENSOR6                   0x50000000+0x18
-#define REG_SENSOR7                   0x50000000+0x1C
+#define REG_CAPTURE0    (BASE_CAPTURE + 0x0)
+#define REG_CAPTURE1    (BASE_CAPTURE + 0x4)
+#define REG_CAPTURE2    (BASE_CAPTURE + 0x8)
+#define REG_CAPTURE3    (BASE_CAPTURE + 0xC)
+#define REG_CAPTURE4    (BASE_CAPTURE + 0x10)
+#define REG_CAPTURE5    (BASE_CAPTURE + 0x14)
+#define REG_CAPTURE6    (BASE_CAPTURE + 0x18)
+#define REG_CAPTURE7    (BASE_CAPTURE + 0x1C)
+#define REG_CAPTURE7    (BASE_CAPTURE + 0x1C)
 
-/*
-typedef enum{
-"0"=0x10000,
-"1"=0x101F4,
-"2"=0x103E8,
-"3"=0x105DC
-};*/
-
-
-//#define REG_SENSOR_address                     0x10000
-
-//#define REG_SENSOR_2                   0x10DAC
-
-//Considering 1 register per camera (8 cameras max)
-#define REG_CAMARA_0                 0x10FA0
-#define REG_CAMARA_1                 0x10FA2
-#define REG_CAMARA_2                 0x10FA4
-#define REG_CAMARA_3                 0x10FA6
-#define REG_CAMARA_4                 0x10FAF
-#define REG_CAMARA_5                 0x10FB1
-#define REG_CAMARA_6                 0x10FB3
-#define REG_CAMARA_7                 0x10FB5
-
-#define REG_CONTADOR 			           0x10FB7
-
-
-#define REG_COLS 				             0x111AB
-#define REG_ROWS  				           0x1139F
-#define REG_IMG_LENGTH  			       0X11593
-
-#define REG_ENABLE             	     0x10068
-
-
-//#define REG_CAMARA				  0x4
-
-//#define REG_BASE_2                 	0x10048
-
-//#define REG_HISTOGRAM              	0x10064
-
-//#define REG_BASE_3                 	0x10048
-//#define REG_CONTADOR                 	0x1119B
-//#define REG_CAMARA_3               0x4
 #endif

@@ -58,7 +58,7 @@ using namespace std;
 /*------------------------------------------------------------------------------------------*/
 //Global BANK OF REGISTERS
 //Need to remove it in the future
-RegisterBank global_register_bank(0x10000, 0x60000000);
+RegisterBank global_register_bank(OFFSET, OFFSET + REGBANK_SIZE);
 
 /*------------------------------------------------------------------------------------------*/
 /*
@@ -224,9 +224,13 @@ SC_MODULE(Top)
 
 int sc_main(int argc, char* argv[])
 {
-  global_register_bank.write_bits(REG_COLS, 0xFFFFFFFF, COLS);
-  global_register_bank.write_bits(REG_ROWS, 0xFFFFFFFF, ROWS);
-  global_register_bank.write_bits(REG_ENABLE, 0x1, 1);
+  uint32_t rows = ROWS;
+  uint32_t cols = COLS;
+  uint32_t enable = 1;
+
+  global_register_bank.write(REG_IMAGE_ROWS, &rows, sizeof(rows));
+  global_register_bank.write(REG_IMAGE_COLS, &cols, sizeof(cols));
+  global_register_bank.write(REG_ENABLE, &enable, sizeof(enable));
 
   //To initiate the different modules
   Top top("top");

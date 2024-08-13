@@ -30,15 +30,12 @@ struct InterpolationTLM: sc_module
     SC_THREAD(thread_process);
   }
 
-  uint32_t register_data_get(uint64_t address, uint32_t mask) {
+  uint32_t register_data_get(uint64_t address) {
     uint32_t data = 0;
     
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-    mask_extension* ext_mask = new mask_extension;
-    ext_mask->mask = mask;
 
-    trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_READ_COMMAND);
     trans.set_data_ptr((uint8_t*)&data);
     trans.set_data_length(sizeof(uint32_t));
@@ -80,14 +77,11 @@ struct InterpolationTLM: sc_module
     }
 
     // Valores principales
-    int original_width = register_data_get(REG_COLS, 0xFFFFFFFF); // Asumiendo que COLS es el ancho de la imagen
-    int original_height = register_data_get(REG_ROWS,0xFFFFFFFF); // Asumiendo que ROWS es la altura de la imagen
+    int original_width = register_data_get(REG_IMAGE_COLS); // Asumiendo que COLS es el ancho de la imagen
+    int original_height = register_data_get(REG_IMAGE_ROWS); // Asumiendo que ROWS es la altura de la imagen
     int channels = 1; // Asumiendo una imagen en escala de grises o un canal
     int new_width = newCOLS;
     int new_height = newROWS;
-    //int new_width = original_width/2;
-    //int new_height = original_height/2;
-
 
     uint8_t** interpol_image = createMatrix(new_height,new_width);
 

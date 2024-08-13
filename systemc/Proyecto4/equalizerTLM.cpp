@@ -30,15 +30,12 @@ struct EqualizerTLM: sc_module
     SC_THREAD(thread_process);
   }
 
-  uint32_t register_data_get(uint64_t address, uint32_t mask) {
+  uint32_t register_data_get(uint64_t address) {
     uint32_t data = 0;
-    
+
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-    mask_extension* ext_mask = new mask_extension;
-    ext_mask->mask = mask;
 
-    trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_READ_COMMAND);
     trans.set_data_ptr((uint8_t*)&data);
     trans.set_data_length(sizeof(uint32_t));
@@ -94,13 +91,13 @@ struct EqualizerTLM: sc_module
       cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     }
     
-    if(!register_data_get(REG_ENABLE,0x1)) {
+    if(!register_data_get(REG_ENABLE)) {
       continue;
     }
 
     // Get numbers of cols and rows from RegisterBank
-    rows = register_data_get(REG_ROWS,0xFFFFFFFF);
-    cols = register_data_get(REG_COLS, 0xFFFFFFFF);
+    rows = register_data_get(REG_IMAGE_ROWS);
+    cols = register_data_get(REG_IMAGE_COLS);
 
     // Process image here
     uint8_t** filtered_image = createMatrix(rows, cols);

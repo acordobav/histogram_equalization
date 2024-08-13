@@ -43,7 +43,6 @@ struct RouterTLM : sc_module
   void thread_process()  
   {
     struct transaction_pending trans_queued;
-    tlm::tlm_sync_enum status;
     tlm::tlm_generic_payload* trans_pending;
     tlm::tlm_phase phase_pending;
     sc_time delay_pending;

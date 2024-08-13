@@ -65,14 +65,10 @@ struct CalcDistTLM : sc_module
     SC_THREAD(thread_process);
   }
 
-  void register_data_set(uint64_t address, uint32_t mask, uint32_t value)
-  {
+  void register_data_set(uint64_t address, uint32_t value) {
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-    mask_extension *ext_mask = new mask_extension;
-    ext_mask->mask = mask;
 
-    trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_WRITE_COMMAND);
     trans.set_data_ptr((uint8_t *)&value);
     trans.set_data_length(sizeof(uint32_t));
@@ -81,16 +77,12 @@ struct CalcDistTLM : sc_module
     register_socket->b_transport(trans, delay);
   }
 
-  uint32_t register_data_get(uint64_t address, uint32_t mask)
-  {
+  uint32_t register_data_get(uint64_t address) {
     uint32_t data = 0;
 
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-    mask_extension *ext_mask = new mask_extension;
-    ext_mask->mask = mask;
 
-    trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_READ_COMMAND);
     trans.set_data_ptr((uint8_t *)&data);
     trans.set_data_length(sizeof(uint32_t));
@@ -101,8 +93,7 @@ struct CalcDistTLM : sc_module
     return data;
   }
 
-  void thread_process()
-  {
+  void thread_process() {
     tlm::tlm_sync_enum status;
 
     while (true)
@@ -120,7 +111,7 @@ struct CalcDistTLM : sc_module
 
       // Variables to store the incoming data
 
-      if (register_data_get(REG_BASE_1 + 0x2, 0x1))
+      if (register_data_get(REG_IS_ACTIVE0))
       {
         unsigned char *data_ptr = trans_pending->get_data_ptr();
         memcpy(&time_output, data_ptr, sizeof(double));
@@ -131,7 +122,7 @@ struct CalcDistTLM : sc_module
         //  cout << "Echo signal coming from sensor: " << echo_signal_result << endl;
 
         // Since reading was detected, now disabling it for next iteration
-        register_data_set(REG_BASE_1 + 0x2, 0x1, 0x0);
+        register_data_set(REG_IS_ACTIVE0, 0x0);
       }
       sens_active_result = false;
       sens_active_transmit = 0;
@@ -162,7 +153,7 @@ struct CalcDistTLM : sc_module
       {
         // Register bit to indicate that an animal is in front of the camara
         // Capture bit being set to TRUE
-        register_data_set(REG_BASE_2 + 0x2, 0x1, 0x1);
+        register_data_set(REG_CAPTURE0, 0x1);
         sens_active_transmit = 1;
       }
       sens_active_transmit = 1; // Just for debugging

@@ -75,14 +75,11 @@ struct UltrasonicSensorTLM: sc_module
   //----------------------------------------------------------------------------------------------------------------
   //----------------------------------------------------------------------------------------------------------------
 
-  void register_data_set(uint64_t address, uint32_t mask, uint32_t value)
+  void register_data_set(uint64_t address, uint32_t value)
   {
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-    mask_extension *ext_mask = new mask_extension;
-    ext_mask->mask = mask;
 
-    trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_WRITE_COMMAND);
     trans.set_data_ptr((uint8_t *)&value);
     trans.set_data_length(sizeof(uint32_t));
@@ -130,7 +127,7 @@ struct UltrasonicSensorTLM: sc_module
         //Prepare to write register
         if (echo_signal_val != 0.0){
             //cout << "Writting REGISTER" << endl;
-            register_data_set(REG_BASE_1+0x2,0x1,0x1);
+            register_data_set(REG_IS_ACTIVE0, 0x1);
         }
 
         //Generating unique id and fields required for the communication

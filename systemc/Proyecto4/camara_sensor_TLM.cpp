@@ -81,14 +81,11 @@ struct CamaraSensTLM : sc_module
     SC_THREAD(thread_process);
   }
 
-  void register_data_set(uint64_t address, uint32_t mask, uint32_t value)
+  void register_data_set(uint64_t address, uint32_t value)
   {
     tlm::tlm_generic_payload trans;
     sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
-    mask_extension *ext_mask = new mask_extension;
-    ext_mask->mask = mask;
 
-    trans.set_extension(ext_mask);
     trans.set_command(tlm::TLM_WRITE_COMMAND);
     trans.set_data_ptr((uint8_t *)&value);
     trans.set_data_length(sizeof(uint32_t));
@@ -133,7 +130,6 @@ struct CamaraSensTLM : sc_module
             imagen[i][j] = img[index];
           }
         }
-        register_data_set(REG_BASE_3 + 0x2, 0x1, 0x1);
         wait(20, SC_US);
       }
       unsigned char **new_image_digitalized = (unsigned char **)(save_image_digitalized);
