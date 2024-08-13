@@ -29,10 +29,13 @@
 #include "equalizerTLM.cpp"
 // INTERPOLATION
 #include "InterpolationTLM.cpp"
-// ROUTER
+// ROUTERS
 #include "routerTLM.cpp"
+#include "blockingRouterTLM.cpp"
 // MEMORY
 #include "MemoryTLM.cpp"
+// REGISTER BANK
+#include "RegisterBankTLM.cpp"
 
 // Required because of implemented registers
 #include "memory_map.h"
@@ -92,159 +95,11 @@ Router2 ------------------------------------> Router3
 
 Conexion 8:
 Router3 ------------------------------------> Memoria
---------------------------------------------------------------------------------------------*/
 
-/*---------------------------------------------------------------------*/
-// BLOQUE: SENSOR PROXIMIDAD
-
-
-
-/*---------------------------------------------------------------------*/
-// BLOQUE: DETECTOR
-
-
-
-/*---------------------------------------------------------------------*/
-// BLOQUE: CAMARA
-
-
-
-/*---------------------------------------------------------------------*/
-// BLOQUE: ECUALIZADOR
-
-
-
-/*---------------------------------------------------------------------*/
-// BLOQUE: COMPRESOR
-
-
-
-/*---------------------------------------------------------------------*/
-// BLOQUE: ROUTERS
-
-
-
-/*---------------------------------------------------------------------*/
-// BLOQUE: MEMORIA
-
-struct DefaultTarget: sc_module
-{
-  // TLM-2 socket, defaults to 32-bits wide, base protocol
-  tlm_utils::simple_target_socket<DefaultTarget> target_socket;
-
-  sc_event  e1;
-  tlm::tlm_generic_payload* trans_pending;   
-  tlm::tlm_phase phase_pending; 
-  sc_time delay_pending;
-
-
-  // Construct and name socket   
-  SC_CTOR(DefaultTarget)
-  : target_socket("DefaultTarget:target")
-  {
-    // Register callbacks for incoming interface method calls
-    target_socket.register_nb_transport_fw(this, &DefaultTarget::nb_transport_fw);
-
-    SC_THREAD(thread_process);
-  }
-
-  void thread_process()  
-{
-  while(true) {
-
-    // Wait for an event to pop out of the back end of the queue   
-    wait(e1);
-	//cout << "LAST TARGET MODULE" << endl << endl;
-    ID_extension* id_extension = new ID_extension;
-    trans_pending->get_extension(id_extension); 
-
-    // Obliged to set response status to indicate successful completion   
-    trans_pending->set_response_status(tlm::TLM_OK_RESPONSE);  
-    wait(200,SC_MS);
-    cout << "LAST TARGET MODULE" << endl << endl;
-    cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
-    
-    unsigned char* filtered_image = trans_pending->get_data_ptr();
-
-    // Save output image
-    stbi_write_jpg("filtered.jpg", COLS/2, ROWS/2, 1, filtered_image, (ROWS/2)*(COLS/2));
-
-    free(filtered_image);
-
-    // Call on backward path to complete the transaction
-    tlm::tlm_phase phase = tlm::BEGIN_RESP;
-    target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
-     sc_stop();
-  }
-}
-
-  // TLM-2 non-blocking transport method
-  virtual tlm::tlm_sync_enum nb_transport_fw(
-    tlm::tlm_generic_payload& trans,
-    tlm::tlm_phase& phase,
-    sc_time& delay)
-  {
-  //cout << name() << "LAST TARGET MODULE!!!!!!!!!!!!!" << endl << endl;
-    ID_extension* id_extension = new ID_extension;
-    trans.get_extension(id_extension);
-
-    if (phase != tlm::BEGIN_REQ) {
-      cout << name() << " unknown phase " << phase << endl;
-      return tlm::TLM_ACCEPTED;
-    }
-
-    cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
-
-    // Now queue the transaction until the annotated time has elapsed
-    trans_pending=&trans;
-    phase_pending=phase;
-    delay_pending=delay;
-
-    e1.notify();
-
-    //Delay
-    wait(delay);
-
-    return tlm::TLM_ACCEPTED;
-  }
-};
-/*
-struct BlockingTarget: sc_module
-{
-  // TLM-2 socket, defaults to 32-bits wide, base protocol
-  tlm_utils::simple_target_socket<BlockingTarget> target_socket;
-
-  // Construct and name socket   
-  SC_CTOR(BlockingTarget)
-  : target_socket("BlockingTarget:target")
-  {
-    // Register callbacks for incoming interface method calls
-    target_socket.register_b_transport(this, &BlockingTarget::b_transport);
-  }
-
-  // TLM-2 non-blocking transport method
-  virtual void b_transport( tlm::tlm_generic_payload& trans, sc_time& delay )
-  {
-    ID_extension* id_extension = new ID_extension;
-    trans.get_extension(id_extension);
-
-    cout << name() << " BEGIN_REQ RECEIVED" << " TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;      
-
-    //Delay
-    wait(delay);
-
-    cout << name() << " BEGIN_RESP SENT" << " TRANS ID " << id_extension->transaction_id <<  " at time " << sc_time_stamp() << endl;
-    
-    // Obliged to set response status to indicate successful completion
-    trans.set_response_status( tlm::TLM_OK_RESPONSE );
-  }
-};
-
-*/
 /*---------------------------------------------------------------------*/
 // BLOQUE: TOP
 
-#define LANES 8
+#define LANES 1
 SC_MODULE(Top)
 {
   //InitiatorSensProx       *initiatorSensProx;
@@ -254,11 +109,15 @@ SC_MODULE(Top)
   EqualizerTLM*             equalizer[LANES];
   InterpolationTLM*         interpolation[LANES];
   RouterTLM<LANES>*         router;
-  //BlockingTarget*           blockingTarget;
+  BlockingRouterTLM<LANES>* blockingRouter;
   MemoryTLM*                memory; 
+  RegisterBankTLM*          registerBank;
+
 
   SC_CTOR(Top) //The quantity of samples to be simulated   
   {   
+
+
     // Instantiate components 
 
     // SENSOR PROXIMIDAD
@@ -298,18 +157,23 @@ SC_MODULE(Top)
       interpolation[i] = new InterpolationTLM(strDefault);
     }
     
-    // ROUTER
+    // ROUTERS
     router = new RouterTLM<LANES>(MAGENTA "routerTLM" ENDCOLOR);
+    blockingRouter = new BlockingRouterTLM<LANES>("blockingRouterTLM");
 
-    
     // MEMORIA
-    memory = new MemoryTLM   (TEAL "memory" ENDCOLOR);
+    memory = new MemoryTLM(TEAL "memory" ENDCOLOR);
     
+    // REGISTER BANK
+    registerBank = new RegisterBankTLM("registerBank");
+
 
     //Temp Solution
     //blockingTarget = new BlockingTarget("blockingTarget");
    
-   /*------------------------------------------------------------------*/
+    /*------------------------------------------------------------------*/
+    uint32_t regbank_i = 0;
+
     // Bind initiator socket to target socket
     // See references to each "Conexion" at the beginning of the script
     //Conexion 1
@@ -327,6 +191,8 @@ SC_MODULE(Top)
     //Conexion 4
     for (int i = 0; i < LANES; i++)
       equalizer[i]->initiator_socket.bind(interpolation[i]->target_socket);
+      equalizer[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
+      regbank_i++;
 
     //Conexion 5
     for (int i = 0; i < LANES; i++)
@@ -336,6 +202,7 @@ SC_MODULE(Top)
     // Router con memoria
     router->initiator_socket.bind(memory->target_socket);
 
+    blockingRouter->initiator_socket.bind(registerBank->target_socket);
   }
 };
 
@@ -346,6 +213,9 @@ int sc_main(int argc, char* argv[])
 {
   //Create the Registers Bank according to the Memory Bank
   //RegisterBank reg_bank(0x10000, 0x10072);
+
+  global_register_bank.write_bits(REG_COLS,0xFFFFFFFF,COLS);
+  global_register_bank.write_bits(REG_ROWS,0xFFFFFFFF,ROWS);
 
   //To initiate the different modules
   Top top("top");

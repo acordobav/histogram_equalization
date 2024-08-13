@@ -32,7 +32,7 @@ struct RouterTLM : sc_module
     for (unsigned int i = 0; i < N_TARGETS; i++)
     {
       char txt[30];
-      sprintf(txt, "InterpolationTLM:target%d", i);
+      sprintf(txt, "RouterTLM:target%d", i);
       target_socket[i] = new tlm_utils::simple_target_socket<RouterTLM>(txt);
       target_socket[i]->register_nb_transport_fw(this, &RouterTLM::target_nb_transport_fw);
     }

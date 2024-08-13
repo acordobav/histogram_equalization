@@ -62,6 +62,23 @@ struct ID_extension: tlm::tlm_extension<ID_extension> {
   unsigned int transaction_id;
 };
 
+struct mask_extension: tlm::tlm_extension<mask_extension> {
+  mask_extension(){};
+
+  virtual tlm_extension_base* clone() const { // Must override pure virtual clone method
+    mask_extension* t = new mask_extension;
+    t->mask = this->mask;
+    return t;
+  }
+
+  // Must override pure virtual copy_from method
+  virtual void copy_from(tlm_extension_base const &ext) {
+    mask = static_cast<mask_extension const &>(ext).mask;
+  }
+
+  uint32_t mask;
+};
+
 #define ROWS 323
 #define COLS 434
 #define newROWS 128

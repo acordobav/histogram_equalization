@@ -9,6 +9,7 @@ struct EqualizerTLM: sc_module
 
   // TLM-2 socket, defaults to 32-bits wide, generic payload, generic DMI mode   
   tlm_utils::simple_initiator_socket<EqualizerTLM> initiator_socket;
+  tlm_utils::simple_initiator_socket<EqualizerTLM> register_socket;
 
   sc_event  e1;
   tlm::tlm_generic_payload* trans_pending;   
@@ -20,6 +21,7 @@ struct EqualizerTLM: sc_module
   SC_CTOR(EqualizerTLM) 
   : target_socket("EqualizerTLM:target")
   , initiator_socket("EqualizerTLM:initiator")
+  , register_socket("EqualizerTLM:register")
   {
     // Register callbacks for incoming interface method calls
     target_socket.register_nb_transport_fw(this, &EqualizerTLM::target_nb_transport_fw);
@@ -30,12 +32,31 @@ struct EqualizerTLM: sc_module
     SC_THREAD(thread_process);
   }
 
+  uint32_t register_data_get(uint64_t address, uint32_t mask) {
+    uint32_t data = 0;
+    
+    tlm::tlm_generic_payload trans;
+    sc_core::sc_time delay = sc_core::SC_ZERO_TIME;
+    mask_extension* ext_mask = new mask_extension;
+    ext_mask->mask = mask;
+
+    trans.set_extension(ext_mask);
+    trans.set_command(tlm::TLM_READ_COMMAND);
+    trans.set_data_ptr((uint8_t*)&data);
+    trans.set_data_length(sizeof(uint32_t));
+    trans.set_address(address);
+
+    register_socket->b_transport(trans, delay);
+
+    return data;  
+  }
+
   void thread_process()  
 {
   tlm::tlm_sync_enum status;
 
   while(true) {
-	
+    uint32_t rows, cols;
     // Wait for an event to pop out of the back end of the queue   
     wait(e1);
 
@@ -52,9 +73,12 @@ struct EqualizerTLM: sc_module
     
     unsigned char* ptr = trans_pending->get_data_ptr(); 
     memcpy(&image, ptr, sizeof(image));
-    global_register_bank.write_bits(REG_COLS,0xFFFFFFFF,COLS);
-    global_register_bank.write_bits(REG_ROWS,0xFFFFFFFF,ROWS);	
-   // stbi_write_jpg("salida_imagen.jpg", COLS, ROWS, 1, image, 100);
+    
+    // Get numbers of cols and rows from RegisterBank
+    rows = register_data_get(REG_ROWS,0xFFFFFFFF);
+    cols = register_data_get(REG_COLS, 0xFFFFFFFF);
+    
+    // stbi_write_jpg("salida_imagen.jpg", COLS, ROWS, 1, image, 100);
     
     /*-----------RECIBIENDO BIEN LA IMAGEN ----- 
     unsigned char* resultado;
@@ -75,22 +99,13 @@ struct EqualizerTLM: sc_module
     if (status != tlm::TLM_ACCEPTED) {
       cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     }
-
-    
-    int colu = global_register_bank.read_bits(REG_COLS,0xFFFFFF);
-   //     cout<<"colu     value: " <<dec << colu  <<endl;
-    int rowi = global_register_bank.read_bits(REG_ROWS,0xFFFFFF);
-   // cout<<"rowi     value: " <<dec << rowi  <<endl;
-    
     
     // Process image here
-    uint8_t** filtered_image = createMatrix(rowi, colu);
-    equalizer->equalize(ROWS, COLS, image, filtered_image);   // generating segmentatio fault 
-    
+    uint8_t** filtered_image = createMatrix(rows, cols);
+    equalizer->equalize(rows, cols, image, filtered_image);
     sc_time process_delay = sc_time(300, SC_US);
     wait(process_delay);
-    freeMatrix(image, ROWS);  // generating segmentatio fault  
-
+    freeMatrix(image, rows);
 
     tlm::tlm_generic_payload trans;
     id_extension = new ID_extension;

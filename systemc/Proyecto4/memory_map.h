@@ -85,12 +85,12 @@ typedef enum{
 #define REG_CAMARA_6                 0x10FB3
 #define REG_CAMARA_7                 0x10FB5
 
-#define REG_CONTADOR 			  0x10FB7
+#define REG_CONTADOR 			           0x10FB7
 
 
-#define REG_COLS 				  0x111AB
-#define REG_ROWS  				  0x1139F
-#define REG_IMG_LENGTH  			  0X11593
+#define REG_COLS 				             0x111AB
+#define REG_ROWS  				           0x1139F
+#define REG_IMG_LENGTH  			       0X11593
 //#define REG_CAMARA				  0x4
 
 //#define REG_BASE_2                 	0x10048
