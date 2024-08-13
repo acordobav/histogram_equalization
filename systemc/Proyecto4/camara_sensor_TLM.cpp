@@ -1,8 +1,6 @@
 #include "memory_map.h"
+#include "original_image.hpp"
 #include <cstdlib>
-
-uint8_t save_image_digitalized[ROWS][COLS][3] = {0};
-int width, height, channels;
 
 class signal_driver2 : public sca_tdf::sca_module
 {
@@ -116,23 +114,22 @@ struct CamaraSensTLM : sc_module
       wait(1000, SC_US);
       digital_image_result = digital_image_ready.read();
       wait(1, SC_US);
-      unsigned char *img = stbi_load("sydney.jpg", &width, &height, &channels, 0);
       uint8_t **imagen = createMatrix(ROWS, COLS);
       if (digital_image_result)
       {
         int index = 0;
         // EXtracting the red channel
-        for (int i = 0; i < height; i++)
+        for (int i = 0; i < ROWS; i++)
         {
-          for (int j = 0; j < width; j++)
+          for (int j = 0; j < COLS; j++)
           {
-            int index = (i * width + j) * channels;
-            imagen[i][j] = img[index];
+            imagen[i][j] = original_image[index];
+            index++;
           }
         }
         wait(20, SC_US);
       }
-      unsigned char **new_image_digitalized = (unsigned char **)(save_image_digitalized);
+
       tlm::tlm_phase phase = tlm::BEGIN_RESP;
       //  status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
       // if (status != tlm::TLM_ACCEPTED) {

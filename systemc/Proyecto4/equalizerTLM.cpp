@@ -69,19 +69,6 @@ struct EqualizerTLM: sc_module
     unsigned char* ptr = trans_pending->get_data_ptr(); 
     memcpy(&image, ptr, sizeof(image));
     
-    // stbi_write_jpg("salida_imagen.jpg", COLS, ROWS, 1, image, 100);
-    
-    /*-----------RECIBIENDO BIEN LA IMAGEN ----- 
-    unsigned char* resultado;
-    unsigned char* ptr = trans_pending->get_data_ptr();
-    uint8_t** image = (uint8_t**)ptr;		
-    
-    memcpy(&resultado, ptr, sizeof(resultado));
-    uint8_t** filtered_image = createMatrix(ROWS, COLS);
-    stbi_write_jpg("salida3.jpg", COLS, ROWS, 3, resultado, 100);
-    -----------RECIBIENDO BIEN LA IMAGEN -----  */   
-    
-
     // Call on backward path to complete the transaction
     tlm::tlm_phase phase = tlm::BEGIN_RESP;
     status = target_socket->nb_transport_bw(*trans_pending, phase, delay_pending);
@@ -98,6 +85,16 @@ struct EqualizerTLM: sc_module
     // Get numbers of cols and rows from RegisterBank
     rows = register_data_get(REG_IMAGE_ROWS);
     cols = register_data_get(REG_IMAGE_COLS);
+
+    /*
+      uint8_t save_image[ROWS][COLS] = { 0 };
+      for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+          save_image[i][j] = image[i][j];
+        }
+      }
+      stbi_write_jpg("eq_entrada.jpg", cols, rows, 1, save_image, 100);
+    */
 
     // Process image here
     uint8_t** filtered_image = createMatrix(rows, cols);

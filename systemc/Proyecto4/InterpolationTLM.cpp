@@ -106,9 +106,7 @@ struct InterpolationTLM: sc_module
     }
 
     // Guardar la imagen de entrada interpolada
-    if (!stbi_write_jpg("2_interpolated.jpg", new_width, new_height, channels, interpolated_image, 100)) {
-        cerr << "Error: no se pudo guardar la imagen" << endl;
-    }
+    // stbi_write_jpg("2_interpolated.jpg", new_width, new_height, channels, interpolated_image, 100)
     free(interpolated_image);
 // Convertir imagen de ENTRADA  a un vector
     unsigned char* test_image = (unsigned char*)malloc(original_width * original_height * channels);
@@ -122,9 +120,7 @@ struct InterpolationTLM: sc_module
     }
 
     // Guardar la imagen 
-    if (!stbi_write_jpg("1_entrada.jpg", original_width, original_height, channels, test_image, 100)) {
-        cerr << "Error: no se pudo guardar la imagen" << endl;
-    }
+    // stbi_write_jpg("1_entrada.jpg", original_width, original_height, channels, test_image, 100);
     free(test_image);
 
 //-----------------------------------------
