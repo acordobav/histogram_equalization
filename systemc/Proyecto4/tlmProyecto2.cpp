@@ -173,45 +173,48 @@ SC_MODULE(Top)
 
     // Bind initiator socket to target socket
     // See references to each "Conexion" at the beginning of the script
-    //Conexion 1
+    
+    // Conexion 1
     for (int i = 0; i < LANES; i++) {
       uSensor[i]->initiator_socket.bind( calcDist[i]->target_socket );
       uSensor[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
     }
 
-    //Conexion 2
+    // Conexion 2
     for (int i = 0; i < LANES; i++) {
       calcDist[i]->initiator_socket.bind( cSens[i]->target_socket );
       calcDist[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
     }
 
-    //Conexion 3
+    // Conexion 3
     for (int i = 0; i < LANES; i++) {
       cSens[i]->initiator_socket.bind(equalizer[i]->target_socket );
       cSens[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
     }
 
-    //Conexion 4
+    // Conexion 4
     for (int i = 0; i < LANES; i++) {
       equalizer[i]->initiator_socket.bind(interpolation[i]->target_socket);
       equalizer[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
     }
 
-    //Conexion 5
+    // Conexion 5
     for (int i = 0; i < LANES; i++) {
       interpolation[i]->initiator_socket.bind(*router->target_socket[i]);
       interpolation[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
       regbank_i++;
     }
 
-    //Conexion 6
+    // Conexion 6
     // Router con memoria
     router->initiator_socket.bind(memory->target_socket);
 
+    // Conexion 7
+    // BlockingRouter con RegisterBank
     blockingRouter->initiator_socket.bind(registerBank->target_socket);
   }
 };
@@ -221,9 +224,6 @@ SC_MODULE(Top)
 
 int sc_main(int argc, char* argv[])
 {
-  //Create the Registers Bank according to the Memory Bank
-  //RegisterBank reg_bank(0x10000, 0x10072);
-
   global_register_bank.write_bits(REG_COLS, 0xFFFFFFFF, COLS);
   global_register_bank.write_bits(REG_ROWS, 0xFFFFFFFF, ROWS);
   global_register_bank.write_bits(REG_ENABLE, 0x1, 1);
