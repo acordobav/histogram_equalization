@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="CalsDis.cpp" path="/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/CalsDis.cpp"/>
+    <originFiles name="CalsDis.h" path="/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/CalsDis.h"/>
+  </source>
+  <testbench>
+    <originFiles name="TB.cpp" path="/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/files/TB.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

@@ -1,0 +1,9 @@
+vhdl xil_defaultlib "AESL_sim_pkg.vhd"
+vhdl xil_defaultlib "ip/xil_defaultlib/top_ap_sitodp_2_no_dsp_32.vhd"
+vhdl xil_defaultlib "ip/xil_defaultlib/top_ap_dmul_3_max_dsp_64.vhd"
+sv work "glbl.v"
+vhdl xil_defaultlib "top_dmul_64ns_64ns_64_5_max_dsp_1.vhd"
+vhdl xil_defaultlib "top_sitodp_32ns_64_4_1.vhd"
+vhdl xil_defaultlib "top.autotb.vhd"
+vhdl xil_defaultlib "top.vhd"
+

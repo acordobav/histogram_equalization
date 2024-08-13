@@ -1,0 +1,5 @@
+   Build using "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/tps/lnx64/gcc-6.2.0/bin/g++"
+   Compiling apatb_top.cpp
+   Compiling CalsDis.cpp_pre.cpp.tb.cpp
+   Compiling TB.cpp_pre.cpp.tb.cpp
+   Generating cosim.tv.exe

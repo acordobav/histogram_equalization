@@ -1,0 +1,70 @@
+INFO: [HLS 200-10] Running '/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/bin/unwrapped/lnx64.o/vivado_hls'
+INFO: [HLS 200-10] For user 'jpv' on host 'jpv' (Linux_x86_64 version 6.5.0-45-generic) on Tue Aug 13 01:16:49 CST 2024
+INFO: [HLS 200-10] On os Ubuntu 22.04.4 LTS
+INFO: [HLS 200-10] In directory '/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance'
+Sourcing Tcl script '/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/csynth.tcl'
+INFO: [HLS 200-10] Opening project '/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance'.
+INFO: [HLS 200-10] Adding design file '../files/CalsDis.cpp' to the project
+INFO: [HLS 200-10] Adding design file '../files/CalsDis.h' to the project
+INFO: [HLS 200-10] Adding test bench file '../files/TB.cpp' to the project
+INFO: [HLS 200-10] Opening solution '/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+WARNING: [HLS 200-40] Cannot find library '/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/common/technology/xilinx/Virtex-7/Virtex-7.lib'.
+WARNING: [HLS 200-40] Cannot find library 'xilinx/Virtex-7/Virtex-7'.
+INFO: [HLS 200-10] Setting target device to 'xc7vx485t-ffg1157-1'
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file '../files/CalsDis.cpp' ... 
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 1548 ; free virtual = 5437
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 1555 ; free virtual = 5445
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 873.590 ; gain = 195.938 ; free physical = 1508 ; free virtual = 5406
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [XFORM 203-602] Inlining function 'fp_struct<double>::mantissa' into 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:15) automatically.
+INFO: [XFORM 203-602] Inlining function 'fp_struct<double>::expv' into 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:18) automatically.
+INFO: [XFORM 203-602] Inlining function 'fp_struct<double>::__signbit' into 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:59) automatically.
+INFO: [XFORM 203-602] Inlining function 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' into 'generic_cast_IEEE754<int, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:117) automatically.
+INFO: [XFORM 203-602] Inlining function 'generic_cast_IEEE754<int, double>' into '__hls_fptosi_double_i32' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/src/lib_floatconversion.cpp:55) automatically.
+INFO: [XFORM 203-602] Inlining function '__hls_fptosi_double_i32' into 'top' (../files/CalsDis.cpp:9) automatically.
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1473 ; free virtual = 5377
+INFO: [XFORM 203-602] Inlining function 'fp_struct<double>::mantissa' into 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:15) automatically.
+INFO: [XFORM 203-602] Inlining function 'fp_struct<double>::expv' into 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:18) automatically.
+INFO: [XFORM 203-602] Inlining function 'fp_struct<double>::__signbit' into 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:59) automatically.
+INFO: [XFORM 203-602] Inlining function 'generic_cast_IEEE754<int, (ap_q_mode)6, double>' into 'generic_cast_IEEE754<int, double>' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/include/FloatingPoint/hls_case_IEEE754.h:117) automatically.
+INFO: [XFORM 203-602] Inlining function 'generic_cast_IEEE754<int, double>' into '__hls_fptosi_double_i32' (/wrk/2019.1/continuous/2019_05_24_2552052/src/products/hls/hls_lib/hlsmath/src/lib_floatconversion.cpp:55) automatically.
+INFO: [XFORM 203-602] Inlining function '__hls_fptosi_double_i32' into 'top' (../files/CalsDis.cpp:9) automatically.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock to (../files/CalsDis.cpp:22:1) in function 'top'... converting 5 basic blocks.
+INFO: [XFORM 203-11] Balancing expressions in function 'top' (../files/CalsDis.cpp:3)...3 expression(s) balanced.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1407 ; free virtual = 5323
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1392 ; free virtual = 5311
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'top' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'top' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 9.73 seconds; current allocated memory: 219.534 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.04 seconds; current allocated memory: 219.843 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'top' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'top/echo' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'top/simulated_time' to 'ap_none'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'top/dist_cm' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'top/calc_voltage' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on port 'top/sens_range' to 'ap_vld'.
+INFO: [RTGEN 206-500] Setting interface mode on function 'top' to 'ap_ctrl_hs'.
+INFO: [RTGEN 206-100] Generating core module 'top_dmul_64ns_64ns_64_5_max_dsp_1': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'top_sitodp_32ns_64_4_1': 1 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'top'.
+INFO: [HLS 200-111]  Elapsed time: 0.08 seconds; current allocated memory: 220.580 MB.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 875.578 ; gain = 197.926 ; free physical = 1389 ; free virtual = 5309
+INFO: [VHDL 208-304] Generating VHDL RTL for top.
+INFO: [VLOG 209-307] Generating Verilog RTL for top.
+INFO: [HLS 200-112] Total elapsed time: 10.54 seconds; peak allocated memory: 220.580 MB.

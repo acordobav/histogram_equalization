@@ -1,0 +1,6 @@
+INFO: [HLS 200-10] Running '/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/bin/unwrapped/lnx64.o/apcc'
+INFO: [HLS 200-10] For user 'jpv' on host 'jpv' (Linux_x86_64 version 6.5.0-45-generic) on Mon Aug 12 23:50:59 CST 2024
+INFO: [HLS 200-10] On os Ubuntu 22.04.4 LTS
+INFO: [HLS 200-10] In directory '/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/csim/build'
+INFO: [APCC 202-3] Tmp directory is /tmp/apcc_db_jpv/3272611723528259274401
+INFO: [APCC 202-1] APCC is done.

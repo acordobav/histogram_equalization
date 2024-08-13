@@ -1,0 +1,430 @@
+
+        SystemC 2.3.1-Accellera --- Mar  5 2018 14:23:08
+        Copyright (c) 1996-2014 by all Contributors,
+        ALL RIGHTS RESERVED
+
+Info: (I702) default timescale unit used for tracing: 1 ps (wave.vcd)
+Medición número: 1
+Distance (cm): 10
+Voltage: 0.016
+Sensor range: cercano
+Test 1 pasado.
+
+Medición número: 2
+Distance (cm): 50
+Voltage: 0.080
+Sensor range: cercano
+Test 2 pasado.
+
+Medición número: 3
+Distance (cm): 120
+Voltage: 0.192
+Sensor range: medio
+Test 3 pasado.
+
+Medición número: 4
+Distance (cm): 180
+Voltage: 0.288
+Sensor range: medio
+Test 4 pasado.
+
+Medición número: 5
+Distance (cm): 220
+Voltage: 0.352
+Sensor range: lejano
+Test 5 pasado.
+
+Medición número: 6
+Distance (cm): 280
+Voltage: 0.448
+Sensor range: lejano
+Test 6 pasado.
+
+Medición número: 7
+Distance (cm): 350
+Voltage: 0.560
+Sensor range: fuera de rango
+Test 7 pasado.
+
+Medición número: 8
+Distance (cm): 320
+Voltage: 0.512
+Sensor range: fuera de rango
+Test 8 pasado.
+
+
+Info: Test: Todos los tests pasaron correctamente.
+
+INFO: [XSIM 43-3496] Using init file passed via -initfile option "/home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/xsim/ip/xsim_ip.ini".
+Vivado Simulator 2019.1
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/bin/unwrapped/lnx64.o/xelab xil_defaultlib.apatb_top_top glbl -prj top.prj -L smartconnect_v1_0 -L axi_protocol_checker_v1_1_12 -L axi_protocol_checker_v1_1_13 -L axis_protocol_checker_v1_1_11 -L axis_protocol_checker_v1_1_12 -L xil_defaultlib -L unisims_ver -L xpm --initfile /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/xsim/ip/xsim_ip.ini --lib ieee_proposed=./ieee_proposed -s top -debug wave 
+Multi-threading is on. Using 6 slave threads.
+Determining compilation order of HDL files.
+WARNING: [XSIM 43-3431] One or more environment variables have been detected which affect the operation of the C compiler. These are typically not set in standard installations and are not tested by Xilinx, however they may be appropriate for your system, so the flow will attempt to continue.  If errors occur, try running xelab with the "-mt off -v 1" switches to see more information from the C compiler. The following environment variables have been detected:
+    LIBRARY_PATH
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/glbl.v" into library work
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/top.autotb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module apatb_top_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/top_sitodp_32ns_64_4_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_sitodp_32ns_64_4_1
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/top_dmul_64ns_64ns_64_5_max_dsp_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_dmul_64ns_64ns_64_5_max_dsp_1
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/ip/xil_defaultlib/top_ap_sitodp_2_no_dsp_32.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'top_ap_sitodp_2_no_dsp_32'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/ip/xil_defaultlib/top_ap_dmul_3_max_dsp_64.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'top_ap_dmul_3_max_dsp_64'
+Starting static elaboration
+WARNING: [VRFC 10-3499] library name 'floating_point_v7_1_8' of instantiated unit conflicts with visible identifier [ip/xil_defaultlib/top_ap_dmul_3_max_dsp_64.vhd:201]
+WARNING: [VRFC 10-3499] library name 'floating_point_v7_1_8' of instantiated unit conflicts with visible identifier [ip/xil_defaultlib/top_ap_sitodp_2_no_dsp_32.vhd:196]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package floating_point_v7_1_8.floating_point_v7_1_8_viv_comp
+Compiling package xbip_utils_v3_0_10.xbip_utils_v3_0_10_pkg
+Compiling package axi_utils_v2_0_6.axi_utils_v2_0_6_pkg
+Compiling package floating_point_v7_1_8.floating_point_v7_1_8_consts
+Compiling package ieee.math_real
+Compiling package floating_point_v7_1_8.floating_point_v7_1_8_exp_table_...
+Compiling package mult_gen_v12_0_15.mult_gen_v12_0_15_pkg
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_signed
+Compiling package floating_point_v7_1_8.floating_point_v7_1_8_pkg
+Compiling package floating_point_v7_1_8.flt_utils
+Compiling package unisim.vcomponents
+Compiling package xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv_comp
+Compiling package ieee.vital_timing
+Compiling package ieee.vital_primitives
+Compiling package unisim.vpkg
+Compiling package floating_point_v7_1_8.vt2mutils
+Compiling package floating_point_v7_1_8.vt2mcomps
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=2,length=0)\]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=19,b_wi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=7,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=4,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=16,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=17,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=25,length=0)\]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=17,b_wi...]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=17,b_wi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [delay_default]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=17,b_wi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=19,length=0)\]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=19,b_wi...]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(adreg=0,alumodereg=0,ca...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=19,b_wi...]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=19,b_wi...]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(adreg=0,alumodereg=0,ca...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=19,b_wi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=17)\]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(a_width=19,b_wi...]
+Compiling architecture struct of entity floating_point_v7_1_8.fix_mult_dsp48e1_dbl [\fix_mult_dsp48e1_dbl(mult_usage...]
+Compiling architecture rtl of entity floating_point_v7_1_8.fix_mult [\fix_mult(c_xdevicefamily="virte...]
+Compiling architecture muxcy_v of entity unisim.MUXCY [muxcy_default]
+Compiling architecture xorcy_v of entity unisim.XORCY [xorcy_default]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=11,length=0,fast_in...]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=64,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=9,length=0)\]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture synth of entity floating_point_v7_1_8.compare_eq_im [\compare_eq_im(c_xdevicefamily="...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(length=0,fast_input=true)...]
+Compiling architecture rtl of entity floating_point_v7_1_8.special_detect [\special_detect(c_xdevicefamily=...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(length=2)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=2,length=2,fast_inp...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(length=2,fast_input=true)...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=4,length=2,fast_inp...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=11,length=2)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=3,length=0,fast_inp...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=4,length=0,fast_inp...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=14,length=0)\]
+Compiling architecture rtl of entity floating_point_v7_1_8.flt_mult_exp [\flt_mult_exp(c_xdevicefamily="v...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=11,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=48,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=18,length=0)\]
+Compiling architecture dsp48e1_v of entity unisim.DSP48E1 [\DSP48E1(acascreg=0,adreg=0,alum...]
+Compiling architecture rtl of entity floating_point_v7_1_8.dsp48e1_wrapper [\dsp48e1_wrapper(b_width=18,c_wi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=8,length=0)\]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=28,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=29,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=54,length=0,fast_in...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=3,length=0)\]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=2,length=0,fast_inp...]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture rtl of entity floating_point_v7_1_8.flt_round_bit [\flt_round_bit(c_xdevicefamily="...]
+Compiling architecture rtl of entity floating_point_v7_1_8.renorm_and_round_logic [\renorm_and_round_logic(c_xdevic...]
+Compiling architecture rtl of entity floating_point_v7_1_8.flt_mult_round [\flt_mult_round(c_xdevicefamily=...]
+Compiling architecture synth of entity floating_point_v7_1_8.flt_dec_op_lat [\flt_dec_op_lat(c_xdevicefamily=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.flt_mult [\flt_mult(c_xdevicefamily="virte...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture xilinx of entity floating_point_v7_1_8.floating_point_v7_1_8_viv [\floating_point_v7_1_8_viv(c_xde...]
+Compiling architecture xilinx of entity floating_point_v7_1_8.floating_point_v7_1_8 [\floating_point_v7_1_8(c_xdevice...]
+Compiling architecture top_ap_dmul_3_max_dsp_64_arch of entity xil_defaultlib.top_ap_dmul_3_max_dsp_64 [top_ap_dmul_3_max_dsp_64_default]
+Compiling module xil_defaultlib.top_dmul_64ns_64ns_64_5_max_dsp_...
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=32,length=0)\]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=4,fast_input=true)\]
+Compiling architecture rtl of entity floating_point_v7_1_8.mux4 [\mux4(c_xdevicefamily="virtex7",...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=2)\]
+Compiling architecture rtl of entity floating_point_v7_1_8.mux4 [\mux4(c_xdevicefamily="virtex7",...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=8,length=0,fast_inp...]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture rtl of entity floating_point_v7_1_8.lead_zero_encode [\lead_zero_encode(c_xdevicefamil...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_latency=...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=32)\]
+Compiling architecture rtl of entity floating_point_v7_1_8.shift_msb_first [\shift_msb_first(a_width=32,dist...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=26,length=0)\]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=27,length=0)\]
+Compiling architecture struct of entity floating_point_v7_1_8.carry_chain [\carry_chain(c_xdevicefamily="vi...]
+Compiling architecture synth of entity xbip_pipe_v3_0_6.xbip_pipe_v3_0_6_viv [\xbip_pipe_v3_0_6_viv(c_has_ce=1...]
+Compiling architecture rtl of entity floating_point_v7_1_8.delay [\delay(width=54,length=0)\]
+Compiling architecture rtl of entity floating_point_v7_1_8.renorm_and_round_logic [\renorm_and_round_logic(c_xdevic...]
+Compiling architecture synth of entity floating_point_v7_1_8.fix_to_flt_conv_exp [\fix_to_flt_conv_exp(c_xdevicefa...]
+Compiling architecture synth of entity floating_point_v7_1_8.flt_dec_op [\flt_dec_op(c_xdevicefamily="vir...]
+Compiling architecture struct of entity floating_point_v7_1_8.fix_to_flt_conv [\fix_to_flt_conv(c_xdevicefamily...]
+Compiling architecture xilinx of entity floating_point_v7_1_8.floating_point_v7_1_8_viv [\floating_point_v7_1_8_viv(c_xde...]
+Compiling architecture xilinx of entity floating_point_v7_1_8.floating_point_v7_1_8 [\floating_point_v7_1_8(c_xdevice...]
+Compiling architecture top_ap_sitodp_2_no_dsp_32_arch of entity xil_defaultlib.top_ap_sitodp_2_no_dsp_32 [top_ap_sitodp_2_no_dsp_32_defaul...]
+Compiling module xil_defaultlib.top_sitodp_32ns_64_4_1(ID=1)
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.apatb_top_top
+Compiling module work.glbl
+Built simulation snapshot top
+
+****** Webtalk v2019.1 (64-bit)
+  **** SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source /home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/xsim.dir/top/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Tue Aug 13 01:11:00 2024...
+
+****** xsim v2019.1 (64-bit)
+  **** SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source xsim.dir/top/xsim_script.tcl
+# xsim {top} -autoloadwcfg -tclbatch {top.tcl}
+Vivado Simulator 2019.1
+Time resolution is 1 ps
+source top.tcl
+## log_wave -r /
+WARNING: [Simtcl 6-197] One or more HDL objects could not be logged because of object type or size limitations.  To see details please rerun the command with -verbose (-v).
+## set designtopgroup [add_wave_group "Design Top Signals"]
+## set coutputgroup [add_wave_group "C Outputs" -into $designtopgroup]
+## set sens_range_group [add_wave_group sens_range(wire) -into $coutputgroup]
+## add_wave /apatb_top_top/AESL_inst_top/sens_range_ap_vld -into $sens_range_group -color #ffff00 -radix hex
+## add_wave /apatb_top_top/AESL_inst_top/sens_range -into $sens_range_group -radix hex
+## set calc_voltage_group [add_wave_group calc_voltage(wire) -into $coutputgroup]
+## add_wave /apatb_top_top/AESL_inst_top/calc_voltage_ap_vld -into $calc_voltage_group -color #ffff00 -radix hex
+## add_wave /apatb_top_top/AESL_inst_top/calc_voltage -into $calc_voltage_group -radix hex
+## set dist_cm_group [add_wave_group dist_cm(wire) -into $coutputgroup]
+## add_wave /apatb_top_top/AESL_inst_top/dist_cm_ap_vld -into $dist_cm_group -color #ffff00 -radix hex
+## add_wave /apatb_top_top/AESL_inst_top/dist_cm -into $dist_cm_group -radix hex
+## set cinputgroup [add_wave_group "C Inputs" -into $designtopgroup]
+## set simulated_time_group [add_wave_group simulated_time(wire) -into $cinputgroup]
+## add_wave /apatb_top_top/AESL_inst_top/simulated_time -into $simulated_time_group -radix hex
+## set echo_group [add_wave_group echo(wire) -into $cinputgroup]
+## add_wave /apatb_top_top/AESL_inst_top/echo -into $echo_group -radix hex
+## set blocksiggroup [add_wave_group "Block-level IO Handshake" -into $designtopgroup]
+## add_wave /apatb_top_top/AESL_inst_top/ap_start -into $blocksiggroup
+## add_wave /apatb_top_top/AESL_inst_top/ap_done -into $blocksiggroup
+## add_wave /apatb_top_top/AESL_inst_top/ap_idle -into $blocksiggroup
+## add_wave /apatb_top_top/AESL_inst_top/ap_ready -into $blocksiggroup
+## set resetgroup [add_wave_group "Reset" -into $designtopgroup]
+## add_wave /apatb_top_top/AESL_inst_top/ap_rst -into $resetgroup
+## set clockgroup [add_wave_group "Clock" -into $designtopgroup]
+## add_wave /apatb_top_top/AESL_inst_top/ap_clk -into $clockgroup
+## set testbenchgroup [add_wave_group "Test Bench Signals"]
+## set tbinternalsiggroup [add_wave_group "Internal Signals" -into $testbenchgroup]
+## set tb_simstatus_group [add_wave_group "Simulation Status" -into $tbinternalsiggroup]
+## set tb_portdepth_group [add_wave_group "Port Depth" -into $tbinternalsiggroup]
+## add_wave /apatb_top_top/AUTOTB_TRANSACTION_NUM -into $tb_simstatus_group -radix hex
+## add_wave /apatb_top_top/ready_cnt -into $tb_simstatus_group -radix hex
+## add_wave /apatb_top_top/done_cnt -into $tb_simstatus_group -radix hex
+## add_wave /apatb_top_top/LENGTH_echo -into $tb_portdepth_group -radix hex
+## add_wave /apatb_top_top/LENGTH_simulated_time -into $tb_portdepth_group -radix hex
+## add_wave /apatb_top_top/LENGTH_dist_cm -into $tb_portdepth_group -radix hex
+## add_wave /apatb_top_top/LENGTH_calc_voltage -into $tb_portdepth_group -radix hex
+## add_wave /apatb_top_top/LENGTH_sens_range -into $tb_portdepth_group -radix hex
+## set tbcoutputgroup [add_wave_group "C Outputs" -into $testbenchgroup]
+## set tb_sens_range_group [add_wave_group sens_range(wire) -into $tbcoutputgroup]
+## add_wave /apatb_top_top/sens_range_ap_vld -into $tb_sens_range_group -color #ffff00 -radix hex
+## add_wave /apatb_top_top/sens_range -into $tb_sens_range_group -radix hex
+## set tb_calc_voltage_group [add_wave_group calc_voltage(wire) -into $tbcoutputgroup]
+## add_wave /apatb_top_top/calc_voltage_ap_vld -into $tb_calc_voltage_group -color #ffff00 -radix hex
+## add_wave /apatb_top_top/calc_voltage -into $tb_calc_voltage_group -radix hex
+## set tb_dist_cm_group [add_wave_group dist_cm(wire) -into $tbcoutputgroup]
+## add_wave /apatb_top_top/dist_cm_ap_vld -into $tb_dist_cm_group -color #ffff00 -radix hex
+## add_wave /apatb_top_top/dist_cm -into $tb_dist_cm_group -radix hex
+## set tbcinputgroup [add_wave_group "C Inputs" -into $testbenchgroup]
+## set tb_simulated_time_group [add_wave_group simulated_time(wire) -into $tbcinputgroup]
+## add_wave /apatb_top_top/simulated_time -into $tb_simulated_time_group -radix hex
+## set tb_echo_group [add_wave_group echo(wire) -into $tbcinputgroup]
+## add_wave /apatb_top_top/echo -into $tb_echo_group -radix hex
+## save_wave_config top.wcfg
+## run all
+////////////////////////////////////////////////////////////////////////////////////
+// Inter-Transaction Progress: Completed Transaction / Total Transaction
+// Intra-Transaction Progress: Measured Latency / Latency Estimation * 100%
+//
+// RTL Simulation : "Inter-Transaction Progress" ["Intra-Transaction Progress"] @ "Simulation Time"
+////////////////////////////////////////////////////////////////////////////////////
+// RTL Simulation : 0 / 8 [0.00%] @ "125000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 175100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 275100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 1 / 8 [100.00%] @ "295000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 335100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 435100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 2 / 8 [100.00%] @ "455000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 495100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 595100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 3 / 8 [100.00%] @ "615000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 655100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 755100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 4 / 8 [100.00%] @ "775000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 815100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 915100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 5 / 8 [100.00%] @ "935000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 975100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 1075100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 6 / 8 [100.00%] @ "1095000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 1135100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 1235100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 7 / 8 [100.00%] @ "1255000"
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 1295100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+Warning: OPMODE Input Warning : The OPMODE 011XX11 with CARRYINSEL  000 to DSP48E1 instance is invalid.
+Time: 1395100 ps  Iteration: 10  Process: /apatb_top_top/AESL_inst_top/top_dmul_64ns_64ns_64_5_max_dsp_1_U1/top_ap_dmul_3_max_dsp_64_u/U0/i_synth/mult/OP/i_non_prim/R_AND_R/logic/R_AND_R/dsp48_e1/dsp48e1_add/DSP48E1_ADD/DSP/prcs_opmode_drc  File: /home/jpv/Msc/DisAltNiv/xilinx/vivado/Vivado/2019.1/data/vhdl/src/unisims/primitive/DSP48E1.vhd
+// RTL Simulation : 8 / 8 [100.00%] @ "1415000"
+////////////////////////////////////////////////////////////////////////////////////
+$finish called at time : 1455 ns : File "/home/jpv/Msc/DisAltNiv/vivadoFiles/Example/OtherExampleForDistance/Distance/Calc_distance/solution1/sim/verilog/top.autotb.v" Line 463
+## quit
+INFO: [Common 17-206] Exiting xsim at Tue Aug 13 01:11:11 2024...
+
+        SystemC 2.3.1-Accellera --- Mar  5 2018 14:23:08
+        Copyright (c) 1996-2014 by all Contributors,
+        ALL RIGHTS RESERVED
+
+Info: (I702) default timescale unit used for tracing: 1 ps (wave.vcd)
+Medición número: 1
+Distance (cm): 10
+Voltage: 0.016
+Sensor range: cercano
+Test 1 pasado.
+
+Medición número: 2
+Distance (cm): 50
+Voltage: 0.080
+Sensor range: cercano
+Test 2 pasado.
+
+Medición número: 3
+Distance (cm): 120
+Voltage: 0.192
+Sensor range: medio
+Test 3 pasado.
+
+Medición número: 4
+Distance (cm): 180
+Voltage: 0.288
+Sensor range: medio
+Test 4 pasado.
+
+Medición número: 5
+Distance (cm): 220
+Voltage: 0.352
+Sensor range: lejano
+Test 5 pasado.
+
+Medición número: 6
+Distance (cm): 280
+Voltage: 0.448
+Sensor range: lejano
+Test 6 pasado.
+
+Medición número: 7
+Distance (cm): 350
+Voltage: 0.560
+Sensor range: fuera de rango
+Test 7 pasado.
+
+Medición número: 8
+Distance (cm): 320
+Voltage: 0.512
+Sensor range: fuera de rango
+Test 8 pasado.
+
+
+Info: Test: Todos los tests pasaron correctamente.
+

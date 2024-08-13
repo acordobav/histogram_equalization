@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top.wdb" id="1">
+         <top_modules>
+            <top_module name="apatb_top_top" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+   </zoom_setting>
+   <column_width_setting>
+   </column_width_setting>
+   <WVObjectSize size="2" />
+   <wvobject type="group" fp_name="group1">
+      <obj_property name="label">Design Top Signals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="group" fp_name="group2">
+         <obj_property name="label">C Outputs</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="group" fp_name="group3">
+            <obj_property name="label">sens_range(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/sens_range_ap_vld">
+               <obj_property name="ElementShortName">sens_range_ap_vld</obj_property>
+               <obj_property name="ObjectShortName">sens_range_ap_vld</obj_property>
+               <obj_property name="CustomSignalColor">#ffff00</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/AESL_inst_top/sens_range">
+               <obj_property name="ElementShortName">sens_range[31:0]</obj_property>
+               <obj_property name="ObjectShortName">sens_range[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="group" fp_name="group6">
+            <obj_property name="label">calc_voltage(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/calc_voltage_ap_vld">
+               <obj_property name="ElementShortName">calc_voltage_ap_vld</obj_property>
+               <obj_property name="ObjectShortName">calc_voltage_ap_vld</obj_property>
+               <obj_property name="CustomSignalColor">#ffff00</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/AESL_inst_top/calc_voltage">
+               <obj_property name="ElementShortName">calc_voltage[63:0]</obj_property>
+               <obj_property name="ObjectShortName">calc_voltage[63:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="group" fp_name="group9">
+            <obj_property name="label">dist_cm(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/dist_cm_ap_vld">
+               <obj_property name="ElementShortName">dist_cm_ap_vld</obj_property>
+               <obj_property name="ObjectShortName">dist_cm_ap_vld</obj_property>
+               <obj_property name="CustomSignalColor">#ffff00</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/AESL_inst_top/dist_cm">
+               <obj_property name="ElementShortName">dist_cm[31:0]</obj_property>
+               <obj_property name="ObjectShortName">dist_cm[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group12">
+         <obj_property name="label">C Inputs</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="group" fp_name="group13">
+            <obj_property name="label">simulated_time(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="array" fp_name="/apatb_top_top/AESL_inst_top/simulated_time">
+               <obj_property name="ElementShortName">simulated_time[63:0]</obj_property>
+               <obj_property name="ObjectShortName">simulated_time[63:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="group" fp_name="group15">
+            <obj_property name="label">echo(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="array" fp_name="/apatb_top_top/AESL_inst_top/echo">
+               <obj_property name="ElementShortName">echo[31:0]</obj_property>
+               <obj_property name="ObjectShortName">echo[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group17">
+         <obj_property name="label">Block-level IO Handshake</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/ap_start">
+            <obj_property name="ElementShortName">ap_start</obj_property>
+            <obj_property name="ObjectShortName">ap_start</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/ap_done">
+            <obj_property name="ElementShortName">ap_done</obj_property>
+            <obj_property name="ObjectShortName">ap_done</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/ap_idle">
+            <obj_property name="ElementShortName">ap_idle</obj_property>
+            <obj_property name="ObjectShortName">ap_idle</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/ap_ready">
+            <obj_property name="ElementShortName">ap_ready</obj_property>
+            <obj_property name="ObjectShortName">ap_ready</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group22">
+         <obj_property name="label">Reset</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/ap_rst">
+            <obj_property name="ElementShortName">ap_rst</obj_property>
+            <obj_property name="ObjectShortName">ap_rst</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group24">
+         <obj_property name="label">Clock</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="logic" fp_name="/apatb_top_top/AESL_inst_top/ap_clk">
+            <obj_property name="ElementShortName">ap_clk</obj_property>
+            <obj_property name="ObjectShortName">ap_clk</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group26">
+      <obj_property name="label">Test Bench Signals</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="group" fp_name="group27">
+         <obj_property name="label">Internal Signals</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="group" fp_name="group28">
+            <obj_property name="label">Simulation Status</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="array" fp_name="/apatb_top_top/AUTOTB_TRANSACTION_NUM">
+               <obj_property name="ElementShortName">AUTOTB_TRANSACTION_NUM[31:0]</obj_property>
+               <obj_property name="ObjectShortName">AUTOTB_TRANSACTION_NUM[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/ready_cnt">
+               <obj_property name="ElementShortName">ready_cnt[31:0]</obj_property>
+               <obj_property name="ObjectShortName">ready_cnt[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/done_cnt">
+               <obj_property name="ElementShortName">done_cnt[31:0]</obj_property>
+               <obj_property name="ObjectShortName">done_cnt[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="group" fp_name="group29">
+            <obj_property name="label">Port Depth</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="array" fp_name="/apatb_top_top/LENGTH_echo">
+               <obj_property name="ElementShortName">LENGTH_echo[31:0]</obj_property>
+               <obj_property name="ObjectShortName">LENGTH_echo[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/LENGTH_simulated_time">
+               <obj_property name="ElementShortName">LENGTH_simulated_time[31:0]</obj_property>
+               <obj_property name="ObjectShortName">LENGTH_simulated_time[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/LENGTH_dist_cm">
+               <obj_property name="ElementShortName">LENGTH_dist_cm[31:0]</obj_property>
+               <obj_property name="ObjectShortName">LENGTH_dist_cm[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/LENGTH_calc_voltage">
+               <obj_property name="ElementShortName">LENGTH_calc_voltage[31:0]</obj_property>
+               <obj_property name="ObjectShortName">LENGTH_calc_voltage[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/LENGTH_sens_range">
+               <obj_property name="ElementShortName">LENGTH_sens_range[31:0]</obj_property>
+               <obj_property name="ObjectShortName">LENGTH_sens_range[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group38">
+         <obj_property name="label">C Outputs</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="group" fp_name="group39">
+            <obj_property name="label">sens_range(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="logic" fp_name="/apatb_top_top/sens_range_ap_vld">
+               <obj_property name="ElementShortName">sens_range_ap_vld</obj_property>
+               <obj_property name="ObjectShortName">sens_range_ap_vld</obj_property>
+               <obj_property name="CustomSignalColor">#ffff00</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/sens_range">
+               <obj_property name="ElementShortName">sens_range[31:0]</obj_property>
+               <obj_property name="ObjectShortName">sens_range[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="group" fp_name="group42">
+            <obj_property name="label">calc_voltage(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="logic" fp_name="/apatb_top_top/calc_voltage_ap_vld">
+               <obj_property name="ElementShortName">calc_voltage_ap_vld</obj_property>
+               <obj_property name="ObjectShortName">calc_voltage_ap_vld</obj_property>
+               <obj_property name="CustomSignalColor">#ffff00</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/calc_voltage">
+               <obj_property name="ElementShortName">calc_voltage[63:0]</obj_property>
+               <obj_property name="ObjectShortName">calc_voltage[63:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="group" fp_name="group45">
+            <obj_property name="label">dist_cm(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="logic" fp_name="/apatb_top_top/dist_cm_ap_vld">
+               <obj_property name="ElementShortName">dist_cm_ap_vld</obj_property>
+               <obj_property name="ObjectShortName">dist_cm_ap_vld</obj_property>
+               <obj_property name="CustomSignalColor">#ffff00</obj_property>
+               <obj_property name="UseCustomSignalColor">true</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/apatb_top_top/dist_cm">
+               <obj_property name="ElementShortName">dist_cm[31:0]</obj_property>
+               <obj_property name="ObjectShortName">dist_cm[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+      </wvobject>
+      <wvobject type="group" fp_name="group48">
+         <obj_property name="label">C Inputs</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="group" fp_name="group49">
+            <obj_property name="label">simulated_time(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="array" fp_name="/apatb_top_top/simulated_time">
+               <obj_property name="ElementShortName">simulated_time[63:0]</obj_property>
+               <obj_property name="ObjectShortName">simulated_time[63:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="group" fp_name="group51">
+            <obj_property name="label">echo(wire)</obj_property>
+            <obj_property name="DisplayName">label</obj_property>
+            <wvobject type="array" fp_name="/apatb_top_top/echo">
+               <obj_property name="ElementShortName">echo[31:0]</obj_property>
+               <obj_property name="ObjectShortName">echo[31:0]</obj_property>
+               <obj_property name="Radix">HEXRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+</wave_config>
