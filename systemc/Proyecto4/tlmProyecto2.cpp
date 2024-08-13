@@ -100,7 +100,7 @@ Router3 ------------------------------------> Memoria
 // BLOQUE: TOP
 
 #define LANES 1
-#define NUM_MODULES 2
+#define NUM_MODULES 3
 #define REGBANK_T (LANES * NUM_MODULES)
 SC_MODULE(Top)
 {
@@ -180,6 +180,8 @@ SC_MODULE(Top)
     //Conexion 2
     for (int i = 0; i < LANES; i++)
       calcDist[i]->initiator_socket.bind( cSens[i]->target_socket );
+      calcDist[i]->register_socket.bind(*blockingRouter->target_socket[regbank_i]);
+      regbank_i++;
 
     //Conexion 3
     for (int i = 0; i < LANES; i++)

@@ -25,7 +25,9 @@ struct RegisterBankTLM : sc_module {
       uint32_t data = global_register_bank.read_bits(addr,ext_mask->mask);
       memcpy(ptr, &data, len);
     } else if (cmd == tlm::TLM_WRITE_COMMAND) {
-      cout << "received value: " << *ptr << endl;
+      uint32_t value = 100;
+      value = (uint32_t)*ptr;
+      cout << "ARTURO | address: " << std::hex << addr << " value: " << value << endl;
       global_register_bank.write_bits(addr,ext_mask->mask,*ptr);
     }
 
