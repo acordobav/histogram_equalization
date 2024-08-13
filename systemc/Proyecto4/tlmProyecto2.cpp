@@ -224,8 +224,9 @@ int sc_main(int argc, char* argv[])
   //Create the Registers Bank according to the Memory Bank
   //RegisterBank reg_bank(0x10000, 0x10072);
 
-  global_register_bank.write_bits(REG_COLS,0xFFFFFFFF,COLS);
-  global_register_bank.write_bits(REG_ROWS,0xFFFFFFFF,ROWS);
+  global_register_bank.write_bits(REG_COLS, 0xFFFFFFFF, COLS);
+  global_register_bank.write_bits(REG_ROWS, 0xFFFFFFFF, ROWS);
+  global_register_bank.write_bits(REG_ENABLE, 0x1, 1);
 
   //To initiate the different modules
   Top top("top");

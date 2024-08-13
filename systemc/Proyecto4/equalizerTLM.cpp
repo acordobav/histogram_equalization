@@ -1,7 +1,5 @@
 #include "utils.hpp"
 
-uint8_t imagen_prueba[ROWS][COLS][3] = {0};
-
 struct EqualizerTLM: sc_module
 {
   // TLM-2 socket, defaults to 32-bits wide, base protocol
@@ -74,10 +72,6 @@ struct EqualizerTLM: sc_module
     unsigned char* ptr = trans_pending->get_data_ptr(); 
     memcpy(&image, ptr, sizeof(image));
     
-    // Get numbers of cols and rows from RegisterBank
-    rows = register_data_get(REG_ROWS,0xFFFFFFFF);
-    cols = register_data_get(REG_COLS, 0xFFFFFFFF);
-    
     // stbi_write_jpg("salida_imagen.jpg", COLS, ROWS, 1, image, 100);
     
     /*-----------RECIBIENDO BIEN LA IMAGEN ----- 
@@ -100,6 +94,14 @@ struct EqualizerTLM: sc_module
       cout << name() << " unknown response TRANS ID " << id_extension->transaction_id << " at time " << sc_time_stamp() << endl;
     }
     
+    if(!register_data_get(REG_ENABLE,0x1)) {
+      continue;
+    }
+
+    // Get numbers of cols and rows from RegisterBank
+    rows = register_data_get(REG_ROWS,0xFFFFFFFF);
+    cols = register_data_get(REG_COLS, 0xFFFFFFFF);
+
     // Process image here
     uint8_t** filtered_image = createMatrix(rows, cols);
     equalizer->equalize(rows, cols, image, filtered_image);
@@ -159,8 +161,6 @@ struct EqualizerTLM: sc_module
 
     return tlm::TLM_ACCEPTED;
   }
-
-
 
   // ************************************************
   // TLM2 backward path non-blocking transport method   
